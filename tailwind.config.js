@@ -7,6 +7,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+       animation: {
+        scroll: 'scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite',
+      },
+      keyframes: {
+        scroll: {
+          to: {
+            transform: 'translate(calc(-35% - 1rem))',
+          },
+        },
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

@@ -5,6 +5,12 @@ import { LuGraduationCap } from "react-icons/lu";
 import corpcommentImg from "@/public/corpcomment.png";
 import rmtdevImg from "@/public/rmtdev.png";
 import wordanalyticsImg from "@/public/wordanalytics.png";
+import dartImg from "@/public/dart.png";
+import dasarKotlinImg from "@/public/dasar_kotlin.png";
+import fundamentalAndroidImg from "@/public/fundamentalAndroid.png";
+import aiImg from "@/public/AI.png";
+import androPemulaImg from "@/public/andro_pemula.png";
+
 
 export const links = [
   {
@@ -14,6 +20,10 @@ export const links = [
   {
     name: "About",
     hash: "#about",
+  },
+  {
+    name: "Certificates",
+    hash: "#certificates",
   },
   {
     name: "Projects",
@@ -84,24 +94,93 @@ export const projectsData = [
   },
 ] as const;
 
+export const certificatesData = [
+  {
+    title: "Getting Started With Dart",
+    description:
+      "The class is aimed at beginners who want to learn the basics of the Dart programming language with reference to industry standards. At the end of the class, students will be able to create Dart programs using the IntelliJ IDEA IDE or an Online IDE such as DartPad.",
+    tags: [
+      "Dart Fundamental",
+      "Control Flow",
+      "Collection",
+      "Object Oriented Programming",
+      "Functional Styles",
+      "Dart Type System",
+      "Effective Dart"
+    ],
+    imageUrl: dartImg,
+  },
+  {
+    title: "Getting Started with Kotlin Programming",
+    description:
+      "This class is intended for those who want to learn the basics of the Kotlin programming language by referring to the international competency standards of Google Developers Authorized Training Partners. At the end of the class, students understand the basic concepts of programming languages, functional programming, and object-oriented programming (OOP) using Kotlin.",
+    tags: [
+      "Kotlin Fundamental",
+      "Control Flow",
+      "Collection",
+      "Kotlin  OOP",
+      "Kotlin Generics",
+      "Special Classes",
+      "Collections",
+      "Coroutines"
+    ],
+    imageUrl: dasarKotlinImg,
+  },
+  {
+    title: "Learn Fundamental Android Apllication",
+    description:
+      "Classes are aimed at levelers who want to learn the fundamentals of making Android applications, such as networking and databases, with reference to the international competency standards of the Google Developers Authorized Training Partner. At the end of class, students can create applications that can retrieve data from the Web API and store favorite data using a local database.",
+    tags: [
+      "Dasar Pengembangan Aplikasi Android",
+      "Fragment",
+      "Background Thread & Networking",
+      "Android Architecture Component",
+      "Navigation dan API",
+      "Local Data Persistent",
+      "Background Task dan Scheduler"
+    ],
+    imageUrl: fundamentalAndroidImg,
+  },
+  {
+    title: "Learn AI Basics",
+    description:
+      "This class is intended for beginners who want to start a career in the world of AI. After taking the class, students are expected to be able to examine various basic concepts in AI and their applications well.",
+    tags: [
+      "Berkenalan dengan Artificial Intelligence (AI)",
+      "Data untuk AI",
+      "Pengantar Machine Learning"
+    ],
+    imageUrl: aiImg,
+  },
+  {
+    title: "Learn to Make Android Apps for Beginners",
+    description:
+      "This class is intended for beginners who want to start their careers in the Android Developer field by referring to Googl's international competency standards. At the end of class, students can create an Android application that can display lists and data details.",
+    tags: [
+      "Pengenalan Android Studio",
+      "Activity",
+      "Intent",
+      "View dan ViewGroup",
+      "Functional Styles",
+      "Style dan Theme",
+      "RecyclerView"
+    ],
+    imageUrl: androPemulaImg,
+  }
+] as const;
+
 export const skillsData = [
   "HTML",
   "CSS",
-  "JavaScript",
-  "TypeScript",
   "React",
-  "Next.js",
-  "Node.js",
-  "Git",
   "Tailwind",
-  "Prisma",
-  "MongoDB",
-  "Redux",
-  "GraphQL",
-  "Apollo",
-  "Express",
-  "PostgreSQL",
+  "JavaScript",
+  "Kotlin",
+  "Figma",
+  "Firebase",
+  "PHP",
+  "Android Studio",
+  "Visual Studio Code",
+  "Node.js",
   "Python",
-  "Django",
-  "Framer Motion",
 ] as const;
