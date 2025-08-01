@@ -20,7 +20,7 @@ export default function Certificates() {
           items={certificatesData} 
           direction="right"
           speed="normal"
-          pauseOnHover={true}
+          pauseOnHover={false}
           className="mt-10 sm:mt-20"/>
       </div>
     </section>
