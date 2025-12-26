@@ -58,7 +58,7 @@ function TimelineElement({ item }: { item: (typeof experiencesData)[number] }) {
   const opacityProgess = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
 
   return (
-    <div ref={ref} className='vertical-timeline-element'>
+    <div ref={ref as React.Ref<HTMLDivElement>} className='vertical-timeline-element'>
       <VerticalTimelineElement
         visible={true}
         contentStyle={{

@@ -5,7 +5,7 @@ import React from "react";
 import { BsMoon, BsSun } from "react-icons/bs";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 export default function ThemeSwitch() {
-  const { theme, toggleTheme } = useTheme();
+  // const { theme, toggleTheme } = useTheme();
 
   return (
     <AnimatedThemeToggler

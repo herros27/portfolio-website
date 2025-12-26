@@ -59,11 +59,11 @@ export default function Skills() {
   return (
     <section
       id='skills'
-      ref={ref}
+      ref={ref as React.Ref<HTMLElement>}
       className='mb-10 max-w-[53rem] scroll-mt-28 text-center md:mb-28'>
       {/* 3. Terapkan Animasi ke Heading */}
       <motion.div
-        ref={headingRef}
+        ref={headingRef as React.Ref<HTMLDivElement>}
         style={{ scale: headingScale, opacity: headingOpacity }}
         className='mb-8'>
         <SectionHeading>My Skills</SectionHeading>
@@ -74,7 +74,7 @@ export default function Skills() {
         {/* 4. Terapkan Animasi ke IconCloud */}
         {/* Note: Saya menghapus 'scale-150' statis karena kita sudah pakai dynamic scaling dari motion */}
         <motion.div
-          ref={cloudRef}
+          ref={cloudRef as React.Ref<HTMLDivElement>}
           style={{ scale: cloudScale, opacity: cloudOpacity }}
           className='relative scale-3d md:scale-200 pt-0 md:pt-20 flex size-full max-w-lg items-center justify-center overflow-hidden rounded-lg '>
           <IconCloud images={images} />
