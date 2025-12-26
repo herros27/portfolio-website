@@ -92,8 +92,8 @@ function TimelineElement({ item }: { item: (typeof experiencesData)[number] }) {
         // Animasi ICON
         icon={
           <motion.div
-            style={{ scale: scaleProgess, opacity: opacityProgess }}
-            className='w-full h-full'>
+            className='w-full h-full'
+            style={{ scale: scaleProgess, opacity: opacityProgess }}>
             {item.icon}
           </motion.div>
         }
