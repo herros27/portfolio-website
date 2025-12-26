@@ -12,7 +12,7 @@ export default function About() {
 
   return (
     <motion.div
-      ref={ref as React.Ref<HTMLDivElement>}
+      ref={ref as any}
       className=' max-w-[45rem] w-full mx-auto text-center leading-8  scroll-mt-28 px-4 sm:px-0'
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}

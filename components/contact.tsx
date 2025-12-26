@@ -43,7 +43,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   return (
     <motion.section
       id="contact"
-      ref={ref as React.Ref<HTMLDivElement>}
+      ref={ref as any}
       className="mb-20 sm:mb-28 w-[min(100%,38rem)] text-center"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}

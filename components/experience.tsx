@@ -58,7 +58,9 @@ function TimelineElement({ item }: { item: (typeof experiencesData)[number] }) {
   const opacityProgess = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
 
   return (
-    <div ref={ref as React.Ref<HTMLDivElement>} className='vertical-timeline-element'>
+    <div
+      ref={ref as React.Ref<HTMLDivElement>}
+      className='vertical-timeline-element'>
       <VerticalTimelineElement
         visible={true}
         contentStyle={{
@@ -81,7 +83,7 @@ function TimelineElement({ item }: { item: (typeof experiencesData)[number] }) {
               style={{ opacity: opacityProgess, display: "inline-block" }}>
               {item.date}
             </motion.span>
-          ) as unknown as string // Casting as any karena library expect string
+          ) as any // Casting as any karena library expect string
         }
         // 4. Animasi ICON: Bungkus icon dengan motion.div menggunakan scaleProgress yang sama
         icon={

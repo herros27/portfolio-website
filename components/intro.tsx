@@ -22,7 +22,7 @@ export default function Intro() {
   const images = useImages();
   return (
     <section
-      ref={ref as React.Ref<HTMLDivElement>}
+      ref={ref as any}
       id='home'
       className='relative flex min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden py-10 sm:py-20 text-center'>
       <div className='relative z-20 mx-auto w-full max-w-[50rem] px-4 sm:px-6'>

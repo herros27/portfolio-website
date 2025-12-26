@@ -12,7 +12,7 @@ export default function Certificates() {
   const { ref } = useSectionInView("Certificates", 0.5);
 
   return (
-    <section ref={ref as React.Ref<HTMLDivElement>} id='certificates' className='py-20 '>
+    <section ref={ref as any} id='certificates' className='py-20 '>
       <SectionHeading>My Certificates</SectionHeading>
       <div>
         <InfiniteMovingCards
