@@ -9,7 +9,7 @@ import { useSectionInView } from "@/lib/hooks";
 import InfiniteMovingCards from "./ui/infinite-moving-cards";
 
 export default function Certificates() {
-  const { ref } = useSectionInView("Certificates", 0.10);
+  const { ref } = useSectionInView("Certificates", 0.1);
 
   return (
     <section ref={ref as any} id='certificates' className='py-10 z-30'>
