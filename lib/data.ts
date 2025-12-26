@@ -3,61 +3,97 @@ import { CgWorkAlt } from "react-icons/cg";
 import { FaReact, FaAndroid } from "react-icons/fa";
 import { LuGraduationCap } from "react-icons/lu";
 import { SiFlutter } from "react-icons/si";
+import constMg from "@/public/constMg.png";
+import kompal from "@/public/kompal.png";
+import bestek from "@/public/bestek.png";
+import dermascan from "@/public/dermascan.png";
+import cleanscape from "@/public/cleanscape.png";
+import achievement from "@/public/achievement.png"
+import bangkit from "@/public/bangkitCompl.png"
+import idCamp from "@/public/idcamp.png"
 
 
 export const projectsData = [
+
   {
     title: "DermaScan App",
-    description: "This was my capstone project...",
+    description:
+      "This was my capstone project for Bangkit Academy. I was part of the Mobile Development team, building features and ensuring smooth mobile user experience.",
     tags: ["Android", "Kotlin", "Jetpack Compose", "Room", "Retrofit"],
-    // ✅ GANTI JADI STRING (sesuai nama file di folder public)
-    imageUrl: "/dermascan.png",
+    imageUrl: dermascan,
   },
   {
     title: "CleanScape App",
-    description: "A mobile app for managing inorganic waste...",
+    description:
+      "A mobile app for managing inorganic waste, originally built for my previous organization. I implemented Firebase to handle data and authentication.",
     tags: ["Android", "Kotlin", "Firebase", "Firestore", "Firebase Auth"],
-    imageUrl: "/cleanscape.png",
+    imageUrl: cleanscape,
   },
   {
     title: "constmg.murgung.id",
-    description: "I worked as a FullStack Developer...",
+    description:
+      "I worked as a FullStack Developer collaborating with a team at PT Murgung to create a project and employee management system. I built the front-end with React and the backend REST API with Laravel.",
     tags: ["React", "Laravel", "REST API", "Tailwind"],
-    imageUrl: "/constMg.png",
+    imageUrl: constMg,
   },
   {
     title: "kompalsarana.com",
-    description: "Website profile for PT. KOMPAL SARANA NUSANTARA...",
+    description:
+      "Website profile for PT. KOMPAL SARANA NUSANTARA. Built as a professional company website showcasing company info and services.",
     tags: ["Vue.js", "Interactive UI", "Web Design"],
-    imageUrl: "/kompal.png",
+
+    imageUrl: kompal,
   },
   {
     title: "bestek.co.id",
-    description: "Website profile for PT BEST TEKNOLOGI...",
+    description:
+      "Website profile for PT BEST TEKNOLOGI, built with Vue.js featuring an interactive UI for a modern company profile website.",
     tags: ["Vue.js", "Interactive UI", "Web Design"],
-    imageUrl: "/bestek.png",
+
+    imageUrl: bestek,
   },
 ] as const;
 
 export const certificatesData = [
   {
     title: "Certificate of Completion Bangkit Academy",
-    description: "Graduated with Distinction...",
-    tags: ["Android", "Kotlin", "Jetpack Compose", "Google Cloud", "Soft Skills"],
-    // Pastikan besar kecil huruf SAMA PERSIS dengan nama file
-    imageUrl: "/bangkitCompl.png",
+    description:
+      "Graduated with Distinction in the Mobile Development path from Google's Bangkit Academy, mastering Android Native and soft skills.",
+    tags: [
+      "Android",
+      "Kotlin",
+      "Jetpack Compose",
+      "Google Cloud",
+      "Soft Skills",
+    ],
+    imageUrl: bangkit,
   },
   {
     title: "Certificate of Achievement Bangkit Academy",
-    description: "Awarded as one of the Top 50 Product Capstone Teams...",
-    tags: ["Product Management", "Team Leadership", "Capstone Project", "Pitching"],
-    imageUrl: "/achievement.png",
+    description:
+      "Awarded as one of the Top 50 Product Capstone Teams for building an innovative mobile solution among thousands of participants.",
+    tags: [
+      "Product Management",
+      "Team Leadership",
+      "Capstone Project",
+      "Pitching"
+    ],
+    imageUrl: achievement,
   },
   {
     title: "Certificate of Completion IDCamp (Flutter)",
-    description: "Completed the Expert-level Multi-Platform...",
-    tags: ["Flutter", "Dart", "Clean Architecture", "State Management", "Testing"],
-    imageUrl: "/idcamp.png",
+    description:
+      "Completed the Expert-level Multi-Platform App Developer path at IDCamp 2024, mastering advanced Flutter concepts and architecture.",
+    tags: [
+      "Flutter",
+      "Dart",
+      "Clean Architecture",
+      "State Management",
+      "Testing",
+      "SOLID Principles",
+      "Multi-platform"
+    ],
+    imageUrl: idCamp,
   }
 ] as const;
 
