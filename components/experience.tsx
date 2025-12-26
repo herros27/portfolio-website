@@ -13,13 +13,14 @@ import { useTheme } from "@/context/theme-context";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Experience() {
-  const { ref } = useSectionInView("Experience");
+  // Gunakan Generic HTMLElement agar aman
+  const { ref } = useSectionInView<HTMLElement>("Experience");
 
-  // 1. Setup animasi khusus untuk Heading
+  // 1. Setup animasi Heading
   const headingRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: headingScrollY } = useScroll({
     target: headingRef as React.RefObject<HTMLDivElement>,
-    offset: ["1 1", "10.5 1"],
+    offset: ["0 1", "1.5 1"],
   });
 
   const headingScale = useTransform(headingScrollY, [0, 1], [0.8, 1]);
@@ -27,14 +28,15 @@ export default function Experience() {
 
   return (
     <section id='experience' ref={ref} className='scroll-mt-28 mb-28 sm:mb-40'>
-      {/* 2. Bungkus Heading dengan Motion */}
-      <motion.div
-        ref={headingRef}
-        style={{ scale: headingScale, opacity: headingOpacity }}
-        className='mb-8' // Tambah margin biar rapi
-      >
-        <SectionHeading>My experience</SectionHeading>
-      </motion.div>
+      {/* 2. SOLUSI FIX ERROR:
+          Bungkus luar pakai DIV BIASA untuk memegang 'ref' dan 'className'.
+          Div biasa tidak akan pernah error soal tipe data. */}
+      <div ref={headingRef} className='mb-8'>
+        {/* Animasi ditaruh di dalam. motion.div ini TIDAK memegang ref, jadi aman. */}
+        <motion.div style={{ scale: headingScale, opacity: headingOpacity }}>
+          <SectionHeading>My experience</SectionHeading>
+        </motion.div>
+      </div>
 
       <VerticalTimeline lineColor=''>
         {experiencesData.map((item, index) => (
@@ -47,6 +49,8 @@ export default function Experience() {
 
 function TimelineElement({ item }: { item: (typeof experiencesData)[number] }) {
   const { theme } = useTheme();
+
+  // Ref khusus untuk elemen timeline ini
   const ref = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -58,9 +62,9 @@ function TimelineElement({ item }: { item: (typeof experiencesData)[number] }) {
   const opacityProgess = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
 
   return (
-    <section
-      ref={ref as React.Ref<HTMLDivElement>}
-      className='vertical-timeline-element'>
+    // 3. Wrapper per Item: Gunakan DIV BIASA.
+    // Ini menangani deteksi scroll (ref) dan layout CSS library.
+    <div ref={ref} className='vertical-timeline-element'>
       <VerticalTimelineElement
         visible={true}
         contentStyle={{
@@ -76,29 +80,30 @@ function TimelineElement({ item }: { item: (typeof experiencesData)[number] }) {
               : "0.4rem solid rgba(255, 255, 255, 0.5)",
           display: "none",
         }}
-        // 3. Animasi TANGGAL: Bungkus string tanggal dengan motion.span
+        // Animasi TANGGAL
         date={
           (
             <motion.span
               style={{ opacity: opacityProgess, display: "inline-block" }}>
               {item.date}
             </motion.span>
-          ) as any // Casting as any karena library expect string
+          ) as unknown as string
         }
-        // 4. Animasi ICON: Bungkus icon dengan motion.div menggunakan scaleProgress yang sama
+        // Animasi ICON
         icon={
           <motion.div
             style={{ scale: scaleProgess, opacity: opacityProgess }}
-            className='w-full h-full  '>
+            className='w-full h-full'>
             {item.icon}
           </motion.div>
         }
         iconStyle={{
           background: theme === "light" ? "white" : "rgba(255, 255, 255, 0.15)",
           fontSize: "1.5rem",
-          boxShadow: "none", // Hilangkan shadow bawaan agar animasi opacity lebih bersih
+          boxShadow: "none",
           border: theme === "light" ? "1px solid rgba(0,0,0,0.05)" : "none",
         }}>
+        {/* Animasi KARTU (Card) */}
         <motion.div
           style={{
             scale: scaleProgess,
@@ -118,6 +123,6 @@ function TimelineElement({ item }: { item: (typeof experiencesData)[number] }) {
           </p>
         </motion.div>
       </VerticalTimelineElement>
-    </section>
+    </div>
   );
 }
