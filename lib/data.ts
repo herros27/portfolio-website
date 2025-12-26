@@ -1,17 +1,16 @@
 import React from "react";
 import { CgWorkAlt } from "react-icons/cg";
-import { FaReact } from "react-icons/fa";
+import { FaReact, FaAndroid } from "react-icons/fa";
 import { LuGraduationCap } from "react-icons/lu";
-import corpcommentImg from "@/public/corpcomment.png";
-import rmtdevImg from "@/public/rmtdev.png";
-import wordanalyticsImg from "@/public/wordanalytics.png";
-import dartImg from "@/public/dart.png";
-import dasarKotlinImg from "@/public/dasar_kotlin.png";
-import fundamentalAndroidImg from "@/public/fundamentalAndroid.png";
-import aiImg from "@/public/AI.png";
-import androPemulaImg from "@/public/andro_pemula.png";
-
-
+import { SiFlutter } from "react-icons/si";
+import constMg from "@/public/constMg.png";
+import kompal from "@/public/kompal.png";
+import bestek from "@/public/bestek.png";
+import dermascan from "@/public/dermascan.png";
+import cleanscape from "@/public/cleanscape.png";
+import achievement from "@/public/achievement.png"
+import bangkit from "@/public/bangkitCompl.png"
+import idCamp from "@/public/idcamp.png"
 export const links = [
   {
     name: "Home",
@@ -45,127 +44,128 @@ export const links = [
 
 export const experiencesData = [
   {
-    title: "Graduated bootcamp",
-    location: "Miami, FL",
+    title: "Bachelor of Informatics (S1 Informatika)",
+    location: "Universitas Ahmad Dahlan, Yogyakarta",
     description:
-      "I graduated after 6 months of studying. I immediately found a job as a front-end developer.",
+      "Currently in Semester 7 (Class of 2022). Majoring in Informatics with a focus on Software Engineering. Active in academic projects and currently preparing for the final thesis with a target graduation in 2026.",
     icon: React.createElement(LuGraduationCap),
-    date: "2019",
+    date: "2022 - 2026 (Expected)",
   },
   {
-    title: "Front-End Developer",
-    location: "Orlando, FL",
+    title: "Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka",
+    location: "Remote (Indonesia)",
     description:
-      "I worked as a front-end developer for 2 years in 1 job and 1 year in another job. I also upskilled to the full stack.",
-    icon: React.createElement(CgWorkAlt),
-    date: "2019 - 2021",
+      "Graduated with Distinction in the Mobile Development (Android) path. Selected as Top 50 Product Capstone Project, building an innovative mobile solution with a cross-functional team.",
+    icon: React.createElement(FaAndroid), // Menggunakan icon Android karena fokus track kamu
+    date: "Feb 2024 - Jul 2024", // Sesuaikan tanggal
   },
   {
-    title: "Full-Stack Developer",
-    location: "Houston, TX",
+    title: "IDCamp 2024 - Multi Platform App Developer",
+    location: "Online",
     description:
-      "I'm now a full-stack developer working as a freelancer. My stack includes React, Next.js, TypeScript, Tailwind, Prisma and MongoDB. I'm open to full-time opportunities.",
+      "Mastered Flutter development at the Expert Level. Focused on Clean Architecture, State Management, and building scalable multi-platform applications.",
+    icon: React.createElement(SiFlutter), // Menggunakan icon Flutter
+    date: "2024",
+  },
+  {
+    title: "Independent Full-Stack Developer",
+    location: "Indonesia",
+    description:
+      "Deepening skills in Web Development (Next.js, TypeScript, Tailwind) and Mobile Automation. I actively explore CI/CD pipelines, library development, and Blockchain technology while building personal projects.",
+    icon: React.createElement(CgWorkAlt), // Atau bisa ganti icon code
+    date: "2024 - Present",
+  },
+  {
+    title: "Full-Stack & Automation Developer",
+    location: "Indonesia",
+    description:
+      "Open to opportunities. Specializing in bridging the gap between mobile and web technologies, with a strong focus on automation and efficient code architecture.",
     icon: React.createElement(FaReact),
-    date: "2021 - present",
+    date: "Present",
   },
 ] as const;
 
 export const projectsData = [
+
   {
-    title: "CorpComment",
+    title: "DermaScan App",
     description:
-      "I worked as a full-stack developer on this startup project for 2 years. Users can give public feedback to companies.",
-    tags: ["React", "Next.js", "MongoDB", "Tailwind", "Prisma"],
-    imageUrl: corpcommentImg,
+      "This was my capstone project for Bangkit Academy. I was part of the Mobile Development team, building features and ensuring smooth mobile user experience.",
+    tags: ["Android", "Kotlin", "Jetpack Compose", "Room", "Retrofit"],
+    imageUrl: dermascan,
   },
   {
-    title: "rmtDev",
+    title: "CleanScape App",
     description:
-      "Job board for remote developer jobs. I was the front-end developer. It has features like filtering, sorting and pagination.",
-    tags: ["React", "TypeScript", "Next.js", "Tailwind", "Redux"],
-    imageUrl: rmtdevImg,
+      "A mobile app for managing inorganic waste, originally built for my previous organization. I implemented Firebase to handle data and authentication.",
+    tags: ["Android", "Kotlin", "Firebase", "Firestore", "Firebase Auth"],
+    imageUrl: cleanscape,
   },
   {
-    title: "Word Analytics",
+    title: "constmg.murgung.id",
     description:
-      "A public web app for quick analytics on text. It shows word count, character count and social media post limits.",
-    tags: ["React", "Next.js", "SQL", "Tailwind", "Framer"],
-    imageUrl: wordanalyticsImg,
+      "I worked as a FullStack Developer collaborating with a team at PT Murgung to create a project and employee management system. I built the front-end with React and the backend REST API with Laravel.",
+    tags: ["React", "Laravel", "REST API", "Tailwind"],
+    imageUrl: constMg,
+  },
+  {
+    title: "kompalsarana.com",
+    description:
+      "Website profile for PT. KOMPAL SARANA NUSANTARA. Built as a professional company website showcasing company info and services.",
+    tags: ["Vue.js", "Interactive UI", "Web Design"],
+
+    imageUrl: kompal,
+  },
+  {
+    title: "bestek.co.id",
+    description:
+      "Website profile for PT BEST TEKNOLOGI, built with Vue.js featuring an interactive UI for a modern company profile website.",
+    tags: ["Vue.js", "Interactive UI", "Web Design"],
+
+    imageUrl: bestek,
   },
 ] as const;
 
 export const certificatesData = [
   {
-    title: "Getting Started With Dart",
+    title: "Certificate of Completion Bangkit Academy",
     description:
-      "The class is aimed at beginners who want to learn the basics of the Dart programming language with reference to industry standards. At the end of the class, students will be able to create Dart programs using the IntelliJ IDEA IDE or an Online IDE such as DartPad.",
+      "Graduated with Distinction in the Mobile Development path from Google's Bangkit Academy, mastering Android Native and soft skills.",
     tags: [
-      "Dart Fundamental",
-      "Control Flow",
-      "Collection",
-      "Object Oriented Programming",
-      "Functional Styles",
-      "Dart Type System",
-      "Effective Dart"
+      "Android",
+      "Kotlin",
+      "Jetpack Compose",
+      "Google Cloud",
+      "Soft Skills",
     ],
-    imageUrl: dartImg,
+    imageUrl: bangkit,
   },
   {
-    title: "Getting Started with Kotlin Programming",
+    title: "Certificate of Achievement Bangkit Academy",
     description:
-      "This class is intended for those who want to learn the basics of the Kotlin programming language by referring to the international competency standards of Google Developers Authorized Training Partners. At the end of the class, students understand the basic concepts of programming languages, functional programming, and object-oriented programming (OOP) using Kotlin.",
+      "Awarded as one of the Top 50 Product Capstone Teams for building an innovative mobile solution among thousands of participants.",
     tags: [
-      "Kotlin Fundamental",
-      "Control Flow",
-      "Collection",
-      "Kotlin  OOP",
-      "Kotlin Generics",
-      "Special Classes",
-      "Collections",
-      "Coroutines"
+      "Product Management",
+      "Team Leadership",
+      "Capstone Project",
+      "Pitching"
     ],
-    imageUrl: dasarKotlinImg,
+    imageUrl: achievement,
   },
   {
-    title: "Learn Fundamental Android Apllication",
+    title: "Certificate of Completion IDCamp (Flutter)",
     description:
-      "Classes are aimed at levelers who want to learn the fundamentals of making Android applications, such as networking and databases, with reference to the international competency standards of the Google Developers Authorized Training Partner. At the end of class, students can create applications that can retrieve data from the Web API and store favorite data using a local database.",
+      "Completed the Expert-level Multi-Platform App Developer path at IDCamp 2024, mastering advanced Flutter concepts and architecture.",
     tags: [
-      "Dasar Pengembangan Aplikasi Android",
-      "Fragment",
-      "Background Thread & Networking",
-      "Android Architecture Component",
-      "Navigation dan API",
-      "Local Data Persistent",
-      "Background Task dan Scheduler"
+      "Flutter",
+      "Dart",
+      "Clean Architecture",
+      "State Management",
+      "Testing",
+      "SOLID Principles",
+      "Multi-platform"
     ],
-    imageUrl: fundamentalAndroidImg,
-  },
-  {
-    title: "Learn AI Basics",
-    description:
-      "This class is intended for beginners who want to start a career in the world of AI. After taking the class, students are expected to be able to examine various basic concepts in AI and their applications well.",
-    tags: [
-      "Berkenalan dengan Artificial Intelligence (AI)",
-      "Data untuk AI",
-      "Pengantar Machine Learning"
-    ],
-    imageUrl: aiImg,
-  },
-  {
-    title: "Learn to Make Android Apps for Beginners",
-    description:
-      "This class is intended for beginners who want to start their careers in the Android Developer field by referring to Googl's international competency standards. At the end of class, students can create an Android application that can display lists and data details.",
-    tags: [
-      "Pengenalan Android Studio",
-      "Activity",
-      "Intent",
-      "View dan ViewGroup",
-      "Functional Styles",
-      "Style dan Theme",
-      "RecyclerView"
-    ],
-    imageUrl: androPemulaImg,
+    imageUrl: idCamp,
   }
 ] as const;
 

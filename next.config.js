@@ -15,7 +15,9 @@ const nextConfig = {
         hostname: "assets.aceternity.com",
       },
     ],
+    qualities: [75, 95],
   },
+
   experimental: {
     serverActions: {},
   },

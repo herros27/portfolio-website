@@ -8,8 +8,10 @@ import ThemeContextProvider from "@/context/theme-context";
 import { Toaster } from "react-hot-toast";
 import { SmoothCursor } from "@/components/ui/smooth-cursor";
 import { ProgressiveBlur } from "@/components/magicui/progressive-blur";
-const inter = Inter({ subsets: ["latin"] });
+import SplashProvider from "@/components/providers/splash-provider";
 
+const inter = Inter({ subsets: ["latin"] });
+import { WasmProvider } from "validation_semantic";
 export const metadata = {
   title: "Kemas Khairunsyah | Personal Portfolio",
   description: "Kemas is a freelancer developer with 2 years of experience.",
@@ -21,38 +23,37 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth!">
+    <html lang='en' className='scroll-smooth!'>
       <body
-        className={`${inter.className} bg-gray-50 text-gray-950 relative pt-28 sm:pt-36 dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90`}
-      >
-        <div className="bg-[#fbe2e3] absolute -top-24 -z-10 right-44 h-125 w-125 rounded-full blur-[10rem] sm:w-275 dark:bg-[#946263]"></div>
-        <div className="bg-[#dbd7fb] absolute -top-4 -z-10 -left-140 h-125 w-200 rounded-full blur-[10rem] sm:w-275 md:-left-132 lg:-left-112 xl:-left-60 2xl:-left-20 dark:bg-[#676394]"></div>
+        className={`${inter.className} bg-gray-50 text-gray-950 relative pt-0 md:pt-26 dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90`}>
+        <SplashProvider>
+          <div className='bg-[#fbe2e3] absolute -top-24 -z-10 right-44 h-125 w-125 rounded-full blur-[10rem] sm:w-275 dark:bg-[#946263]'></div>
+          <div className='bg-[#dbd7fb] absolute -top-4 -z-10 -left-140 h-125 w-200 rounded-full blur-[10rem] sm:w-275 md:-left-132 lg:-left-112 xl:-left-60 2xl:-left-20 dark:bg-[#676394]'></div>
 
-        <div className="relative h-full w-full overflow-auto">
-  {/* Your scrollable content */}
-          <div className="p-4 space-y-4 overflow-x-hidden">
-            <ThemeContextProvider>
-              <ActiveSectionContextProvider>
-                <Header />
-                {children}
-                <Footer />
+          <div className='relative h-full w-full overflow-auto'>
+            {/* Your scrollable content */}
+            <div className='p-4 space-y-4 overflow-x-hidden'>
+              <ThemeContextProvider>
+                <ActiveSectionContextProvider>
+                  <Header />
+                  {children}
+                  <Footer />
 
-                <Toaster position="top-right" />
-                <ThemeSwitch />
-                <SmoothCursor />
-              </ActiveSectionContextProvider>
-            </ThemeContextProvider>
+                  <Toaster position='top-right' />
+                  <ThemeSwitch />
+                </ActiveSectionContextProvider>
+              </ThemeContextProvider>
+            </div>
+
+            <ProgressiveBlur
+              className='pointer-events-none'
+              height='20%'
+              position='top'
+              blurLevels={[2, 4, 8]}
+            />
           </div>
-
-          <ProgressiveBlur
-            className="pointer-events-none"
-            height="20%"
-            position="top"
-            blurLevels={[2, 4, 8]}
-          />
-        </div>
-
-       
+          <SmoothCursor />
+        </SplashProvider>
       </body>
     </html>
   );
