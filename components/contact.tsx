@@ -41,7 +41,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   // }, [state]);
 
   return (
-    <motion.section
+    <motion.div
       id="contact"
       ref={ref as any}
       className="mb-20 sm:mb-28 w-[min(100%,38rem)] text-center"
@@ -78,6 +78,6 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
        <SubmitBtn pending={pending} />
 
       </form>
-    </motion.section>
+    </motion.div>
   );
 }
