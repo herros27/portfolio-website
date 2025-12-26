@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
 import { WarpBackground } from "@/components/ui/warp-background";
 import { LightRays } from "@/components/ui/light-rays";
+import { SectionName } from "@/lib/types";
 export default function About() {
   const { ref } = useSectionInView("About");
 
