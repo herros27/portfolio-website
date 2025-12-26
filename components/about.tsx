@@ -10,7 +10,7 @@ export default function About() {
   const { ref } = useSectionInView("About");
 
   return (
-    <motion.section
+    <motion.div
       ref={ref}
       className=' max-w-[45rem] w-full mx-auto text-center leading-8  scroll-mt-28 px-4 sm:px-0'
       initial={{ opacity: 0, y: 100 }}
@@ -84,6 +84,6 @@ export default function About() {
           </p>
         </div>
       </WarpBackground>
-    </motion.section>
+    </motion.div>
   );
 }
