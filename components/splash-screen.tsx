@@ -13,7 +13,7 @@ export default function SplashScreen({
 
   return (
     <motion.div
-      className='fixed inset-0 h-full z-[99] w-full flex items-center justify-center bg-background text-foreground'
+      className='fixed inset-0 h-full z-99 w-full flex items-center justify-center bg-background text-foreground'
       initial={{ opacity: 1 }}
       exit={{ y: "-100%", transition: { duration: 1, ease: "easeInOut" } }} // Efek layar naik ke atas
       onAnimationComplete={() => {
