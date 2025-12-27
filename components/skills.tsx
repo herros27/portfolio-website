@@ -7,6 +7,12 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { IconCloud } from "@/components/ui/icon-cloud";
 
 const slugs = [
+  // "vuedotjs",
+
+  "laravel",
+  "netlify",
+  "nextdotjs",
+  "tailwindcss",
   "typescript",
   "javascript",
   "dart",
@@ -18,10 +24,6 @@ const slugs = [
   "nodedotjs",
   "postgresql",
   "firebase",
-  "nginx",
-  "vercel",
-  "testinglibrary",
-  "jest",
   "docker",
   "git",
   "github",
@@ -29,6 +31,9 @@ const slugs = [
   "figma",
   "notion",
   "postman",
+  "python",
+  "kotlin",
+  "supabase",
 ];
 // Generate URL images
 const images = slugs.map(
