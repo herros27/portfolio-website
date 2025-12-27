@@ -156,7 +156,7 @@ export default function Intro() {
       <div className='absolute inset-0 z-10 h-full w-full bg-white/60 backdrop-blur-[2px] dark:bg-black/60' />
       {/* ThreeDMarquee akan langsung menerima images yang sudah diload */}
       <ThreeDMarquee
-        className=' pointer-events-none absolute inset-0 z-0 h-full w-full opacity-50'
+        className='will-change-transform transform-gpu pointer-events-none absolute inset-0 z-0 h-full w-full opacity-50'
         images={images}
       />
     </section>
