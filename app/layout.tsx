@@ -9,12 +9,27 @@ import { Toaster } from "react-hot-toast";
 import { SmoothCursor } from "@/components/ui/smooth-cursor";
 import { ProgressiveBlur } from "@/components/magicui/progressive-blur";
 import SplashProvider from "@/components/providers/splash-provider";
+import type { Metadata } from 'next'
 
 const inter = Inter({ subsets: ["latin"] });
 import { WasmProvider } from "validation_semantic";
-export const metadata = {
-  title: "Kemas Khairunsyah | Personal Portfolio",
+export const metadata: Metadata = {
+  metadataBase: new URL("https://kemz.my.id"),
+  title: {
+    default: "Kemas Khairunsyah | Personal Portfolio",
+    template: "%s | Kemas Khairunsyah",
+  },
   description: "Kemas is a freelancer developer with 2 years of experience.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Kemas Khairunsyah | Personal Portfolio",
+    description: "Kemas is a freelancer developer with 2 years of experience.",
+    url: "https://kemz.my.id",
+    siteName: "Kemas Portfolio",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
