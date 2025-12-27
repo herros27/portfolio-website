@@ -5,36 +5,36 @@ import React, { useState, useEffect, createContext, useContext } from "react";
 import SplashScreen from "@/components/splash-screen";
 import { AnimatePresence } from "framer-motion";
 const FALLBACK_IMAGES = [
-  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=420&h=300&fit=crop&auto=format&q=50",
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=420&h=300&fit=crop&auto=format&q=50",
   // Tambahkan URL gambar lain sesuka hati
 ];
 // 1. Buat Context
@@ -80,7 +80,10 @@ export default function SplashProvider({
         const data = await res.json();
 
         if (Array.isArray(data)) {
-          const urls = data.map((photo: any) => photo.urls.regular);
+          const urls = data.map(
+            (photo: any) =>
+              `${photo.urls.raw}&w=420&h=300&fit=crop&auto=format&q=50`
+          );
           setImages(urls);
           // Simpan ke session storage
           sessionStorage.setItem("marquee_images", JSON.stringify(urls));

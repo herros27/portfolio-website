@@ -24,7 +24,7 @@ export const projectsData = [
 
     tags: ["Android", "Kotlin", "Jetpack Compose", "Room", "Retrofit"],
 
-    imageUrl: '/dermascan.png',
+    imageUrl: '/dermascan.webp',
 
   },
 
@@ -38,7 +38,7 @@ export const projectsData = [
 
     tags: ["Android", "Kotlin", "Firebase", "Firestore", "Firebase Auth"],
 
-    imageUrl: '/cleanscape.png',
+    imageUrl: '/cleanscape.webp',
 
   },
 
@@ -52,7 +52,7 @@ export const projectsData = [
 
     tags: ["React", "Laravel", "REST API", "Tailwind"],
 
-    imageUrl: '/constMg.png',
+    imageUrl: '/constMg.webp',
 
   },
 
@@ -68,7 +68,7 @@ export const projectsData = [
 
 
 
-    imageUrl: '/kompal.png',
+    imageUrl: '/kompal.webp',
 
   },
 
@@ -84,7 +84,7 @@ export const projectsData = [
 
 
 
-    imageUrl: '/bestek.png',
+    imageUrl: '/bestek.webp',
 
   },
 
@@ -116,7 +116,7 @@ export const certificatesData = [
 
     ],
 
-    imageUrl: '/bangkitCompl.png',
+    imageUrl: '/bangkitCompl.webp',
 
   },
 
@@ -140,7 +140,7 @@ export const certificatesData = [
 
     ],
 
-    imageUrl: '/achievement.png',
+    imageUrl: '/achievement.webp',
 
   },
 
@@ -170,7 +170,7 @@ export const certificatesData = [
 
     ],
 
-    imageUrl: '/idCamp.png',
+    imageUrl: '/idCamp.webp',
 
   }
 

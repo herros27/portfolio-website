@@ -40,7 +40,7 @@ export default function Intro() {
               }}>
               <div className='relative overflow-hidden rounded-full shadow-xl'>
                 <Image
-                  src='https://res.cloudinary.com/dmwow6mmu/image/upload/v1753981088/Foto_CoCard_KKN_uoazuh.png'
+                  src='https://res.cloudinary.com/dmwow6mmu/image/upload/w_200,h_200,c_fill,g_face,f_auto,q_auto/v1753981088/Foto_CoCard_KKN_uoazuh.png'
                   alt='Kemas Khairunsyah portrait'
                   width='192'
                   height='192'
