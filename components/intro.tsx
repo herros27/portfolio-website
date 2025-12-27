@@ -28,7 +28,7 @@ export default function Intro() {
     <section
       ref={ref as any}
       id='home'
-      className='relative flex min-h-svh w-full flex-col items-center justify-center overflow-hidden py-10 sm:py-20 text-center'>
+      className='relative flex min-h-max w-full flex-col items-center justify-center overflow-hidden py-10 sm:py-20 text-center'>
       {/* <BorderBeam duration={8} delay={3} size={400} borderWidth={10} /> */}
       <BorderBeam duration={8} size={400} borderWidth={10} />
       <BorderBeam duration={8} delay={3} size={400} borderWidth={10} />
