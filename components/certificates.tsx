@@ -9,7 +9,7 @@ import { useSectionInView } from "@/lib/hooks";
 import InfiniteMovingCards from "./ui/infinite-moving-cards";
 
 export default function Certificates() {
-  const { ref } = useSectionInView("Certificates", 0.20);
+  const { ref } = useSectionInView("Certificates", 0.10);
 
   return (
     <section ref={ref as any} id='certificates' className='py-10 z-30'>
@@ -21,7 +21,7 @@ export default function Certificates() {
           direction='right'
           speed='normal'
           pauseOnHover={true}
-          
+
           className='will-change-transform transform-gpu mt-10   '
         />
       </div>
