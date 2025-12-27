@@ -60,7 +60,7 @@ export default function Skills() {
     <section
       id='skills'
       ref={ref as any}
-      className='mb-10 max-w-[53rem] scroll-mt-28 text-center md:mb-28'>
+      className='mb-10 max-w-212 scroll-mt-28 text-center md:mb-28'>
       {/* 3. Terapkan Animasi ke Heading */}
       <motion.div
         ref={headingRef as any}

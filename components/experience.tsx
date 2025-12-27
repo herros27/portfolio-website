@@ -14,7 +14,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Experience() {
   // Gunakan Generic HTMLElement agar aman
-  const { ref } = useSectionInView<HTMLElement>("Experience");
+  const { ref } = useSectionInView<HTMLElement>("Experience", 0.2);
 
   // 1. Setup animasi Heading
   const headingRef = useRef<HTMLDivElement>(null);

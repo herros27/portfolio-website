@@ -9,10 +9,10 @@ import { useSectionInView } from "@/lib/hooks";
 import InfiniteMovingCards from "./infinite-moving-cards";
 
 export default function Certificates() {
-  const { ref } = useSectionInView("Certificates", 0.5);
+  const { ref } = useSectionInView("Certificates", 0.2);
 
   return (
-    <section ref={ref as any} id='certificates' className='py-20 '>
+    <section ref={ref as any} id='certificates' className='py-50 z-30'>
       <SectionHeading>My Certificates</SectionHeading>
       <div>
         <InfiniteMovingCards
@@ -20,7 +20,7 @@ export default function Certificates() {
           items={certificatesData}
           direction='right'
           speed='normal'
-          pauseOnHover={false}
+          pauseOnHover={true}
           className='mt-10 sm:mt-20'
         />
       </div>

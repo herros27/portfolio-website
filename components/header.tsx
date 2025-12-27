@@ -17,7 +17,7 @@ export default function Header() {
   return (
     <header className='z-50 relative'>
       <motion.div
-        className='hidden sm:block fixed top-0 left-1/2 h-18 w-full rounded-none border border-white border-opacity-40 bg-white bg-opacity-80 shadow-lg shadow-black/3 backdrop-blur-[0.5rem] sm:top-6 sm:h-13 sm:w-172 sm:rounded-full dark:bg-gray-950 dark:border-black/40 dark:bg-opacity-75'
+        className='hidden sm:block fixed top-0 left-1/2 h-18 w-full rounded-none border border-white border-opacity-40 bg-white bg-opacity-80 shadow-lg shadow-black/3 backdrop-blur-0.5rem sm:top-6 sm:h-13 sm:w-172 sm:rounded-full dark:bg-gray-950 dark:border-black/40 dark:bg-opacity-75'
         initial={{ y: -100, x: "-50%", opacity: 0 }}
         animate={{ y: 0, x: "-50%", opacity: 1 }}></motion.div>
 
@@ -31,9 +31,9 @@ export default function Header() {
               animate={{ y: 0, opacity: 1 }}>
               <Link
                 className={clsx(
-                  "flex w-full items-center justify-center px-3 py-3 hover:text-gray-950 transition dark:text-gray-500 dark:hover:text-gray-300",
+                  "flex w-full items-center justify-center px-3 py-3 hover:text-gray-700 transition dark:text-gray-100 dark:hover:text-gray-700",
                   {
-                    "text-gray-950 dark:text-gray-200":
+                    "text-gray-100 dark:text-gray-200":
                       activeSection === link.name,
                   }
                 )}
@@ -46,7 +46,7 @@ export default function Header() {
 
                 {link.name === activeSection && (
                   <motion.span
-                    className='bg-gray-700 rounded-full absolute inset-0 -z-10 dark:bg-gray-800'
+                    className='bg-gray-700 rounded-full absolute inset-0 -z-10 dark:bg-gray-700'
                     layoutId='activeSection'
                     transition={{
                       type: "spring",
@@ -64,12 +64,12 @@ export default function Header() {
 
       {/* Tombol Hamburger Floating */}
       <motion.div
-        className='fixed top-4 right-4 z-[999] sm:hidden'
+        className='fixed top-4 right-4 z-999 sm:hidden'
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className='bg-white w-[3rem] h-[3rem] bg-opacity-80 backdrop-blur-[0.5rem] border border-white border-opacity-40 shadow-2xl rounded-full flex items-center justify-center hover:scale-[1.15] active:scale-105 transition-all dark:bg-gray-950 dark:border-black/40'>
+          className='bg-white w-3rem h-3rem bg-opacity-80 backdrop-blur-0.5rem border border-white border-opacity-40 shadow-2xl rounded-full flex items-center justify-center hover:scale-[1.15] active:scale-105 transition-all dark:bg-gray-950 dark:border-black/40'>
           {/* Icon Hamburger / Close */}
           {isOpen ? (
             <svg
@@ -107,7 +107,7 @@ export default function Header() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className='fixed top-20 right-4 w-64 bg-white bg-opacity-90 backdrop-blur-lg border border-white border-opacity-40 shadow-2xl rounded-2xl p-4 flex flex-col items-center justify-center gap-2 dark:bg-gray-950 dark:border-black/40 dark:bg-opacity-90 sm:hidden z-[998]'
+            className='fixed top-20 right-4 w-64 bg-white bg-opacity-90 backdrop-blur-lg border border-white border-opacity-40 shadow-2xl rounded-2xl p-4 flex flex-col items-center justify-center gap-2 dark:bg-gray-950 dark:border-black/40 dark:bg-opacity-90 sm:hidden z-998'
             initial={{ opacity: 0, scale: 0.9, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: -20 }}>
