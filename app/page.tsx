@@ -4,7 +4,7 @@ import Contact from "@/components/contact";
 import Experience from "@/components/experience";
 import Intro from "@/components/intro";
 import Projects from "@/components/projects";
-import SectionDivider from "@/components/section-divider";
+import SectionDivider from "@/components/ui/section-divider";
 import Skills from "@/components/skills";
 import Certificates from "@/components/certificates";
 import { WasmProvider } from "validation_semantic";

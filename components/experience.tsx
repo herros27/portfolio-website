@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import SectionHeading from "./section-heading";
+import SectionHeading from "./ui/section-heading";
 import {
   VerticalTimeline,
   VerticalTimelineElement,

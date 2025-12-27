@@ -2,13 +2,13 @@
 
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
-export const ThreeDMarquee = ({
+export default function ThreeDMarquee({
   images,
   className,
 }: {
   images: string[];
   className?: string;
-}) => {
+}) {
   // Split the images array into 4 equal parts
   const chunkSize = Math.ceil(images.length / 4);
   const chunks = Array.from({ length: 4 }, (_, colIndex) => {
@@ -18,11 +18,11 @@ export const ThreeDMarquee = ({
   return (
     <div
       className={cn(
-        "mx-auto block h-[600px] overflow-hidden rounded-2xl max-sm:h-100",
+        "mx-auto block h-150 overflow-hidden rounded-2xl max-sm:h-100",
         className
       )}>
       <div className='flex size-full items-center justify-center'>
-        <div className='size-[1720px] shrink-0 scale-50 sm:scale-75 lg:scale-100'>
+        <div className='size-430 shrink-0 scale-50 sm:scale-75 lg:scale-100'>
           <div
             style={{
               transform: "rotateX(55deg) rotateY(0deg) rotateZ(-45deg)",
@@ -66,7 +66,7 @@ export const ThreeDMarquee = ({
       </div>
     </div>
   );
-};
+}
 
 const GridLineHorizontal = ({
   className,

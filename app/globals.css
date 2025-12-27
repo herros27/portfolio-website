@@ -38,6 +38,11 @@
   }
 }
 
+.will-change-transform {
+  will-change: transform;
+}
+
+
 /* app/globals.css */
 
 @theme inline {

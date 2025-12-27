@@ -3,10 +3,10 @@
 "use client";
 
 import React from "react";
-import SectionHeading from "./section-heading";
+import SectionHeading from "./ui/section-heading";
 import { certificatesData } from "@/lib/data";
 import { useSectionInView } from "@/lib/hooks";
-import InfiniteMovingCards from "./infinite-moving-cards";
+import InfiniteMovingCards from "./ui/infinite-moving-cards";
 
 export default function Certificates() {
   const { ref } = useSectionInView("Certificates", 0.2);

@@ -9,7 +9,7 @@ import { Toaster } from "react-hot-toast";
 import { SmoothCursor } from "@/components/ui/smooth-cursor";
 import { ProgressiveBlur } from "@/components/magicui/progressive-blur";
 import SplashProvider from "@/components/providers/splash-provider";
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 import { WasmProvider } from "validation_semantic";
@@ -39,6 +39,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' className='scroll-smooth!'>
+      <head>
+        <link rel='preconnect' href='https://res.cloudinary.com' />
+        <link rel='preconnect' href='https://images.unsplash.com' />
+        <link rel='preconnect' href='https://cdn.simpleicons.org' />
+      </head>
+
       <body
         className={`${inter.className} bg-gray-50 text-gray-950 relative pt-0 md:pt-26 dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90`}>
         <SplashProvider>

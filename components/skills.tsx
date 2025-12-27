@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import SectionHeading from "./section-heading";
+import SectionHeading from "./ui/section-heading";
 import { useSectionInView } from "@/lib/hooks";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { IconCloud } from "@/components/ui/icon-cloud";

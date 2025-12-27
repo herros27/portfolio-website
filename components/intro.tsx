@@ -10,11 +10,15 @@ import { HiDownload } from "react-icons/hi";
 import { FaGithubSquare } from "react-icons/fa";
 import { useSectionInView } from "@/lib/hooks";
 import { useActiveSectionContext } from "@/context/active-section-context";
-import { ThreeDMarquee } from "@/components/3d-marquee";
+import dynamic from "next/dynamic";
+
 import { BorderBeam } from "@/components/ui/border-beam";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import { useImages } from "@/components/providers/splash-provider";
+const ThreeDMarquee = dynamic(() => import("@/components/ui/3d-marquee"), {
+  ssr: false,
+});
 export default function Intro() {
   const { ref } = useSectionInView("Home", 0.5);
   const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
@@ -152,7 +156,7 @@ export default function Intro() {
       <div className='absolute inset-0 z-10 h-full w-full bg-white/60 backdrop-blur-[2px] dark:bg-black/60' />
       {/* ThreeDMarquee akan langsung menerima images yang sudah diload */}
       <ThreeDMarquee
-        className='pointer-events-none absolute inset-0 z-0 h-full w-full opacity-50'
+        className='will-change-transform transform-gpu pointer-events-none absolute inset-0 z-0 h-full w-full opacity-50'
         images={images}
       />
     </section>

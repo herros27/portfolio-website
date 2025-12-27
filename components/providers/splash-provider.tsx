@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useState, useEffect, createContext, useContext } from "react";
-import SplashScreen from "@/components/splash-screen";
+import SplashScreen from "@/components/ui/splash-screen";
 import { AnimatePresence } from "framer-motion";
 const FALLBACK_IMAGES = [
   "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=420&h=300&fit=crop&auto=format&q=50",

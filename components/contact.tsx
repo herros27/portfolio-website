@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import SectionHeading from "./section-heading";
+import SectionHeading from "./ui/section-heading";
 import { CreateEmailResponse } from "resend";
 
 import { motion } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
 import { sendEmail } from "@/actions/sendEmail";
-import SubmitBtn from "./submit-btn";
+import SubmitBtn from "./ui/submit-btn";
 import toast from "react-hot-toast";
 import { useFormState } from "react-dom";
 
