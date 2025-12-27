@@ -24,8 +24,11 @@ export default function Intro() {
     <section
       ref={ref as any}
       id='home'
-      className='relative flex min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden py-10 sm:py-20 text-center'>
-      <div className='relative z-20 mx-auto w-full max-w-[50rem] px-4 sm:px-6'>
+      className='relative flex min-h-svh w-full flex-col items-center justify-center overflow-hidden py-10 sm:py-20 text-center'>
+      {/* <BorderBeam duration={8} delay={3} size={400} borderWidth={10} /> */}
+      <BorderBeam duration={8} size={400} borderWidth={10} />
+      <BorderBeam duration={8} delay={3} size={400} borderWidth={10} />
+      <div className='relative z-20 mx-auto w-full max-w-200 px-4 sm:px-6'>
         <div className='flex items-center justify-center'>
           <div className='relative'>
             <motion.div
@@ -36,7 +39,6 @@ export default function Intro() {
                 duration: 0.2,
               }}>
               <div className='relative overflow-hidden rounded-full shadow-xl'>
-                <BorderBeam duration={6} size={200} />
                 <Image
                   src='https://res.cloudinary.com/dmwow6mmu/image/upload/v1753981088/Foto_CoCard_KKN_uoazuh.png'
                   alt='Kemas Khairunsyah portrait'
@@ -65,7 +67,7 @@ export default function Intro() {
         </div>
 
         <motion.h1
-          className='mb-8 mt-6 px-2 text-xl font-medium !leading-[1.5] sm:mb-10 sm:text-3xl lg:text-4xl'
+          className='mb-8 mt-6 px-2 text-xl font-medium leading-normal! sm:mb-10 sm:text-3xl lg:text-4xl'
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}>
           <span className='font-bold'>Hi, I'm Kemas.</span> I'm a{" "}
@@ -94,7 +96,17 @@ export default function Intro() {
           transition={{
             delay: 0.1,
           }}>
-          <InteractiveHoverButton className='group flex w-full items-center justify-center gap-2 rounded-full bg-gray-900 px-7 py-3 text-white outline-hidden transition hover:scale-105 hover:bg-gray-950 focus:scale-105 active:scale-100 sm:w-auto'>
+          <InteractiveHoverButton className='group flex w-full items-center justify-center gap-2 rounded-full dark:bg-gray-900 bg-white px-7 py-3 text-white outline-hidden transition hover:scale-105 hover:bg-gray-950 focus:scale-105 active:scale-100 sm:w-auto'>
+            <BorderBeam
+              size={100}
+              initialOffset={20}
+              className='from-transparent via-red-500 to-transparent'
+              transition={{
+                type: "spring",
+                stiffness: 60,
+                damping: 20,
+              }}
+            />
             <Link
               href='#contact'
               onClick={() => {

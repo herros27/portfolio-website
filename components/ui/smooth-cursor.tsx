@@ -192,7 +192,7 @@ export function SmoothCursor({
         pointerEvents: "none",
         willChange: "transform",
       }}
-      className='smooth-cursor z-[9999]'
+      className='smooth-cursor z-9999'
       initial={{ scale: 0 }}
       animate={{ scale: 1 }}
       transition={{
