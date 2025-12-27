@@ -74,7 +74,7 @@ export default function Intro() {
           className='mb-8 mt-6 px-2 text-xl font-medium leading-normal! sm:mb-10 sm:text-3xl lg:text-4xl'
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}>
-          <span className='font-bold'>Hi, I'm Kemas.</span> I'm a{" "}
+          <span className='font-bold'>Hawoo 🖐️, I'm Kemas.</span> I'm a{" "}
           <span className='font-bold'>programmer & developer</span> with a
           passion for{" "}
           <span className='italic'>mobile, web, and desktop automation</span>. I
