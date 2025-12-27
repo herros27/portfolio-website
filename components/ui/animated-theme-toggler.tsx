@@ -38,14 +38,25 @@ export const AnimatedThemeToggler = ({
   const toggleTheme = useCallback(async () => {
     if (!buttonRef.current) return;
 
-    await document.startViewTransition(() => {
+    // Cek apakah browser mendukung View Transition API
+    if (!document.startViewTransition) {
+      const newTheme = !isDark;
+      setIsDark(newTheme);
+      document.documentElement.classList.toggle("dark");
+      return;
+    }
+
+    // Jika mendukung, jalankan animasi
+    const transition = document.startViewTransition(() => {
       flushSync(() => {
         const newTheme = !isDark;
         setIsDark(newTheme);
         document.documentElement.classList.toggle("dark");
         localStorage.setItem("theme", newTheme ? "dark" : "light");
       });
-    }).ready;
+    });
+
+    await transition.ready;
 
     const { top, left, width, height } =
       buttonRef.current.getBoundingClientRect();

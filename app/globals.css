@@ -209,9 +209,17 @@ html.dark {
     @apply bg-background text-foreground;
   }
 }
-
+/* Menonaktifkan animasi default agar clip-path kita terlihat jelas */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
+}
+
+/* Memastikan elemen baru berada di atas elemen lama */
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 9999;
 }
