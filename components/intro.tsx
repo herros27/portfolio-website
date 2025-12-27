@@ -30,8 +30,19 @@ export default function Intro() {
       id='home'
       className='relative flex min-h-max w-full flex-col items-center justify-center overflow-hidden py-10 sm:py-20 text-center'>
       {/* <BorderBeam duration={8} delay={3} size={400} borderWidth={10} /> */}
-      <BorderBeam duration={8} size={400} borderWidth={10} />
-      <BorderBeam duration={8} delay={3} size={400} borderWidth={10} />
+      <BorderBeam
+        className='will-change-transform transform-gpu'
+        duration={8}
+        size={400}
+        borderWidth={10}
+      />
+      <BorderBeam
+        className='will-change-transform transform-gpu'
+        duration={8}
+        delay={3}
+        size={400}
+        borderWidth={10}
+      />
       <div className='relative z-20 mx-auto w-full max-w-200 px-4 sm:px-6'>
         <div className='flex items-center justify-center'>
           <div className='relative'>

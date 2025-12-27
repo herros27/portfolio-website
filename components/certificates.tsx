@@ -21,7 +21,7 @@ export default function Certificates() {
           direction='right'
           speed='normal'
           pauseOnHover={true}
-          className='mt-10 sm:mt-20'
+          className='will-change-transform transform-gpu mt-10 sm:mt-20'
         />
       </div>
     </section>

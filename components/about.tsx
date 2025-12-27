@@ -20,8 +20,8 @@ export default function About() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.175 }}>
         {/* WarpBackground biasanya butuh padding internal agar konten tidak menempel ke efeknya */}
-        <WarpBackground className='z-20 p-4 md:p-8 rounded-xl'>
-          <LightRays className='animate-pulse' />
+        <WarpBackground className='will-change-transform transform-gpu z-20 p-4 md:p-8 rounded-xl'>
+          <LightRays className='will-change-transform transform-gpu animate-pulse' />
           <SectionHeading>About me</SectionHeading>
 
           {/* Typografi yang responsif */}
