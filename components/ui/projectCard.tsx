@@ -40,8 +40,39 @@ export default function Project({
         {/* 3. KONTEN VISUAL (SEMANTIK): Article.
             Ini adalah "Kartu" itu sendiri. Saya ganti <section> jadi <article> 
             karena ini adalah item mandiri dalam list, lebih tepat secara SEO. */}
-        <article className='bg-gray-200 max-w-2xl border border-black/5 rounded-lg overflow-hidden sm:pr-8 relative sm:h-80 hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 dark:hover:bg-white/20'>
-          <div className='pt-4 pb-7 px-5 sm:pl-10 sm:pr-2 sm:pt-10 sm:max-w-[50%] flex flex-col h-full sm:group-even:ml-72'>
+        <article className='bg-gray-200 max-w-2xl border border-black/5 rounded-lg overflow-hidden relative sm:pr-8 sm:h-80 hover:bg-gray-250 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 dark:hover:bg-white/20'>
+          {/* 1. GAMBAR DIPINDAH KE ATAS */}
+          <Image
+            src={imageUrl}
+            alt='Project I worked on'
+            quality={95}
+            width={500}
+            height={300}
+            className='
+      /* Tampilan Mobile: Muncul paling atas */
+      block w-full rounded-t-lg shadow-2xl 
+      
+      /* Tampilan Desktop: Kembali jadi melayang (absolute) */
+      sm:absolute sm:top-8 sm:-right-40 sm:w-113 sm:block 
+      
+      /* Efek Animasi Desktop */
+      transition 
+      group-hover:scale-[1.04]
+      group-hover:-translate-x-3
+      group-hover:translate-y-3
+      group-hover:-rotate-2
+
+      /* Posisi untuk Kartu Genap di Desktop */
+      group-even:sm:right-[initial] 
+      group-even:sm:-left-40
+      
+      group-hover:group-even:translate-x-3
+      group-hover:group-even:translate-y-3
+      group-hover:group-even:rotate-2'
+          />
+
+          {/* 2. KONTEN TEKS */}
+          <div className='pt-6 pb-7 px-5 sm:pl-10 sm:pr-2 sm:pt-10 sm:max-w-[50%] flex flex-col h-full sm:group-even:ml-72'>
             <h3 className='text-2xl font-semibold'>{title}</h3>
             <p className='mt-2 leading-relaxed text-gray-700 dark:text-white/70'>
               {description}
@@ -56,26 +87,6 @@ export default function Project({
               ))}
             </ul>
           </div>
-
-          <Image
-            src={imageUrl}
-            alt='Project I worked on'
-            quality={95}
-            width={500}
-            height={300}
-            className='absolute hidden sm:block top-8 -right-40 w-113 rounded-t-lg shadow-2xl
-              transition 
-              group-hover:scale-[1.04]
-              group-hover:-translate-x-3
-              group-hover:translate-y-3
-              group-hover:-rotate-2
-
-              group-hover:group-even:translate-x-3
-              group-hover:group-even:translate-y-3
-              group-hover:group-even:rotate-2
-
-              group-even:right-[initial] group-even:-left-40'
-          />
         </article>
       </motion.div>
     </section>

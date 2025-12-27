@@ -8,7 +8,7 @@ import { WarpBackground } from "@/components/ui/warp-background";
 import { LightRays } from "@/components/ui/light-rays";
 import { SectionName } from "@/lib/types";
 export default function About() {
-  const { ref } = useSectionInView("About");
+  const { ref } = useSectionInView("About", 1);
 
   return (
     <section

@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import { useFormState } from "react-dom";
 
 export default function Contact() {
-  const { ref } = useSectionInView("Contact");
+  const { ref } = useSectionInView("Contact", 0.40);
   const [pending, setPending] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

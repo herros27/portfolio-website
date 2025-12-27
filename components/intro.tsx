@@ -20,7 +20,7 @@ const ThreeDMarquee = dynamic(() => import("@/components/ui/3d-marquee"), {
   ssr: false,
 });
 export default function Intro() {
-  const { ref } = useSectionInView("Home", 0.5);
+  const { ref } = useSectionInView("Home", 0.50);
   const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
   // const [images, setImages] = useState<string[]>([]);
   const images = useImages();

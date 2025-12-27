@@ -113,49 +113,61 @@ export const InfiniteMovingCards = ({
 };
 
 // --- Sub-Komponen Kartu (Agar kode lebih bersih) ---
+// --- Sub-Komponen Kartu ---
 const CardItem = ({ item }: { item: Item }) => {
   return (
     <li
       className={cn(
-        "group/card relative h-80 w-87.5 md:w-112.5 shrink-0 rounded-xl perspective-[1000px]",
-        // Mengaktifkan kembali pointer events agar kartu bisa di-interaksi (hover/klik)
+        // Mobile: w-72 (288px), Desktop: w-112.5 (450px)
+        // Tinggi dikurangi sedikit di mobile agar tidak memenuhi layar (h-72)
+        "group/card relative h-72 w-72 md:h-80 md:w-112.5 shrink-0 rounded-xl perspective-[1000px]",
         "pointer-events-auto"
       )}>
-      {/* Container untuk efek flip 3D */}
       <div className='relative h-full w-full rounded-xl shadow-xl transition-all duration-500 transform-3d group-hover/card:transform-[rotateY(180deg)]'>
-        {/* === Sisi Depan (Gambar) === */}
+        {/* === Sisi Depan === */}
         <div className='absolute inset-0 h-full w-full rounded-xl backface-hidden'>
           <Image
             src={item.imageUrl}
             alt={item.title}
             fill
             className='rounded-xl object-cover'
-            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+            sizes='(max-width: 768px) 80vw, 450px'
           />
-          <div className='absolute inset-0 flex items-end rounded-xl bg-black/40 p-6 transition-opacity group-hover/card:opacity-0'>
-            <h3 className='text-2xl font-bold text-white drop-shadow-md'>
+          {/* Overlay text lebih kecil di mobile */}
+          <div className='absolute inset-0 flex items-end rounded-xl bg-black/40 p-4 md:p-6 transition-opacity group-hover/card:opacity-0'>
+            <h3 className='text-lg md:text-2xl font-bold text-white drop-shadow-md'>
               {item.title}
             </h3>
           </div>
         </div>
 
-        {/* === Sisi Belakang (Deskripsi & Tags) === */}
-        <div className='absolute inset-0 h-full w-full rounded-xl bg-gray-100 p-6 text-center text-slate-800 transform-[rotateY(180deg)] backface-hidden dark:bg-zinc-800 dark:text-slate-200'>
+        {/* === Sisi Belakang === */}
+        <div className='absolute inset-0 h-full w-full rounded-xl bg-gray-100 p-4 md:p-6 text-center text-slate-800 transform-[rotateY(180deg)] backface-hidden dark:bg-zinc-900 dark:text-slate-200'>
           <div className='flex h-full flex-col items-center justify-center'>
-            <h4 className='mb-2 text-lg font-bold'>{item.title}</h4>
+            <h4 className='mb-1 md:mb-2 text-sm md:text-lg font-bold line-clamp-1'>
+              {item.title}
+            </h4>
 
-            <div className='grow overflow-y-auto px-2 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent'>
-              <p className='text-sm leading-relaxed'>{item.description}</p>
+            <div className='grow overflow-y-auto px-1 scrollbar-none'>
+              {/* Text size lebih kecil untuk mobile */}
+              <p className='text-[12px] md:text-sm leading-relaxed opacity-90'>
+                {item.description}
+              </p>
             </div>
 
-            <ul className='mt-4 flex flex-wrap justify-center gap-2'>
-              {item.tags.map((tag, index) => (
-                <li
-                  key={index}
-                  className='rounded-full bg-black/80 px-3 py-1 text-[0.65rem] uppercase tracking-wider text-white dark:bg-white/10'>
-                  {tag}
-                </li>
-              ))}
+            <ul className='mt-3 flex flex-wrap justify-center gap-1.5'>
+              {item.tags.slice(0, 3).map(
+                (
+                  tag,
+                  index // Batasi tag di mobile agar tidak penuh
+                ) => (
+                  <li
+                    key={index}
+                    className='rounded-full bg-black/80 px-2 py-0.5 text-[10px] md:text-[0.65rem] uppercase tracking-wider text-white dark:bg-white/10'>
+                    {tag}
+                  </li>
+                )
+              )}
             </ul>
           </div>
         </div>

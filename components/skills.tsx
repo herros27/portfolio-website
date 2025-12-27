@@ -41,7 +41,7 @@ const images = slugs.map(
 );
 
 export default function Skills() {
-  const { ref } = useSectionInView("Skills");
+  const { ref } = useSectionInView("Skills", 0.50);
 
   // 1. Setup Animasi untuk HEADING
   const headingRef = useRef<HTMLDivElement>(null);
