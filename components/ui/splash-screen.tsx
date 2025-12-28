@@ -13,15 +13,15 @@ export default function SplashScreen({
 
   return (
     <motion.div
-      className='fixed inset-0 h-full z-99 w-full flex items-center justify-center bg-background text-foreground'
+      className='fixed inset-0 z-9999 w-full h-[101%] flex items-center justify-center bg-background text-foreground'
       initial={{ opacity: 1 }}
       exit={{ y: "-100%", transition: { duration: 1, ease: "easeInOut" } }} // Efek layar naik ke atas
       onAnimationComplete={() => {
         // Opsional: Jika ingin trigger sesuatu setelah exit selesai
       }}>
       {/* ... Background Pattern ... */}
-      <BackgroundRippleEffect cols={30} cellSize={60} />
-      <div className='relative z-10 flex flex-col items-center px-4 mt-40 w-full'>
+      <BackgroundRippleEffect cols={38} cellSize={50} />
+      <div className='relative z-10 flex flex-col items-center  w-full'>
         {" "}
         {/* Tambah px-4 agar ada jarak di HP */}
         {/* PERUBAHAN ADA DI SINI */}

@@ -2,7 +2,7 @@
 
 import { motion, useSpring } from "motion/react";
 import { FC, JSX, useEffect, useRef, useState } from "react";
-
+// import { useIsDesktop } from "@/lib/hooks";
 interface Position {
   x: number;
   y: number;
@@ -87,12 +87,14 @@ export function SmoothCursor({
     restDelta: 0.001,
   },
 }: SmoothCursorProps) {
-  const [isMoving, setIsMoving] = useState(false);
+  // const [isMoving, setIsMoving] = useState(false);
   const lastMousePos = useRef<Position>({ x: 0, y: 0 });
   const velocity = useRef<Position>({ x: 0, y: 0 });
   const lastUpdateTime = useRef(Date.now());
   const previousAngle = useRef(0);
   const accumulatedRotation = useRef(0);
+
+  // const isDesktop = useIsDesktop();
 
   const cursorX = useSpring(0, springConfig);
   const cursorY = useSpring(0, springConfig);
@@ -147,11 +149,11 @@ export function SmoothCursor({
         previousAngle.current = currentAngle;
 
         scale.set(0.95);
-        setIsMoving(true);
+        // setIsMoving(true);
 
         const timeout = setTimeout(() => {
           scale.set(1);
-          setIsMoving(false);
+          // setIsMoving(false);
         }, 150);
 
         return () => clearTimeout(timeout);

@@ -1,5 +1,5 @@
 import { useActiveSectionContext } from "@/context/active-section-context";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import type { SectionName } from "./types";
 
@@ -19,3 +19,21 @@ export function useSectionInView<T extends HTMLElement>(sectionName: SectionName
     ref: ref as unknown as React.Ref<T>,
   };
 }
+
+
+// export function useIsDesktop() {
+//   const [isDesktop, setIsDesktop] = useState(false);
+
+//   useEffect(() => {
+//     const mediaQuery = window.matchMedia("(pointer: fine)");
+
+//     const handleChange = () => setIsDesktop(mediaQuery.matches);
+
+//     handleChange(); // initial check
+//     mediaQuery.addEventListener("change", handleChange);
+
+//     return () => mediaQuery.removeEventListener("change", handleChange);
+//   }, []);
+
+//   return isDesktop;
+// }
