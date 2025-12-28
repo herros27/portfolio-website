@@ -89,7 +89,9 @@ export default function ProjectForm({ project }: ProjectFormProps) {
         : await createProject(formData);
 
       if (result.error) {
-        toast.error(typeof result.error === "string" ? result.error : "Validation error");
+        toast.error(
+          typeof result.error === "string" ? result.error : "Validation error"
+        );
       } else {
         toast.success(project ? "Project updated!" : "Project created!");
         router.push("/admin/projects");
@@ -103,31 +105,31 @@ export default function ProjectForm({ project }: ProjectFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+    <form onSubmit={handleSubmit(onSubmit)} className='space-y-8'>
       {/* Header */}
-      <div className="flex items-center gap-4">
+      <div className='flex items-center gap-4'>
         <Link
-          href="/admin/projects"
-          className="p-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors"
-        >
+          href='/admin/projects'
+          className='p-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors'>
           <ArrowLeft size={20} />
         </Link>
-        <div className="flex-1">
-          <h1 className="text-3xl font-bold text-white">
+        <div className='flex-1'>
+          <h1 className='text-3xl font-bold text-white'>
             {project ? "Edit Project" : "New Project"}
           </h1>
-          <p className="text-gray-400 mt-1">
-            {project ? "Update project details" : "Add a new project to your portfolio"}
+          <p className='text-gray-400 mt-1'>
+            {project
+              ? "Update project details"
+              : "Add a new project to your portfolio"}
           </p>
         </div>
         <button
-          type="submit"
+          type='submit'
           disabled={isLoading}
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium hover:from-blue-600 hover:to-purple-700 transition-all disabled:opacity-50"
-        >
+          className='inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-linear-to-r from-blue-500 to-purple-600 text-white font-medium hover:from-blue-600 hover:to-purple-700 transition-all disabled:opacity-50'>
           {isLoading ? (
             <>
-              <Loader2 size={18} className="animate-spin" />
+              <Loader2 size={18} className='animate-spin' />
               Saving...
             </>
           ) : (
@@ -136,51 +138,53 @@ export default function ProjectForm({ project }: ProjectFormProps) {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
         {/* Main Content */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className='lg:col-span-2 space-y-6'>
           {/* Title */}
-          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6'>
+            <label className='block text-sm font-medium text-gray-300 mb-2'>
               Project Title *
             </label>
             <input
               {...register("title")}
-              type="text"
-              placeholder="My Awesome Project"
-              className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              type='text'
+              placeholder='My Awesome Project'
+              className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
             />
             {errors.title && (
-              <p className="mt-2 text-sm text-red-400">{errors.title.message}</p>
+              <p className='mt-2 text-sm text-red-400'>
+                {errors.title.message}
+              </p>
             )}
           </div>
 
           {/* Description */}
-          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6'>
+            <label className='block text-sm font-medium text-gray-300 mb-2'>
               Description *
             </label>
             <textarea
               {...register("description")}
               rows={6}
-              placeholder="Describe your project..."
-              className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+              placeholder='Describe your project...'
+              className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none'
             />
             {errors.description && (
-              <p className="mt-2 text-sm text-red-400">
+              <p className='mt-2 text-sm text-red-400'>
                 {errors.description.message}
               </p>
             )}
           </div>
 
           {/* Tags */}
-          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6'>
+            <label className='block text-sm font-medium text-gray-300 mb-2'>
               Tech Stack / Tags
             </label>
-            <div className="flex gap-2 mb-3">
+            <div className='flex gap-2 mb-3'>
               <input
-                type="text"
+                type='text'
                 value={tagInput}
                 onChange={(e) => setTagInput(e.target.value)}
                 onKeyDown={(e) => {
@@ -189,29 +193,26 @@ export default function ProjectForm({ project }: ProjectFormProps) {
                     addTag();
                   }
                 }}
-                placeholder="Add a tag..."
-                className="flex-1 px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder='Add a tag...'
+                className='flex-1 px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
               />
               <button
-                type="button"
+                type='button'
                 onClick={addTag}
-                className="px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-gray-400 hover:text-white hover:border-gray-600 transition-colors"
-              >
+                className='px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-gray-400 hover:text-white hover:border-gray-600 transition-colors'>
                 <Plus size={20} />
               </button>
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className='flex flex-wrap gap-2'>
               {tags.map((tag) => (
                 <span
                   key={tag}
-                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-blue-500/20 text-blue-400 text-sm"
-                >
+                  className='inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-blue-500/20 text-blue-400 text-sm'>
                   {tag}
                   <button
-                    type="button"
+                    type='button'
                     onClick={() => removeTag(tag)}
-                    className="hover:text-white transition-colors"
-                  >
+                    className='hover:text-white transition-colors'>
                     <X size={14} />
                   </button>
                 </span>
@@ -220,38 +221,38 @@ export default function ProjectForm({ project }: ProjectFormProps) {
           </div>
 
           {/* Links */}
-          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6 space-y-4">
-            <h3 className="text-lg font-medium text-white">Project Links</h3>
-            
+          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6 space-y-4'>
+            <h3 className='text-lg font-medium text-white'>Project Links</h3>
+
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className='block text-sm font-medium text-gray-300 mb-2'>
                 Live Demo URL
               </label>
               <input
                 {...register("demoUrl")}
-                type="url"
-                placeholder="https://example.com"
-                className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                type='url'
+                placeholder='https://example.com'
+                className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
               />
               {errors.demoUrl && (
-                <p className="mt-2 text-sm text-red-400">
+                <p className='mt-2 text-sm text-red-400'>
                   {errors.demoUrl.message}
                 </p>
               )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className='block text-sm font-medium text-gray-300 mb-2'>
                 GitHub Repository URL
               </label>
               <input
                 {...register("githubUrl")}
-                type="url"
-                placeholder="https://github.com/username/repo"
-                className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                type='url'
+                placeholder='https://github.com/username/repo'
+                className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
               />
               {errors.githubUrl && (
-                <p className="mt-2 text-sm text-red-400">
+                <p className='mt-2 text-sm text-red-400'>
                   {errors.githubUrl.message}
                 </p>
               )}
@@ -260,10 +261,10 @@ export default function ProjectForm({ project }: ProjectFormProps) {
         </div>
 
         {/* Sidebar */}
-        <div className="space-y-6">
+        <div className='space-y-6'>
           {/* Image */}
-          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-            <label className="block text-sm font-medium text-gray-300 mb-3">
+          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6'>
+            <label className='block text-sm font-medium text-gray-300 mb-3'>
               Project Image
             </label>
             <ImageUploader
@@ -277,41 +278,41 @@ export default function ProjectForm({ project }: ProjectFormProps) {
                 setValue("imageUrl", "");
                 setValue("imagePublicId", "");
               }}
-              folder="projects"
-              aspectRatio="video"
+              folder='projects'
+              aspectRatio='video'
             />
           </div>
 
           {/* Publish Status */}
-          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-            <label className="block text-sm font-medium text-gray-300 mb-4">
+          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6'>
+            <label className='block text-sm font-medium text-gray-300 mb-4'>
               Visibility
             </label>
-            <label className="flex items-center gap-3 cursor-pointer">
+            <label className='flex items-center gap-3 cursor-pointer'>
               <input
                 {...register("published")}
-                type="checkbox"
-                className="w-5 h-5 rounded border-gray-700 bg-gray-800 text-blue-500 focus:ring-blue-500 focus:ring-offset-gray-900"
+                type='checkbox'
+                className='w-5 h-5 rounded border-gray-700 bg-gray-800 text-blue-500 focus:ring-blue-500 focus:ring-offset-gray-900'
               />
-              <span className="text-white">Published</span>
+              <span className='text-white'>Published</span>
             </label>
-            <p className="mt-2 text-xs text-gray-500">
+            <p className='mt-2 text-xs text-gray-500'>
               Only published projects are visible on your portfolio.
             </p>
           </div>
 
           {/* Order */}
-          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6'>
+            <label className='block text-sm font-medium text-gray-300 mb-2'>
               Display Order
             </label>
             <input
               {...register("order", { valueAsNumber: true })}
-              type="number"
+              type='number'
               min={0}
-              className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
             />
-            <p className="mt-2 text-xs text-gray-500">
+            <p className='mt-2 text-xs text-gray-500'>
               Lower numbers appear first.
             </p>
           </div>

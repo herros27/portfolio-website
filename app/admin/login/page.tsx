@@ -105,7 +105,7 @@ function LoginForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full py-3 px-4 bg-linear-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isLoading ? (
             <span className="flex items-center justify-center gap-2">
@@ -151,11 +151,11 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 px-4">
       <div className="w-full max-w-md">
         {/* Logo/Title Section */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-linear-to-r from-blue-500 to-purple-600 mb-4">
             <svg
               className="w-8 h-8 text-white"
               fill="none"
@@ -170,9 +170,9 @@ export default function LoginPage() {
               />
             </svg>
           </div>
-          <h1 className="text-3xl font-bold text-white">Admin Login</h1>
+          <h1 className="text-3xl font-bold text-white">Irun Only</h1>
           <p className="text-gray-400 mt-2">
-            Sign in to manage your portfolio
+            Ett mo ngapain di sini, bro?
           </p>
         </div>
 
@@ -182,7 +182,7 @@ export default function LoginPage() {
             <div className="animate-pulse space-y-6">
               <div className="h-12 bg-white/5 rounded-lg" />
               <div className="h-12 bg-white/5 rounded-lg" />
-              <div className="h-12 bg-gradient-to-r from-blue-500/50 to-purple-600/50 rounded-lg" />
+              <div className="h-12 bg-linear-to-r from-blue-500/50 to-purple-600/50 rounded-lg" />
             </div>
           </div>
         }>

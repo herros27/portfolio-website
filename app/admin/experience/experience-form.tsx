@@ -45,11 +45,11 @@ export default function ExperienceForm({ experience }: ExperienceFormProps) {
       company: experience?.company || "",
       location: experience?.location || "",
       description: experience?.description || "",
-      startDate: experience?.startDate 
-        ? new Date(experience.startDate).toISOString().split("T")[0] 
+      startDate: experience?.startDate
+        ? new Date(experience.startDate).toISOString().split("T")[0]
         : "",
-      endDate: experience?.endDate 
-        ? new Date(experience.endDate).toISOString().split("T")[0] 
+      endDate: experience?.endDate
+        ? new Date(experience.endDate).toISOString().split("T")[0]
         : "",
       current: experience?.current || false,
       icon: experience?.icon || "work",
@@ -65,7 +65,11 @@ export default function ExperienceForm({ experience }: ExperienceFormProps) {
       const formData = {
         ...data,
         startDate: new Date(data.startDate),
-        endDate: data.current ? null : (data.endDate ? new Date(data.endDate) : null),
+        endDate: data.current
+          ? null
+          : data.endDate
+            ? new Date(data.endDate)
+            : null,
         location: data.location || undefined,
         icon: data.icon || undefined,
       };
@@ -75,9 +79,13 @@ export default function ExperienceForm({ experience }: ExperienceFormProps) {
         : await createExperience(formData);
 
       if (result.error) {
-        toast.error(typeof result.error === "string" ? result.error : "Validation error");
+        toast.error(
+          typeof result.error === "string" ? result.error : "Validation error"
+        );
       } else {
-        toast.success(experience ? "Experience updated!" : "Experience created!");
+        toast.success(
+          experience ? "Experience updated!" : "Experience created!"
+        );
         router.push("/admin/experience");
         router.refresh();
       }
@@ -89,31 +97,31 @@ export default function ExperienceForm({ experience }: ExperienceFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+    <form onSubmit={handleSubmit(onSubmit)} className='space-y-8'>
       {/* Header */}
-      <div className="flex items-center gap-4">
+      <div className='flex items-center gap-4'>
         <Link
-          href="/admin/experience"
-          className="p-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors"
-        >
+          href='/admin/experience'
+          className='p-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors'>
           <ArrowLeft size={20} />
         </Link>
-        <div className="flex-1">
-          <h1 className="text-3xl font-bold text-white">
+        <div className='flex-1'>
+          <h1 className='text-3xl font-bold text-white'>
             {experience ? "Edit Experience" : "New Experience"}
           </h1>
-          <p className="text-gray-400 mt-1">
-            {experience ? "Update experience details" : "Add a new experience to your timeline"}
+          <p className='text-gray-400 mt-1'>
+            {experience
+              ? "Update experience details"
+              : "Add a new experience to your timeline"}
           </p>
         </div>
         <button
-          type="submit"
+          type='submit'
           disabled={isLoading}
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium hover:from-blue-600 hover:to-purple-700 transition-all disabled:opacity-50"
-        >
+          className='inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-linear-to-r from-blue-500 to-purple-600 text-white font-medium hover:from-blue-600 hover:to-purple-700 transition-all disabled:opacity-50'>
           {isLoading ? (
             <>
-              <Loader2 size={18} className="animate-spin" />
+              <Loader2 size={18} className='animate-spin' />
               Saving...
             </>
           ) : (
@@ -122,142 +130,151 @@ export default function ExperienceForm({ experience }: ExperienceFormProps) {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
         {/* Main Content */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className='lg:col-span-2 space-y-6'>
           {/* Title */}
-          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6'>
+            <label className='block text-sm font-medium text-gray-300 mb-2'>
               Job Title / Position *
             </label>
             <input
               {...register("title")}
-              type="text"
-              placeholder="Software Engineer"
-              className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              type='text'
+              placeholder='Software Engineer'
+              className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
             />
             {errors.title && (
-              <p className="mt-2 text-sm text-red-400">{errors.title.message}</p>
+              <p className='mt-2 text-sm text-red-400'>
+                {errors.title.message}
+              </p>
             )}
           </div>
 
           {/* Company & Location */}
-          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6 space-y-4">
+          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6 space-y-4'>
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className='block text-sm font-medium text-gray-300 mb-2'>
                 Company / Organization *
               </label>
               <input
                 {...register("company")}
-                type="text"
-                placeholder="Google"
-                className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                type='text'
+                placeholder='Google'
+                className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
               />
               {errors.company && (
-                <p className="mt-2 text-sm text-red-400">{errors.company.message}</p>
+                <p className='mt-2 text-sm text-red-400'>
+                  {errors.company.message}
+                </p>
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className='block text-sm font-medium text-gray-300 mb-2'>
                 Location
               </label>
               <input
                 {...register("location")}
-                type="text"
-                placeholder="San Francisco, CA"
-                className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                type='text'
+                placeholder='San Francisco, CA'
+                className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
               />
             </div>
           </div>
 
           {/* Description */}
-          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6'>
+            <label className='block text-sm font-medium text-gray-300 mb-2'>
               Description *
             </label>
             <textarea
               {...register("description")}
               rows={5}
-              placeholder="Describe your role and responsibilities..."
-              className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+              placeholder='Describe your role and responsibilities...'
+              className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none'
             />
             {errors.description && (
-              <p className="mt-2 text-sm text-red-400">{errors.description.message}</p>
+              <p className='mt-2 text-sm text-red-400'>
+                {errors.description.message}
+              </p>
             )}
           </div>
         </div>
 
         {/* Sidebar */}
-        <div className="space-y-6">
+        <div className='space-y-6'>
           {/* Dates */}
-          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6 space-y-4">
-            <h3 className="text-lg font-medium text-white">Duration</h3>
-            
+          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6 space-y-4'>
+            <h3 className='text-lg font-medium text-white'>Duration</h3>
+
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className='block text-sm font-medium text-gray-300 mb-2'>
                 Start Date *
               </label>
               <input
                 {...register("startDate")}
-                type="date"
-                className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                type='date'
+                className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
               />
               {errors.startDate && (
-                <p className="mt-2 text-sm text-red-400">{errors.startDate.message}</p>
+                <p className='mt-2 text-sm text-red-400'>
+                  {errors.startDate.message}
+                </p>
               )}
             </div>
 
-            <label className="flex items-center gap-3 cursor-pointer">
+            <label className='flex items-center gap-3 cursor-pointer'>
               <input
                 {...register("current")}
-                type="checkbox"
-                className="w-5 h-5 rounded border-gray-700 bg-gray-800 text-blue-500 focus:ring-blue-500 focus:ring-offset-gray-900"
+                type='checkbox'
+                className='w-5 h-5 rounded border-gray-700 bg-gray-800 text-blue-500 focus:ring-blue-500 focus:ring-offset-gray-900'
               />
-              <span className="text-white">Currently working here</span>
+              <span className='text-white'>Currently working here</span>
             </label>
 
             {!isCurrent && (
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className='block text-sm font-medium text-gray-300 mb-2'>
                   End Date
                 </label>
                 <input
                   {...register("endDate")}
-                  type="date"
-                  className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  type='date'
+                  className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                 />
               </div>
             )}
           </div>
 
           {/* Icon */}
-          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6'>
+            <label className='block text-sm font-medium text-gray-300 mb-2'>
               Icon Type
             </label>
             <select
               {...register("icon")}
-              className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="work">Work</option>
-              <option value="graduation">Education</option>
-              <option value="android">Android</option>
-              <option value="flutter">Flutter</option>
+              className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'>
+              <option value='work'>Work</option>
+              <option value='graduation'>Education</option>
+              <option value='android'>Android</option>
+              <option value='flutter'>Flutter</option>
             </select>
           </div>
 
           {/* Order */}
-          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6'>
+            <label className='block text-sm font-medium text-gray-300 mb-2'>
               Display Order
             </label>
             <input
               {...register("order", { valueAsNumber: true })}
-              type="number"
+              type='number'
               min={0}
-              className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
             />
-            <p className="mt-2 text-xs text-gray-500">Lower numbers appear first.</p>
+            <p className='mt-2 text-xs text-gray-500'>
+              Lower numbers appear first.
+            </p>
           </div>
         </div>
       </div>
