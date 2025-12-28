@@ -10,7 +10,7 @@ import { FaGithubSquare } from "react-icons/fa";
 import { useSectionInView } from "@/lib/hooks";
 import { useActiveSectionContext } from "@/context/active-section-context";
 import dynamic from "next/dynamic";
-
+import parse from "html-react-parser";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { ShinyButton } from "@/components/ui/shiny-button";
@@ -35,16 +35,21 @@ interface IntroProps {
 }
 
 export default function Intro({ profile }: IntroProps) {
-  const { ref } = useSectionInView("Home", 0.50);
+  const { ref } = useSectionInView("Home", 0.5);
   const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
   const images = useImages();
 
   // Default values if no profile
   const name = profile?.name || "Kemas";
-  const photoUrl = profile?.photoUrl || "https://res.cloudinary.com/dmwow6mmu/image/upload/w_200,h_200,c_fill,g_face,f_auto,q_auto/v1753981088/Foto_CoCard_KKN_uoazuh.png";
-  const bio = profile?.bio || "I'm a programmer & developer with a passion for mobile, web, and desktop automation.";
+  const photoUrl =
+    profile?.photoUrl ||
+    "https://res.cloudinary.com/dmwow6mmu/image/upload/w_200,h_200,c_fill,g_face,f_auto,q_auto/v1753981088/Foto_CoCard_KKN_uoazuh.png";
+  const bio =
+    profile?.bio ||
+    "I'm a programmer & developer with a passion for mobile, web, and desktop automation.";
   const githubUrl = profile?.github || "https://github.com/herros27";
-  const linkedinUrl = profile?.linkedin || "https://www.linkedin.com/in/kemaskhairunsyah/";
+  const linkedinUrl =
+    profile?.linkedin || "https://www.linkedin.com/in/kemaskhairunsyah/";
   const resumeUrl = profile?.resumeUrl || "/CV.pdf";
 
   return (
@@ -108,7 +113,9 @@ export default function Intro({ profile }: IntroProps) {
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}>
           <span className='font-bold'>Hawoo 🖐️, I'm {name.split(" ")[0]}.</span>{" "}
-          {bio}
+          {/* <div key={index}></div> */}
+          {parse(bio)}
+          {/* {bio} */}
         </motion.h1>
 
         <motion.div

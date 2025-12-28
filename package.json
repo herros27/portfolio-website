@@ -32,6 +32,7 @@
     "dotenv": "^17.2.3",
     "eslint": "8.43.0",
     "framer-motion": "^12.23.26",
+    "html-react-parser": "^5.2.11",
     "lucide-react": "^0.535.0",
     "motion": "^12.23.26",
     "next": "^15.4.2-canary.24",
