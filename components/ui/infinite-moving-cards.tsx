@@ -9,6 +9,7 @@ import React, {
   useMemo,
 } from "react";
 import Image, { StaticImageData } from "next/image";
+import { ExternalLink, Calendar } from "lucide-react";
 
 // --- Tipe Data ---
 interface Item {
@@ -16,6 +17,8 @@ interface Item {
   description: string;
   tags: readonly string[];
   imageUrl: string | StaticImageData;
+  issueDate?: Date | string;
+  credentialUrl?: string | null;
 }
 
 interface InfiniteMovingCardsProps {
@@ -36,8 +39,6 @@ export const InfiniteMovingCards = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollerRef = useRef<HTMLUListElement>(null);
   const [start, setStart] = useState(false);
-
-  // 1. Tambahkan state untuk kontrol pause manual
   const [isPaused, setIsPaused] = useState(false);
 
   const repeatedItems = useMemo(() => {
@@ -81,7 +82,6 @@ export const InfiniteMovingCards = ({
   return (
     <div
       ref={containerRef}
-      // 2. Tambahkan Event Handlers untuk Desktop & Mobile
       onMouseEnter={() => pauseOnHover && setIsPaused(true)}
       onMouseLeave={() => pauseOnHover && setIsPaused(false)}
       onTouchStart={() => pauseOnHover && setIsPaused(true)}
@@ -93,7 +93,6 @@ export const InfiniteMovingCards = ({
       <ul
         ref={scrollerRef}
         style={{
-          // 3. Kontrol animasi via style inline (lebih pakem di mobile)
           animationPlayState: isPaused ? "paused" : "running",
         }}
         className={cn(
@@ -110,6 +109,14 @@ export const InfiniteMovingCards = ({
 };
 
 const CardItem = ({ item }: { item: Item }) => {
+  // Format date if exists
+  const formattedDate = item.issueDate
+    ? new Date(item.issueDate).toLocaleDateString("en-US", {
+        month: "long",
+        year: "numeric",
+      })
+    : null;
+
   return (
     <li
       className={cn(
@@ -139,13 +146,36 @@ const CardItem = ({ item }: { item: Item }) => {
             <h4 className='mb-1 md:mb-2 text-sm md:text-lg font-bold line-clamp-1'>
               {item.title}
             </h4>
+            
+            {/* Issue Date */}
+            {formattedDate && (
+              <div className='flex items-center gap-1 text-[10px] md:text-xs text-gray-500 dark:text-gray-400 mb-2'>
+                <Calendar size={12} />
+                {formattedDate}
+              </div>
+            )}
+            
             <div className='grow overflow-y-auto px-1 scrollbar-none'>
               <p className='text-[12px] md:text-sm leading-relaxed opacity-90'>
                 {item.description}
               </p>
             </div>
-            <ul className='mt-3 flex flex-wrap justify-center gap-1.5'>
-              {item.tags.slice(0, 3).map((tag, index) => (
+            
+            {/* Credential Link */}
+            {item.credentialUrl && (
+              <a
+                href={item.credentialUrl}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='inline-flex items-center gap-1 mt-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-[10px] md:text-xs font-medium hover:bg-blue-500/30 transition-colors'
+              >
+                <ExternalLink size={12} />
+                Verify Credential
+              </a>
+            )}
+            
+            <ul className='mt-2 flex flex-wrap justify-center gap-1.5'>
+              {item.tags.map((tag, index) => (
                 <li
                   key={index}
                   className='rounded-full bg-black/80 px-2 py-0.5 text-[10px] md:text-[0.65rem] uppercase tracking-wider text-white dark:bg-white/10'>

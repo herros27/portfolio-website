@@ -1,0 +1,136 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Enums
+enum Role {
+  ADMIN
+  USER
+}
+
+// User model for authentication
+model User {
+  id        String     @id @default(cuid())
+  email     String     @unique
+  password  String
+  name      String?
+  role      Role       @default(ADMIN)
+  isActive  Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  auditLogs AuditLog[]
+}
+
+// Profile - singleton for portfolio owner info
+model Profile {
+  id            String   @id @default(cuid())
+  name          String
+  title         String
+  bio           String   @db.Text
+  about         String   @db.Text
+  photoUrl      String?
+  photoPublicId String?
+  resumeUrl     String?
+  location      String?
+  email         String?
+  github        String?
+  linkedin      String?
+  twitter       String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+// Projects
+model Project {
+  id            String    @id @default(cuid())
+  title         String
+  description   String    @db.Text
+  imageUrl      String?
+  imagePublicId String?
+  demoUrl       String?
+  githubUrl     String?
+  tags          String[]
+  published     Boolean   @default(false)
+  order         Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+}
+
+// Work Experience / Education Timeline
+model Experience {
+  id          String    @id @default(cuid())
+  title       String
+  company     String
+  location    String?
+  description String    @db.Text
+  startDate   DateTime
+  endDate     DateTime?
+  current     Boolean   @default(false)
+  icon        String?   // Icon name for timeline
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+}
+
+// Certificates
+model Certificate {
+  id            String    @id @default(cuid())
+  title         String
+  issuer        String
+  description   String?   @db.Text
+  imageUrl      String?
+  imagePublicId String?
+  credentialUrl String?
+  issueDate     DateTime
+  tags          String[]
+  order         Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+}
+
+// Skills
+model Skill {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  category  String?
+  order     Int      @default(0)
+  visible   Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Section visibility controls
+model SectionVisibility {
+  id        String   @id @default(cuid())
+  section   String   @unique
+  visible   Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Audit Log for tracking changes
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String   // CREATE, UPDATE, DELETE, RESTORE
+  entity    String   // Project, Experience, etc.
+  entityId  String
+  changes   Json?    // Store before/after diff
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@index([entity, entityId])
+  @@index([userId])
+  @@index([createdAt])
+}

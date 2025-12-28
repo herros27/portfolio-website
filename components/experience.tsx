@@ -7,16 +7,67 @@ import {
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
-import { experiencesData } from "@/lib/data";
 import { useSectionInView } from "@/lib/hooks";
 import { useTheme } from "@/context/theme-context";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { CgWorkAlt } from "react-icons/cg";
+import { FaAndroid } from "react-icons/fa";
+import { LuGraduationCap } from "react-icons/lu";
+import { SiFlutter } from "react-icons/si";
 
-export default function Experience() {
-  // Gunakan Generic HTMLElement agar aman
+interface ExperienceData {
+  id: string;
+  title: string;
+  company: string;
+  location: string | null;
+  description: string;
+  startDate: Date;
+  endDate: Date | null;
+  current: boolean;
+  icon: string | null;
+}
+
+interface ExperienceProps {
+  experiences: ExperienceData[];
+}
+
+// Map icon names to React icons
+function getIcon(iconName: string | null) {
+  switch (iconName) {
+    case "graduation":
+      return <LuGraduationCap />;
+    case "android":
+      return <FaAndroid />;
+    case "flutter":
+      return <SiFlutter />;
+    case "work":
+    default:
+      return <CgWorkAlt />;
+  }
+}
+
+// Format date range
+function formatDateRange(startDate: Date, endDate: Date | null, current: boolean) {
+  const start = new Date(startDate).toLocaleDateString("en-US", {
+    month: "short",
+    year: "numeric",
+  });
+  
+  if (current || !endDate) {
+    return `${start} - Present`;
+  }
+  
+  const end = new Date(endDate).toLocaleDateString("en-US", {
+    month: "short",
+    year: "numeric",
+  });
+  
+  return `${start} - ${end}`;
+}
+
+export default function Experience({ experiences }: ExperienceProps) {
   const { ref } = useSectionInView<HTMLElement>("Experience", 0.30);
 
-  // 1. Setup animasi Heading
   const headingRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: headingScrollY } = useScroll({
     target: headingRef as React.RefObject<HTMLDivElement>,
@@ -27,30 +78,24 @@ export default function Experience() {
   const headingOpacity = useTransform(headingScrollY, [0, 1], [0.6, 1]);
 
   return (
-    <section id='experience' ref={ref} className='scroll-mt-28 mb-28 sm:mb-40'>
-      {/* 2. SOLUSI FIX ERROR:
-          Bungkus luar pakai DIV BIASA untuk memegang 'ref' dan 'className'.
-          Div biasa tidak akan pernah error soal tipe data. */}
+    <section id='experience' ref={ref as React.LegacyRef<HTMLElement>} className='scroll-mt-28 mb-28 sm:mb-40'>
       <div ref={headingRef} className='mb-8'>
-        {/* Animasi ditaruh di dalam. motion.div ini TIDAK memegang ref, jadi aman. */}
         <motion.div style={{ scale: headingScale, opacity: headingOpacity }}>
           <SectionHeading>My experience</SectionHeading>
         </motion.div>
       </div>
 
       <VerticalTimeline lineColor=''>
-        {experiencesData.map((item, index) => (
-          <TimelineElement key={index} item={item} />
+        {experiences.map((item) => (
+          <TimelineElement key={item.id} item={item} />
         ))}
       </VerticalTimeline>
     </section>
   );
 }
 
-function TimelineElement({ item }: { item: (typeof experiencesData)[number] }) {
+function TimelineElement({ item }: { item: ExperienceData }) {
   const { theme } = useTheme();
-
-  // Ref khusus untuk elemen timeline ini
   const ref = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -61,9 +106,9 @@ function TimelineElement({ item }: { item: (typeof experiencesData)[number] }) {
   const scaleProgess = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
   const opacityProgess = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
 
+  const dateStr = formatDateRange(item.startDate, item.endDate, item.current);
+
   return (
-    // 3. Wrapper per Item: Gunakan DIV BIASA.
-    // Ini menangani deteksi scroll (ref) dan layout CSS library.
     <div ref={ref} className='vertical-timeline-element'>
       <VerticalTimelineElement
         visible={true}
@@ -80,21 +125,19 @@ function TimelineElement({ item }: { item: (typeof experiencesData)[number] }) {
               : "0.4rem solid rgba(255, 255, 255, 0.5)",
           display: "none",
         }}
-        // Animasi TANGGAL
         date={
           (
             <motion.span
               style={{ opacity: opacityProgess, display: "inline-block" }}>
-              {item.date}
+              {dateStr}
             </motion.span>
           ) as unknown as string
         }
-        // Animasi ICON
         icon={
           <motion.div
             className='w-full h-full'
             style={{ scale: scaleProgess, opacity: opacityProgess }}>
-            {item.icon}
+            {getIcon(item.icon)}
           </motion.div>
         }
         iconStyle={{
@@ -103,7 +146,6 @@ function TimelineElement({ item }: { item: (typeof experiencesData)[number] }) {
           boxShadow: "none",
           border: theme === "light" ? "1px solid rgba(0,0,0,0.05)" : "none",
         }}>
-        {/* Animasi KARTU (Card) */}
         <motion.div
           style={{
             scale: scaleProgess,
@@ -117,7 +159,7 @@ function TimelineElement({ item }: { item: (typeof experiencesData)[number] }) {
             }`}></div>
 
           <h3 className='font-semibold capitalize'>{item.title}</h3>
-          <p className='font-normal mt-0!'>{item.location}</p>
+          <p className='font-normal mt-0!'>{item.company}{item.location ? `, ${item.location}` : ""}</p>
           <p className='mt-1! font-normal! text-gray-700 dark:text-white/75'>
             {item.description}
           </p>

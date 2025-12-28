@@ -1,0 +1,16 @@
+services:
+  portfolio-db:
+    image: postgres:15-alpine
+    container_name: portfolio_database
+    restart: always
+    environment:
+      POSTGRES_USER: admin_portfolio
+      POSTGRES_PASSWORD: password_rahasia_123
+      POSTGRES_DB: portfolio_cms
+    ports:
+      - "5434:5432" # Kita gunakan port 5434 agar tidak bentrok dengan 35001 atau 5432
+    volumes:
+      - portfolio_db_data:/var/lib/postgresql/data
+
+volumes:
+  portfolio_db_data:

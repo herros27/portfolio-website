@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -16,20 +15,43 @@ import { BorderBeam } from "@/components/ui/border-beam";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import { useImages } from "@/components/providers/splash-provider";
+
 const ThreeDMarquee = dynamic(() => import("@/components/ui/3d-marquee"), {
   ssr: false,
 });
-export default function Intro() {
+
+interface ProfileData {
+  name: string;
+  title: string;
+  bio: string;
+  photoUrl: string | null;
+  resumeUrl: string | null;
+  github: string | null;
+  linkedin: string | null;
+}
+
+interface IntroProps {
+  profile: ProfileData | null;
+}
+
+export default function Intro({ profile }: IntroProps) {
   const { ref } = useSectionInView("Home", 0.50);
   const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
-  // const [images, setImages] = useState<string[]>([]);
   const images = useImages();
+
+  // Default values if no profile
+  const name = profile?.name || "Kemas";
+  const photoUrl = profile?.photoUrl || "https://res.cloudinary.com/dmwow6mmu/image/upload/w_200,h_200,c_fill,g_face,f_auto,q_auto/v1753981088/Foto_CoCard_KKN_uoazuh.png";
+  const bio = profile?.bio || "I'm a programmer & developer with a passion for mobile, web, and desktop automation.";
+  const githubUrl = profile?.github || "https://github.com/herros27";
+  const linkedinUrl = profile?.linkedin || "https://www.linkedin.com/in/kemaskhairunsyah/";
+  const resumeUrl = profile?.resumeUrl || "/CV.pdf";
+
   return (
     <section
-      ref={ref as any}
+      ref={ref as React.LegacyRef<HTMLElement>}
       id='home'
       className='relative flex min-h-max w-full flex-col items-center justify-center overflow-hidden py-10 sm:py-20 text-center'>
-      {/* <BorderBeam duration={8} delay={3} size={400} borderWidth={10} /> */}
       <BorderBeam
         className='will-change-transform transform-gpu'
         duration={8}
@@ -55,8 +77,8 @@ export default function Intro() {
               }}>
               <div className='relative overflow-hidden rounded-full shadow-xl'>
                 <Image
-                  src='https://res.cloudinary.com/dmwow6mmu/image/upload/w_200,h_200,c_fill,g_face,f_auto,q_auto/v1753981088/Foto_CoCard_KKN_uoazuh.png'
-                  alt='Kemas Khairunsyah portrait'
+                  src={photoUrl}
+                  alt={`${name} portrait`}
                   width='192'
                   height='192'
                   quality='95'
@@ -85,23 +107,8 @@ export default function Intro() {
           className='mb-8 mt-6 px-2 text-xl font-medium leading-normal! sm:mb-10 sm:text-3xl lg:text-4xl'
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}>
-          <span className='font-bold'>Hawoo 🖐️, I'm Kemas.</span> I'm a{" "}
-          <span className='font-bold'>programmer & developer</span> with a
-          passion for{" "}
-          <span className='italic'>mobile, web, and desktop automation</span>. I
-          enjoy exploring{" "}
-          <span className='underline decoration-wavy decoration-blue-400/50'>
-            CI/CD pipelines
-          </span>
-          ,{" "}
-          <span className='underline decoration-wavy decoration-blue-400/50'>
-            library development
-          </span>
-          , and diving deep into{" "}
-          <span className='underline decoration-wavy decoration-blue-400/50'>
-            Blockchain technology
-          </span>
-          .
+          <span className='font-bold'>Hawoo 🖐️, I'm {name.split(" ")[0]}.</span>{" "}
+          {bio}
         </motion.h1>
 
         <motion.div
@@ -136,8 +143,8 @@ export default function Intro() {
             className='group flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-white px-7 py-3 outline-hidden transition hover:scale-105 active:scale-100 dark:bg-white/10 sm:w-auto'
             onClick={() => {
               const link = document.createElement("a");
-              link.href = "/CV.pdf";
-              link.download = "KemasCV.pdf";
+              link.href = resumeUrl;
+              link.download = `${name.replace(/\s+/g, "")}CV.pdf`;
               link.click();
             }}>
             Download CV{" "}
@@ -147,7 +154,7 @@ export default function Intro() {
           <div className='flex gap-4'>
             <a
               className='flex cursor-pointer items-center gap-2 rounded-full bg-white p-4 text-gray-700 transition hover:scale-[1.15] hover:text-gray-950 dark:bg-white/10 dark:text-white/60'
-              href='https://www.linkedin.com/in/kemaskhairunsyah/?locale=in_ID'
+              href={linkedinUrl}
               target='_blank'
               aria-label='View my LinkedIn profile'>
               <BsLinkedin />
@@ -155,7 +162,7 @@ export default function Intro() {
 
             <a
               className='flex cursor-pointer items-center gap-2 rounded-full bg-white p-4 text-[1.35rem] text-gray-700 transition hover:scale-[1.15] hover:text-gray-950 dark:bg-white/10 dark:text-white/60'
-              href='https://github.com/herros27'
+              href={githubUrl}
               target='_blank'
               aria-label='View my GitHub profile'>
               <FaGithubSquare />
@@ -165,7 +172,6 @@ export default function Intro() {
       </div>
 
       <div className='absolute inset-0 z-10 h-full w-full bg-white/60 backdrop-blur-[2px] dark:bg-black/60' />
-      {/* ThreeDMarquee akan langsung menerima images yang sudah diload */}
       <ThreeDMarquee
         className='will-change-transform transform-gpu pointer-events-none absolute inset-0 z-0 h-full w-full opacity-50'
         images={images}

@@ -2,18 +2,27 @@
 
 import React, { useState } from "react";
 import SectionHeading from "./ui/section-heading";
-import { CreateEmailResponse } from "resend";
 
 import { motion } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
 import { sendEmail } from "@/actions/sendEmail";
 import SubmitBtn from "./ui/submit-btn";
 import toast from "react-hot-toast";
-import { useFormState } from "react-dom";
 
-export default function Contact() {
+interface ProfileData {
+  email: string | null;
+}
+
+interface ContactProps {
+  profile: ProfileData | null;
+}
+
+export default function Contact({ profile }: ContactProps) {
   const { ref } = useSectionInView("Contact", 0.40);
   const [pending, setPending] = useState(false);
+
+  // Default email if no profile
+  const contactEmail = profile?.email || "khairunsyah2714@gmail.com";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,29 +30,21 @@ export default function Contact() {
     const formData = new FormData(e.currentTarget);
     setPending(true);
 
-    const { data, error } = await sendEmail(formData);
+    const { error } = await sendEmail(formData);
     setPending(false);
 
     if (error) {
       toast.error(error);
     } else {
       toast.success("Email sent successfully!");
-      form.reset(); // reset form setelah kirim
+      form.reset();
     }
   };
-
-  // React.useEffect(() => {
-  //   if (state?.error) {
-  //     toast.error(state.error);
-  //   } else if (state?.data) {
-  //     toast.success("Email sent successfully!");
-  //   }
-  // }, [state]);
 
   return (
     <section
       id='contact'
-      ref={ref}
+      ref={ref as React.LegacyRef<HTMLElement>}
       className='mb-20 sm:mb-28 w-[min(100%,38rem)] text-center'>
       <motion.div
         initial={{ opacity: 0 }}
@@ -53,8 +54,8 @@ export default function Contact() {
         <SectionHeading>Contact me</SectionHeading>
         <p className='text-gray-700 -mt-6 dark:text-white/80'>
           Please contact me directly at{" "}
-          <a className='underline' href='mailto:khairunsyah2714@gmail.com'>
-            khairunsyah2714@gmail.com
+          <a className='underline' href={`mailto:${contactEmail}`}>
+            {contactEmail}
           </a>{" "}
           or through this form.
         </p>
