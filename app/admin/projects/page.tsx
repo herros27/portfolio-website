@@ -6,7 +6,7 @@ import ProjectsTable from "./projects-table";
 export const dynamic = "force-dynamic";
 
 export default async function ProjectsPage() {
-  const projects = await getProjects();
+  const projects = await getProjects(true); // Fetch ALL projects including deleted ones for restore functionality
 
   return (
     <div className='space-y-6'>

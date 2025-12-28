@@ -6,7 +6,8 @@ import CertificatesList from "./certificates-list";
 export const dynamic = "force-dynamic";
 
 export default async function CertificatesPage() {
-  const certificates = await getCertificates();
+  // Fetch ALL certificates including deleted ones for restore functionality
+  const certificates = await getCertificates(true);
 
   return (
     <div className='space-y-6'>

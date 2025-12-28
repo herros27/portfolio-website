@@ -6,7 +6,8 @@ import ExperienceList from "./experience-list";
 export const dynamic = "force-dynamic";
 
 export default async function ExperiencePage() {
-  const experiences = await getExperiences();
+  // Fetch ALL experiences including deleted ones for restore functionality
+  const experiences = await getExperiences(true);
 
   return (
     <div className='space-y-6'>
