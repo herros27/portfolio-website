@@ -8,10 +8,10 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 function createPrismaClient() {
-  const connectionString = process.env.DATABASE_URL;
+  const connectionString = process.env.POSTGRES_URL;
 
   if (!connectionString) {
-    console.warn("DATABASE_URL is not set. Prisma will not work.");
+    console.warn("POSTGRES_URL is not set. Prisma will not work.");
     return new PrismaClient();
   }
 

@@ -4,9 +4,9 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
 import bcrypt from "bcryptjs";
 
-const connectionString = process.env.DATABASE_URL;
+const connectionString = process.env.POSTGRES_URL;
 if (!connectionString) {
-    throw new Error("DATABASE_URL is not set");
+    throw new Error("POSTGRES_URL is not set");
 }
 
 const pool = new Pool({ connectionString });
