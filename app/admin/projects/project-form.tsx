@@ -10,7 +10,7 @@ import { createProject, updateProject } from "@/actions/projects";
 import toast from "react-hot-toast";
 import { ArrowLeft, Plus, X, Loader2 } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
+import ImageUploader from "@/components/ui/image-uploader";
 
 const projectSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -263,28 +263,23 @@ export default function ProjectForm({ project }: ProjectFormProps) {
         <div className="space-y-6">
           {/* Image */}
           <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-300 mb-3">
               Project Image
             </label>
-            <input
-              {...register("imageUrl")}
-              type="text"
-              placeholder="/project-image.webp or https://..."
-              className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            <ImageUploader
+              value={watch("imageUrl") || ""}
+              publicId={watch("imagePublicId") || ""}
+              onChange={(url, publicId) => {
+                setValue("imageUrl", url);
+                setValue("imagePublicId", publicId);
+              }}
+              onRemove={() => {
+                setValue("imageUrl", "");
+                setValue("imagePublicId", "");
+              }}
+              folder="projects"
+              aspectRatio="video"
             />
-            {watch("imageUrl") && (
-              <div className="mt-4 relative aspect-video rounded-lg overflow-hidden bg-gray-800">
-                <Image
-                  src={watch("imageUrl") || ""}
-                  alt="Preview"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            )}
-            <p className="mt-2 text-xs text-gray-500">
-              Enter image URL or path. Upload feature coming soon.
-            </p>
           </div>
 
           {/* Publish Status */}

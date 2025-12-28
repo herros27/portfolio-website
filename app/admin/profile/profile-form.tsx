@@ -9,7 +9,7 @@ import { Profile } from "@prisma/client";
 import { updateProfile, ProfileFormData } from "@/actions/profile";
 import toast from "react-hot-toast";
 import { Loader2, Save } from "lucide-react";
-import Image from "next/image";
+import ImageUploader from "@/components/ui/image-uploader";
 
 const profileSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -38,6 +38,7 @@ export default function ProfileForm({ profile }: ProfileFormProps) {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<ProfileFormData>({
     resolver: zodResolver(profileSchema),
@@ -217,25 +218,23 @@ export default function ProfileForm({ profile }: ProfileFormProps) {
         <div className="space-y-6">
           {/* Photo */}
           <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-300 mb-3">
               Profile Photo
             </label>
-            <input
-              {...register("photoUrl")}
-              type="text"
-              placeholder="/photo.jpg or https://..."
-              className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            <ImageUploader
+              value={watch("photoUrl") || ""}
+              publicId={watch("photoPublicId") || ""}
+              onChange={(url, publicId) => {
+                setValue("photoUrl", url);
+                setValue("photoPublicId", publicId);
+              }}
+              onRemove={() => {
+                setValue("photoUrl", "");
+                setValue("photoPublicId", "");
+              }}
+              folder="profiles"
+              aspectRatio="square"
             />
-            {watch("photoUrl") && (
-              <div className="mt-4 relative w-32 h-32 mx-auto rounded-full overflow-hidden bg-gray-800">
-                <Image
-                  src={watch("photoUrl") || ""}
-                  alt="Profile"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            )}
           </div>
 
           {/* Resume */}

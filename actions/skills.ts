@@ -22,15 +22,19 @@ async function createAuditLog(
 ) {
     const session = await auth();
     if (!session?.user?.id) return;
-    await prisma.auditLog.create({
-        data: {
-            action,
-            entity,
-            entityId,
-            changes: changes ? JSON.parse(JSON.stringify(changes)) : null,
-            userId: session.user.id,
-        },
-    });
+    try {
+        await prisma.auditLog.create({
+            data: {
+                action,
+                entity,
+                entityId,
+                changes: changes ? JSON.parse(JSON.stringify(changes)) : null,
+                userId: session.user.id,
+            },
+        });
+    } catch (error) {
+        console.error("Failed to create audit log:", error);
+    }
 }
 
 export async function getSkills() {
