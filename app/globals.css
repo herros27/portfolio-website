@@ -42,6 +42,20 @@
   will-change: transform;
 }
 
+/* Hide default cursor only on main portfolio page (not admin) */
+.main-portfolio,
+.main-portfolio * {
+  cursor: none !important;
+}
+.main-portfolio a, 
+.main-portfolio button, 
+.main-portfolio input, 
+.main-portfolio textarea, 
+.main-portfolio select, 
+.main-portfolio [role="button"] {
+  cursor: none !important;
+}
+
 /* app/globals.css */
 
 @theme inline {
@@ -249,5 +263,18 @@ html.dark {
   /* Tambahkan class baru untuk warna biru ini */
   .decoration-blue-400\/50 {
     text-decoration-color: rgba(96, 165, 250, 0.5);
+  }
+}
+
+
+@theme inline {
+  --animate-aurora: aurora 60s linear infinite;
+  @keyframes aurora {
+    from {
+      background-position: 50% 50%, 50% 50%;
+    }
+    to {
+      background-position: 350% 50%, 350% 50%;
+    }
   }
 }

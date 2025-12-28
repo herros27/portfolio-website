@@ -125,7 +125,7 @@ export default function Intro({ profile }: IntroProps) {
           transition={{
             delay: 0.1,
           }}>
-          <InteractiveHoverButton className='group flex w-full items-center justify-center gap-2 rounded-full dark:bg-gray-900 bg-white px-7 py-3 text-white outline-hidden transition hover:scale-105 hover:bg-gray-950 focus:scale-105 active:scale-100 sm:w-auto'>
+          <InteractiveHoverButton className=' group flex w-full items-center justify-center gap-2 rounded-full dark:bg-gray-900 bg-white px-7 py-3 text-white outline-hidden transition hover:scale-105 hover:bg-gray-950 focus:scale-105 active:scale-100 sm:w-auto'>
             <BorderBeam
               size={100}
               initialOffset={20}
@@ -141,26 +141,29 @@ export default function Intro({ profile }: IntroProps) {
               onClick={() => {
                 setActiveSection("Contact");
                 setTimeOfLastClick(Date.now());
-              }}>
+              }}
+              className='cursor-none'>
               Contact me here
             </Link>
           </InteractiveHoverButton>
 
           <ShinyButton
-            className='group flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-white px-7 py-3 outline-hidden transition hover:scale-105 active:scale-100 dark:bg-white/10 sm:w-auto'
+            className='cursor-none group flex w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-3 outline-hidden transition hover:scale-105 active:scale-100 dark:bg-white/10 sm:w-auto'
             onClick={() => {
               const link = document.createElement("a");
               link.href = resumeUrl;
               link.download = `${name.replace(/\s+/g, "")}CV.pdf`;
               link.click();
             }}>
-            Download CV{" "}
-            <HiDownload className='opacity-60 transition group-hover:translate-y-1' />
+            <span className='inline-flex items-center gap-2'>
+              Download CV
+              <HiDownload className='opacity-60 transition group-hover:translate-y-1' />
+            </span>
           </ShinyButton>
 
-          <div className='flex gap-4'>
+          <div className='cursor-none flex gap-4'>
             <a
-              className='flex cursor-pointer items-center gap-2 rounded-full bg-white p-4 text-gray-700 transition hover:scale-[1.15] hover:text-gray-950 dark:bg-white/10 dark:text-white/60'
+              className='cursor-none flex items-center gap-2 rounded-full bg-white p-4 text-gray-700 transition hover:scale-[1.15] hover:text-gray-950 dark:bg-white/10 dark:text-white/60'
               href={linkedinUrl}
               target='_blank'
               aria-label='View my LinkedIn profile'>
@@ -168,7 +171,7 @@ export default function Intro({ profile }: IntroProps) {
             </a>
 
             <a
-              className='flex cursor-pointer items-center gap-2 rounded-full bg-white p-4 text-[1.35rem] text-gray-700 transition hover:scale-[1.15] hover:text-gray-950 dark:bg-white/10 dark:text-white/60'
+              className=' flex items-center gap-2 rounded-full bg-white p-4 text-[1.35rem] text-gray-700 transition hover:scale-[1.15] hover:text-gray-950 dark:bg-white/10 dark:text-white/60'
               href={githubUrl}
               target='_blank'
               aria-label='View my GitHub profile'>

@@ -313,8 +313,8 @@ export function IconCloud({ icons, images }: IconCloudProps) {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
-      className="rounded-lg"
-      aria-label="Interactive 3D Icon Cloud"
+      className="rounded-full cursor-grab active:cursor-grabbing transition-shadow hover:shadow-lg hover:shadow-cyan-500/10"
+      aria-label="Interactive 3D Icon Cloud - Drag to rotate, click icons to focus"
       role="img"
     />
   )

@@ -32,6 +32,8 @@ interface ShinyButtonProps
     MotionProps {
   children: React.ReactNode
   className?: string
+  disabled?: boolean
+  type?: "button" | "submit" | "reset"
 }
 
 export const ShinyButton = React.forwardRef<

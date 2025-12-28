@@ -8,6 +8,7 @@ import {
   Eye,
 } from "lucide-react";
 import Link from "next/link";
+import AdminCard from "@/components/admin/admin-card";
 
 export const dynamic = "force-dynamic";
 
@@ -70,15 +71,17 @@ export default async function AdminDashboard() {
     <div className='space-y-8'>
       {/* Page Header */}
       <div>
-        <h1 className='text-3xl font-bold text-white'>Dashboard</h1>
-        <p className='text-gray-400 mt-1'>
+        <h1 className='text-3xl font-bold bg-linear-to-r from-blue-600 via-purple-600 to-blue-600 dark:from-blue-400 dark:via-purple-400 dark:to-blue-400 bg-clip-text text-transparent'>
+          Dashboard
+        </h1>
+        <p className='text-gray-600 dark:text-gray-400 mt-1'>
           Manage your portfolio content from here
         </p>
       </div>
 
       {/* Stats Grid */}
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
-        {statCards.map((card) => {
+        {statCards.map((card, index) => {
           const Icon = card.icon;
           const value =
             card.key === "projects" ? stats.projects.total : stats[card.key];
@@ -87,13 +90,13 @@ export default async function AdminDashboard() {
             <Link
               key={card.name}
               href={card.href}
-              className='group relative overflow-hidden rounded-2xl bg-gray-900 border border-gray-800 p-6 hover:border-gray-700 transition-all'>
+              className='group relative overflow-hidden rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 hover:border-gray-300 dark:hover:border-gray-700 transition-all hover:shadow-lg dark:hover:shadow-none'>
               <div className='flex items-start justify-between'>
                 <div>
-                  <p className='text-gray-400 text-sm font-medium'>
+                  <p className='text-gray-500 dark:text-gray-400 text-sm font-medium'>
                     {card.name}
                   </p>
-                  <p className='text-4xl font-bold text-white mt-2'>{value}</p>
+                  <p className='text-4xl font-bold text-gray-900 dark:text-white mt-2'>{value}</p>
                   {card.key === "projects" && (
                     <p className='text-sm text-gray-500 mt-1'>
                       {stats.projects.published} published
@@ -116,48 +119,48 @@ export default async function AdminDashboard() {
       {/* Quick Actions */}
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
         {/* Recent Activity Placeholder */}
-        <div className='rounded-2xl bg-gray-900 border border-gray-800 p-6'>
+        <AdminCard showBeam={true} beamSize={200} beamDuration={10} className='p-6'>
           <div className='flex items-center gap-3 mb-6'>
             <TrendingUp className='w-5 h-5 text-blue-500' />
-            <h2 className='text-lg font-semibold text-white'>Quick Actions</h2>
+            <h2 className='text-lg font-semibold text-gray-900 dark:text-white'>Quick Actions</h2>
           </div>
           <div className='space-y-3'>
             <Link
               href='/admin/projects/new'
-              className='flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-800 hover:bg-gray-750 text-gray-300 hover:text-white transition-colors'>
+              className='flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-750 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors'>
               <FolderKanban size={18} />
               <span>Add New Project</span>
             </Link>
             <Link
               href='/admin/experience/new'
-              className='flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-800 hover:bg-gray-750 text-gray-300 hover:text-white transition-colors'>
+              className='flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-750 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors'>
               <Briefcase size={18} />
               <span>Add Experience</span>
             </Link>
             <Link
               href='/admin/certificates/new'
-              className='flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-800 hover:bg-gray-750 text-gray-300 hover:text-white transition-colors'>
+              className='flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-750 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors'>
               <Award size={18} />
               <span>Add Certificate</span>
             </Link>
             <Link
               href='/admin/profile'
-              className='flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-800 hover:bg-gray-750 text-gray-300 hover:text-white transition-colors'>
+              className='flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-750 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors'>
               <Eye size={18} />
               <span>Edit Profile</span>
             </Link>
           </div>
-        </div>
+        </AdminCard>
 
         {/* View Portfolio */}
-        <div className='rounded-2xl bg-linear-to-br from-blue-500/10 to-purple-500/10 border border-gray-800 p-6'>
+        <AdminCard showBeam={true} beamSize={200} beamDuration={10} beamDelay={0.5} className='p-6 bg-linear-to-br from-blue-50 to-purple-50 dark:from-blue-500/10 dark:to-purple-500/10'>
           <div className='flex items-center gap-3 mb-6'>
             <Eye className='w-5 h-5 text-purple-500' />
-            <h2 className='text-lg font-semibold text-white'>
+            <h2 className='text-lg font-semibold text-gray-900 dark:text-white'>
               Preview Portfolio
             </h2>
           </div>
-          <p className='text-gray-400 mb-6'>
+          <p className='text-gray-600 dark:text-gray-400 mb-6'>
             See how your portfolio looks to visitors. All changes you make here
             will be reflected on the public site after saving.
           </p>
@@ -165,11 +168,11 @@ export default async function AdminDashboard() {
             href='/'
             target='_blank'
             rel='noopener noreferrer'
-            className='inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-linear-to-r from-blue-500 to-purple-600 text-white font-medium hover:from-blue-600 hover:to-purple-700 transition-all'>
+            className='inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-linear-to-r from-blue-500 to-purple-600 text-white font-medium hover:from-blue-600 hover:to-purple-700 transition-all hover:scale-105'>
             <Eye size={18} />
             View Live Portfolio
           </a>
-        </div>
+        </AdminCard>
       </div>
     </div>
   );

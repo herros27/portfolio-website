@@ -10,6 +10,8 @@ import { updateProfile, ProfileFormData } from "@/actions/profile";
 import toast from "react-hot-toast";
 import { Loader2, Save } from "lucide-react";
 import ImageUploader from "@/components/ui/image-uploader";
+import AdminCard from "@/components/admin/admin-card";
+import { ShinyButton } from "@/components/ui/shiny-button";
 
 const profileSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -81,144 +83,144 @@ export default function ProfileForm({ profile }: ProfileFormProps) {
         {/* Main Content */}
         <div className="lg:col-span-2 space-y-6">
           {/* Basic Info */}
-          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6 space-y-4">
-            <h3 className="text-lg font-medium text-white">Basic Information</h3>
+          <AdminCard showBeam={true} beamSize={250} beamDuration={10} className="p-6 space-y-4">
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white">Basic Information</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Full Name *
                 </label>
                 <input
                   {...register("name")}
                   type="text"
-                  className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
                 {errors.name && (
-                  <p className="mt-2 text-sm text-red-400">{errors.name.message}</p>
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-400">{errors.name.message}</p>
                 )}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Professional Title *
                 </label>
                 <input
                   {...register("title")}
                   type="text"
                   placeholder="Full-Stack Developer"
-                  className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
                 {errors.title && (
-                  <p className="mt-2 text-sm text-red-400">{errors.title.message}</p>
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-400">{errors.title.message}</p>
                 )}
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Short Bio *
               </label>
               <textarea
                 {...register("bio")}
                 rows={3}
                 placeholder="A brief introduction..."
-                className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                className="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all"
               />
               {errors.bio && (
-                <p className="mt-2 text-sm text-red-400">{errors.bio.message}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-400">{errors.bio.message}</p>
               )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 About Section *
               </label>
               <textarea
                 {...register("about")}
                 rows={6}
                 placeholder="Tell your story..."
-                className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                className="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all"
               />
               {errors.about && (
-                <p className="mt-2 text-sm text-red-400">{errors.about.message}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-400">{errors.about.message}</p>
               )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Location
               </label>
               <input
                 {...register("location")}
                 type="text"
                 placeholder="City, Country"
-                className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               />
             </div>
-          </div>
+          </AdminCard>
 
           {/* Social Links */}
-          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6 space-y-4">
-            <h3 className="text-lg font-medium text-white">Social Links</h3>
+          <AdminCard showBeam={true} beamSize={200} beamDuration={8} beamDelay={0.5} className="p-6 space-y-4">
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white">Social Links</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Email
                 </label>
                 <input
                   {...register("email")}
                   type="email"
                   placeholder="you@example.com"
-                  className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   GitHub
                 </label>
                 <input
                   {...register("github")}
                   type="url"
                   placeholder="https://github.com/username"
-                  className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   LinkedIn
                 </label>
                 <input
                   {...register("linkedin")}
                   type="url"
                   placeholder="https://linkedin.com/in/username"
-                  className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Twitter / X
                 </label>
                 <input
                   {...register("twitter")}
                   type="url"
                   placeholder="https://twitter.com/username"
-                  className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               </div>
             </div>
-          </div>
+          </AdminCard>
         </div>
 
         {/* Sidebar */}
         <div className="space-y-6">
           {/* Photo */}
-          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-            <label className="block text-sm font-medium text-gray-300 mb-3">
+          <AdminCard showBeam={true} beamSize={150} beamDuration={6} beamDelay={1} className="p-6">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
               Profile Photo
             </label>
             <ImageUploader
@@ -235,26 +237,26 @@ export default function ProfileForm({ profile }: ProfileFormProps) {
               folder="profiles"
               aspectRatio="square"
             />
-          </div>
+          </AdminCard>
 
           {/* Resume */}
-          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+          <AdminCard showBeam={true} beamSize={150} beamDuration={6} beamDelay={1.5} className="p-6">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Resume URL
             </label>
             <input
               {...register("resumeUrl")}
               type="text"
               placeholder="/resume.pdf or https://..."
-              className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             />
-          </div>
+          </AdminCard>
 
           {/* Save Button */}
-          <button
+          <ShinyButton
             type="submit"
             disabled={isLoading}
-            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-linear-to-r from-blue-500 to-purple-600 text-white font-medium hover:from-blue-600 hover:to-purple-700 transition-all disabled:opacity-50"
+            className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-lg font-medium transition-all disabled:opacity-50 cursor-pointer hover:scale-[1.02]"
           >
             {isLoading ? (
               <>
@@ -267,7 +269,7 @@ export default function ProfileForm({ profile }: ProfileFormProps) {
                 Save Profile
               </>
             )}
-          </button>
+          </ShinyButton>
         </div>
       </div>
     </form>

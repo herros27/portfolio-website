@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { deleteCertificate, restoreCertificate } from "@/actions/certificates";
 import toast from "react-hot-toast";
+import AdminCard from "@/components/admin/admin-card";
 
 interface CertificatesListProps {
   certificates: Certificate[];
@@ -46,20 +47,20 @@ export default function CertificatesList({ certificates }: CertificatesListProps
       <div className="flex items-center gap-4">
         <button
           onClick={() => setShowDeleted(false)}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all hover:scale-105 ${
             !showDeleted
-              ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
-              : "text-gray-400 hover:text-white"
+              ? "bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 border border-blue-300 dark:border-blue-500/30 shadow-lg shadow-blue-500/10 dark:shadow-blue-500/20"
+              : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800/50"
           }`}
         >
           Active ({items.filter((c) => !c.deletedAt).length})
         </button>
         <button
           onClick={() => setShowDeleted(true)}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all hover:scale-105 ${
             showDeleted
-              ? "bg-red-500/20 text-red-400 border border-red-500/30"
-              : "text-gray-400 hover:text-white"
+              ? "bg-red-100 dark:bg-red-500/20 text-red-600 dark:text-red-400 border border-red-300 dark:border-red-500/30 shadow-lg shadow-red-500/10 dark:shadow-red-500/20"
+              : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800/50"
           }`}
         >
           Deleted ({items.filter((c) => c.deletedAt).length})
@@ -68,28 +69,32 @@ export default function CertificatesList({ certificates }: CertificatesListProps
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {filtered.length === 0 ? (
-          <div className="col-span-full bg-gray-900 rounded-xl border border-gray-800 p-8 text-center text-gray-400">
+          <AdminCard showBeam={false} className="col-span-full p-8 text-center text-gray-600 dark:text-gray-400">
             {showDeleted ? "No deleted certificates" : "No certificates yet"}
-          </div>
+          </AdminCard>
         ) : (
-          filtered.map((cert) => (
-            <div
+          filtered.map((cert, index) => (
+            <AdminCard
               key={cert.id}
-              className="bg-gray-900 rounded-xl border border-gray-800 overflow-hidden hover:border-gray-700 transition-colors"
+              showBeam={true}
+              beamSize={150}
+              beamDuration={6}
+              beamDelay={index * 0.15}
+              className="overflow-hidden group"
             >
               {cert.imageUrl && (
-                <div className="relative aspect-video bg-gray-800">
+                <div className="relative aspect-video bg-gray-200 dark:bg-gray-800 overflow-hidden">
                   <Image
                     src={cert.imageUrl}
                     alt={cert.title}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
               )}
               <div className="p-5">
-                <h3 className="text-lg font-semibold text-white">{cert.title}</h3>
-                <p className="text-gray-400 text-sm">{cert.issuer}</p>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{cert.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">{cert.issuer}</p>
                 <div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
                   <Calendar size={12} />
                   {new Date(cert.issueDate).toLocaleDateString("en-US", {
@@ -101,19 +106,19 @@ export default function CertificatesList({ certificates }: CertificatesListProps
                   {cert.tags.slice(0, 4).map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-0.5 rounded bg-gray-800 text-gray-400 text-xs"
+                      className="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-xs"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-800">
+                <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200 dark:border-gray-800">
                   {cert.credentialUrl && (
                     <a
                       href={cert.credentialUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                      className="inline-flex items-center gap-1 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
                     >
                       <ExternalLink size={14} />
                       Verify
@@ -123,7 +128,7 @@ export default function CertificatesList({ certificates }: CertificatesListProps
                     {cert.deletedAt ? (
                       <button
                         onClick={() => handleRestore(cert.id)}
-                        className="p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-emerald-400 transition-colors"
+                        className="p-2 rounded-lg hover:bg-emerald-100 dark:hover:bg-emerald-500/10 text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all hover:scale-110"
                       >
                         <RotateCcw size={16} />
                       </button>
@@ -131,13 +136,13 @@ export default function CertificatesList({ certificates }: CertificatesListProps
                       <>
                         <Link
                           href={`/admin/certificates/${cert.id}/edit`}
-                          className="p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors"
+                          className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all hover:scale-110"
                         >
                           <Pencil size={16} />
                         </Link>
                         <button
                           onClick={() => handleDelete(cert.id)}
-                          className="p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-red-400 transition-colors"
+                          className="p-2 rounded-lg hover:bg-red-100 dark:hover:bg-red-500/10 text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-all hover:scale-110"
                         >
                           <Trash2 size={16} />
                         </button>
@@ -146,7 +151,7 @@ export default function CertificatesList({ certificates }: CertificatesListProps
                   </div>
                 </div>
               </div>
-            </div>
+            </AdminCard>
           ))
         )}
       </div>

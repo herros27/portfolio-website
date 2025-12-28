@@ -9,6 +9,8 @@ import {
   toggleSkillVisibility,
 } from "@/actions/skills";
 import toast from "react-hot-toast";
+import AdminCard from "@/components/admin/admin-card";
+import { ShinyButton } from "@/components/ui/shiny-button";
 
 interface SkillsListProps {
   skills: Skill[];
@@ -71,9 +73,9 @@ export default function SkillsList({ skills }: SkillsListProps) {
   return (
     <div className='space-y-6'>
       {/* Add New Skill */}
-      <div className='bg-gray-900 rounded-xl border border-gray-800 p-6'>
-        <h3 className='text-lg font-medium text-white mb-4'>Add New Skill</h3>
-        <div className='flex gap-3'>
+      <AdminCard showBeam={true} beamSize={300} beamDuration={10} className='p-6'>
+        <h3 className='text-lg font-medium text-gray-900 dark:text-white mb-4'>Add New Skill</h3>
+        <div className='flex flex-col gap-3 sm:flex-row'>
           <input
             type='text'
             value={newSkill}
@@ -85,34 +87,53 @@ export default function SkillsList({ skills }: SkillsListProps) {
               }
             }}
             placeholder='Enter skill name...'
-            className='flex-1 px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+            className='
+              w-full
+              px-4 py-3
+              rounded-lg
+              bg-gray-100 dark:bg-gray-800/50
+              border border-gray-300 dark:border-gray-700
+              text-gray-900 dark:text-white placeholder-gray-500
+              focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+              transition-all
+            '
           />
-          <button
+
+          <ShinyButton
             onClick={handleAdd}
             disabled={isAdding || !newSkill.trim()}
-            className='inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-linear-to-r from-blue-500 to-purple-600 text-white font-medium hover:from-blue-600 hover:to-purple-700 transition-all disabled:opacity-50'>
+            className='
+              w-full
+              sm:w-auto
+              inline-flex items-center justify-center gap-2
+              px-6 py-3
+              rounded-lg
+              font-medium
+              transition-all
+              disabled:opacity-50
+              cursor-pointer
+            '>
             {isAdding ? (
               <Loader2 size={18} className='animate-spin' />
             ) : (
               <Plus size={18} />
             )}
-            Add
-          </button>
+            <span>Add</span>
+          </ShinyButton>
         </div>
-      </div>
+      </AdminCard>
 
       {/* Skills Grid */}
-      <div className='bg-gray-900 rounded-xl border border-gray-800 p-6'>
+      <AdminCard showBeam={true} beamSize={250} beamDuration={8} beamDelay={0.5} className='p-6'>
         <div className='flex items-center justify-between mb-4'>
-          <h3 className='text-lg font-medium text-white'>Your Skills</h3>
-          <span className='text-sm text-gray-400'>
-            {items.filter((s) => s.visible).length} visible / {items.length}{" "}
-            total
+          <h3 className='text-lg font-medium text-gray-900 dark:text-white'>Your Skills</h3>
+          <span className='text-sm text-gray-600 dark:text-gray-400 px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700'>
+            {items.filter((s) => s.visible).length} visible / {items.length} total
           </span>
         </div>
 
         {items.length === 0 ? (
-          <p className='text-gray-400 text-center py-8'>
+          <p className='text-gray-600 dark:text-gray-400 text-center py-8'>
             No skills yet. Add your first skill above!
           </p>
         ) : (
@@ -120,24 +141,24 @@ export default function SkillsList({ skills }: SkillsListProps) {
             {items.map((skill) => (
               <div
                 key={skill.id}
-                className={`group flex items-center justify-between px-4 py-3 rounded-lg border transition-all ${
+                className={`group flex items-center justify-between px-4 py-3 rounded-lg border transition-all hover:scale-[1.02] ${
                   skill.visible
-                    ? "bg-gray-800 border-gray-700"
-                    : "bg-gray-800/50 border-gray-800 opacity-60"
+                    ? "bg-gray-100 dark:bg-gray-800/50 border-gray-300 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10"
+                    : "bg-gray-50 dark:bg-gray-800/30 border-gray-200 dark:border-gray-800 opacity-60"
                 }`}>
-                <span className='text-white font-medium truncate'>
+                <span className='text-gray-900 dark:text-white font-medium truncate'>
                   {skill.name}
                 </span>
                 <div className='flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity'>
                   <button
                     onClick={() => handleToggleVisibility(skill.id)}
-                    className='p-1.5 rounded hover:bg-gray-700 text-gray-400 hover:text-white transition-colors'
+                    className='p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all hover:scale-110'
                     title={skill.visible ? "Hide" : "Show"}>
                     {skill.visible ? <Eye size={14} /> : <EyeOff size={14} />}
                   </button>
                   <button
                     onClick={() => handleDelete(skill.id)}
-                    className='p-1.5 rounded hover:bg-gray-700 text-gray-400 hover:text-red-400 transition-colors'
+                    className='p-1.5 rounded hover:bg-red-100 dark:hover:bg-red-500/10 text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-all hover:scale-110'
                     title='Delete'>
                     <Trash2 size={14} />
                   </button>
@@ -146,7 +167,7 @@ export default function SkillsList({ skills }: SkillsListProps) {
             ))}
           </div>
         )}
-      </div>
+      </AdminCard>
     </div>
   );
 }

@@ -116,7 +116,7 @@ export default function ImageUploader({
           className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2 ${
             useUpload
               ? "bg-blue-500 text-white"
-              : "bg-gray-800 text-gray-400 hover:text-white"
+              : "bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
           }`}
         >
           <Upload size={16} />
@@ -128,7 +128,7 @@ export default function ImageUploader({
           className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2 ${
             !useUpload
               ? "bg-blue-500 text-white"
-              : "bg-gray-800 text-gray-400 hover:text-white"
+              : "bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
           }`}
         >
           <LinkIcon size={16} />
@@ -148,7 +148,7 @@ export default function ImageUploader({
           />
 
           {value ? (
-            <div className={`relative rounded-lg overflow-hidden border border-gray-700 ${aspectClass}`}>
+            <div className={`relative rounded-lg overflow-hidden border border-gray-300 dark:border-gray-700 ${aspectClass}`}>
               <Image
                 src={value}
                 alt="Upload preview"
@@ -168,7 +168,7 @@ export default function ImageUploader({
               type="button"
               onClick={() => fileInputRef.current?.click()}
               disabled={isUploading}
-              className={`w-full ${aspectClass} min-h-48 border-2 border-dashed border-gray-700 rounded-lg hover:border-gray-600 transition-colors flex flex-col items-center justify-center gap-2 text-gray-400 hover:text-gray-300`}
+              className={`w-full ${aspectClass} min-h-48 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg hover:border-gray-400 dark:hover:border-gray-600 transition-colors flex flex-col items-center justify-center gap-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 bg-gray-50 dark:bg-transparent`}
             >
               {isUploading ? (
                 <>
@@ -179,7 +179,7 @@ export default function ImageUploader({
                 <>
                   <Upload size={32} />
                   <span className="text-sm font-medium">Click to upload image</span>
-                  <span className="text-xs text-gray-500">Max 5MB</span>
+                  <span className="text-xs text-gray-400 dark:text-gray-500">Max 5MB</span>
                 </>
               )}
             </button>
@@ -188,7 +188,7 @@ export default function ImageUploader({
       ) : (
         <div className="space-y-3">
           {value && (
-            <div className={`relative rounded-lg overflow-hidden border border-gray-700 ${aspectClass} mb-3`}>
+            <div className={`relative rounded-lg overflow-hidden border border-gray-300 dark:border-gray-700 ${aspectClass} mb-3`}>
               <Image
                 src={value}
                 alt="URL preview"
@@ -211,7 +211,7 @@ export default function ImageUploader({
               value={urlInput}
               onChange={(e) => setUrlInput(e.target.value)}
               placeholder="https://example.com/image.jpg"
-              className="flex-1 px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
               type="button"

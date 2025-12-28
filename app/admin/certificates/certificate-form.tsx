@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import { ArrowLeft, Plus, X, Loader2 } from "lucide-react";
 import Link from "next/link";
 import ImageUploader from "@/components/ui/image-uploader";
+import AdminCard from "@/components/admin/admin-card";
 
 const certificateSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -115,14 +116,14 @@ export default function CertificateForm({ certificate }: CertificateFormProps) {
       <div className='flex items-center gap-4'>
         <Link
           href='/admin/certificates'
-          className='p-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors'>
+          className='p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors'>
           <ArrowLeft size={20} />
         </Link>
         <div className='flex-1'>
-          <h1 className='text-3xl font-bold text-white'>
+          <h1 className='text-3xl font-bold bg-linear-to-r from-blue-600 via-purple-600 to-blue-600 dark:from-blue-400 dark:via-purple-400 dark:to-blue-400 bg-clip-text text-transparent'>
             {certificate ? "Edit Certificate" : "New Certificate"}
           </h1>
-          <p className='text-gray-400 mt-1'>
+          <p className='text-gray-600 dark:text-gray-400 mt-1'>
             {certificate
               ? "Update certificate details"
               : "Add a new certificate"}
@@ -147,57 +148,57 @@ export default function CertificateForm({ certificate }: CertificateFormProps) {
         {/* Main Content */}
         <div className='lg:col-span-2 space-y-6'>
           {/* Title */}
-          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6'>
-            <label className='block text-sm font-medium text-gray-300 mb-2'>
+          <AdminCard showBeam={true} beamSize={200} beamDuration={10} className='p-6'>
+            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
               Certificate Title *
             </label>
             <input
               {...register("title")}
               type='text'
               placeholder='Certificate of Completion'
-              className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+              className='w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all'
             />
             {errors.title && (
-              <p className='mt-2 text-sm text-red-400'>
+              <p className='mt-2 text-sm text-red-600 dark:text-red-400'>
                 {errors.title.message}
               </p>
             )}
-          </div>
+          </AdminCard>
 
           {/* Issuer & Description */}
-          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6 space-y-4'>
+          <AdminCard showBeam={true} beamSize={200} beamDuration={10} beamDelay={0.2} className='p-6 space-y-4'>
             <div>
-              <label className='block text-sm font-medium text-gray-300 mb-2'>
+              <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
                 Issuer / Organization *
               </label>
               <input
                 {...register("issuer")}
                 type='text'
                 placeholder='Google'
-                className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                className='w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all'
               />
               {errors.issuer && (
-                <p className='mt-2 text-sm text-red-400'>
+                <p className='mt-2 text-sm text-red-600 dark:text-red-400'>
                   {errors.issuer.message}
                 </p>
               )}
             </div>
             <div>
-              <label className='block text-sm font-medium text-gray-300 mb-2'>
+              <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
                 Description
               </label>
               <textarea
                 {...register("description")}
                 rows={4}
                 placeholder='Describe what this certificate represents...'
-                className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none'
+                className='w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all'
               />
             </div>
-          </div>
+          </AdminCard>
 
           {/* Tags */}
-          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6'>
-            <label className='block text-sm font-medium text-gray-300 mb-2'>
+          <AdminCard showBeam={true} beamSize={200} beamDuration={10} beamDelay={0.4} className='p-6'>
+            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
               Skills / Tags
             </label>
             <div className='flex gap-2 mb-3'>
@@ -212,12 +213,12 @@ export default function CertificateForm({ certificate }: CertificateFormProps) {
                   }
                 }}
                 placeholder='Add a tag...'
-                className='flex-1 px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                className='flex-1 px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all'
               />
               <button
                 type='button'
                 onClick={addTag}
-                className='px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-gray-400 hover:text-white hover:border-gray-600 transition-colors'>
+                className='px-4 py-3 rounded-lg bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:border-gray-400 dark:hover:border-gray-600 transition-colors'>
                 <Plus size={20} />
               </button>
             </div>
@@ -225,43 +226,43 @@ export default function CertificateForm({ certificate }: CertificateFormProps) {
               {tags.map((tag) => (
                 <span
                   key={tag}
-                  className='inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-amber-500/20 text-amber-400 text-sm'>
+                  className='inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-amber-100 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 text-sm'>
                   {tag}
                   <button
                     type='button'
                     onClick={() => removeTag(tag)}
-                    className='hover:text-white transition-colors'>
+                    className='hover:text-amber-800 dark:hover:text-white transition-colors'>
                     <X size={14} />
                   </button>
                 </span>
               ))}
             </div>
-          </div>
+          </AdminCard>
 
           {/* Credential URL */}
-          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6'>
-            <label className='block text-sm font-medium text-gray-300 mb-2'>
+          <AdminCard showBeam={true} beamSize={200} beamDuration={10} beamDelay={0.6} className='p-6'>
+            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
               Credential Verification URL
             </label>
             <input
               {...register("credentialUrl")}
               type='url'
               placeholder='https://credential.example.com/verify/...'
-              className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+              className='w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all'
             />
             {errors.credentialUrl && (
-              <p className='mt-2 text-sm text-red-400'>
+              <p className='mt-2 text-sm text-red-600 dark:text-red-400'>
                 {errors.credentialUrl.message}
               </p>
             )}
-          </div>
+          </AdminCard>
         </div>
 
         {/* Sidebar */}
         <div className='space-y-6'>
           {/* Image */}
-          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6'>
-            <label className='block text-sm font-medium text-gray-300 mb-3'>
+          <AdminCard showBeam={true} beamSize={150} beamDuration={6} beamDelay={0.8} className='p-6'>
+            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3'>
               Certificate Image
             </label>
             <ImageUploader
@@ -278,40 +279,40 @@ export default function CertificateForm({ certificate }: CertificateFormProps) {
               folder='certificates'
               aspectRatio='video'
             />
-          </div>
+          </AdminCard>
 
           {/* Issue Date */}
-          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6'>
-            <label className='block text-sm font-medium text-gray-300 mb-2'>
+          <AdminCard showBeam={true} beamSize={150} beamDuration={6} beamDelay={1} className='p-6'>
+            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
               Issue Date *
             </label>
             <input
               {...register("issueDate")}
               type='date'
-              className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+              className='w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all'
             />
             {errors.issueDate && (
-              <p className='mt-2 text-sm text-red-400'>
+              <p className='mt-2 text-sm text-red-600 dark:text-red-400'>
                 {errors.issueDate.message}
               </p>
             )}
-          </div>
+          </AdminCard>
 
           {/* Order */}
-          <div className='bg-gray-900 rounded-xl border border-gray-800 p-6'>
-            <label className='block text-sm font-medium text-gray-300 mb-2'>
+          <AdminCard showBeam={true} beamSize={150} beamDuration={6} beamDelay={1.2} className='p-6'>
+            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
               Display Order
             </label>
             <input
               {...register("order", { valueAsNumber: true })}
               type='number'
               min={0}
-              className='w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+              className='w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all'
             />
             <p className='mt-2 text-xs text-gray-500'>
               Lower numbers appear first.
             </p>
-          </div>
+          </AdminCard>
         </div>
       </div>
     </form>

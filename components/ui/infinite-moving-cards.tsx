@@ -9,7 +9,7 @@ import React, {
   useMemo,
 } from "react";
 import Image, { StaticImageData } from "next/image";
-import { ExternalLink, Calendar } from "lucide-react";
+import { ExternalLink, Calendar, Award, ChevronRight } from "lucide-react";
 
 // --- Tipe Data ---
 interface Item {
@@ -87,7 +87,7 @@ export const InfiniteMovingCards = ({
       onTouchStart={() => pauseOnHover && setIsPaused(true)}
       onTouchEnd={() => pauseOnHover && setIsPaused(false)}
       className={cn(
-        "scroller group relative z-20 w-full overflow-hidden mask-[linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+        "scroller group relative z-20 w-full overflow-hidden",
         className
       )}>
       <ul
@@ -96,7 +96,7 @@ export const InfiniteMovingCards = ({
           animationPlayState: isPaused ? "paused" : "running",
         }}
         className={cn(
-          "flex min-w-full shrink-0 gap-8 py-4 w-max flex-nowrap",
+          "flex min-w-full shrink-0 gap-6 py-6 w-max flex-nowrap",
           start && "animate-scroll",
           "pointer-events-none"
         )}>
@@ -120,43 +120,80 @@ const CardItem = ({ item }: { item: Item }) => {
   return (
     <li
       className={cn(
-        "group/card relative h-72 w-72 md:h-80 md:w-112.5 shrink-0 rounded-xl perspective-[1000px]",
+        "group/card relative h-80 w-80 md:h-96 md:w-[450px] shrink-0 rounded-2xl perspective-[1000px]",
         "pointer-events-auto"
       )}>
-      <div className='relative h-full w-full rounded-xl shadow-xl transition-all duration-500 transform-3d group-hover/card:transform-[rotateY(180deg)]'>
-        {/* Sisi Depan */}
-        <div className='absolute inset-0 h-full w-full rounded-xl backface-hidden'>
+      <div className='relative h-full w-full rounded-2xl shadow-2xl shadow-black/10 dark:shadow-black/30 transition-all duration-700 transform-3d group-hover/card:transform-[rotateY(180deg)]'>
+        {/* Front Side */}
+        <div className='absolute inset-0 h-full w-full rounded-2xl backface-hidden overflow-hidden'>
           <Image
             src={item.imageUrl}
             alt={item.title}
             fill
-            className='rounded-xl object-cover'
+            className='rounded-2xl object-cover transition-transform duration-700 group-hover/card:scale-110'
             sizes='(max-width: 768px) 80vw, 450px'
           />
-          <div className='absolute inset-0 flex items-end rounded-xl bg-black/40 p-4 md:p-6 transition-opacity group-hover/card:opacity-0'>
-            <h3 className='text-lg md:text-2xl font-bold text-white drop-shadow-md'>
-              {item.title}
-            </h3>
+          
+          {/* Gradient overlay */}
+          <div className='absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent rounded-2xl' />
+          
+          {/* Content overlay */}
+          <div className='absolute inset-0 flex flex-col justify-between p-5 md:p-6'>
+            {/* Top badge */}
+            <div className='flex justify-end'>
+              <div className='flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30'>
+                <Award className='w-3.5 h-3.5 text-white' />
+                <span className='text-xs font-medium text-white'>Certificate</span>
+              </div>
+            </div>
+            
+            {/* Bottom content */}
+            <div className='space-y-2'>
+              <h3 className='text-lg md:text-2xl font-bold text-white drop-shadow-lg line-clamp-2'>
+                {item.title}
+              </h3>
+              {formattedDate && (
+                <div className='flex items-center gap-1.5 text-white/80'>
+                  <Calendar size={14} />
+                  <span className='text-xs md:text-sm'>{formattedDate}</span>
+                </div>
+              )}
+              {/* Hint to flip */}
+              <div className='flex items-center gap-1 text-white/60 text-xs pt-1'>
+                <span>Hover to see details</span>
+                <ChevronRight size={12} className='animate-pulse' />
+              </div>
+            </div>
           </div>
+          
+          {/* Decorative corner accent */}
+          <div className='absolute top-0 left-0 w-24 h-24 bg-linear-to-br from-amber-500/30 to-transparent rounded-tl-2xl' />
         </div>
 
-        {/* Sisi Belakang */}
-        <div className='absolute inset-0 h-full w-full rounded-xl bg-gray-100 p-4 md:p-6 text-center text-slate-800 transform-[rotateY(180deg)] backface-hidden dark:bg-zinc-900 dark:text-slate-200'>
-          <div className='flex h-full flex-col items-center justify-center'>
-            <h4 className='mb-1 md:mb-2 text-sm md:text-lg font-bold line-clamp-1'>
-              {item.title}
-            </h4>
-            
-            {/* Issue Date */}
-            {formattedDate && (
-              <div className='flex items-center gap-1 text-[10px] md:text-xs text-gray-500 dark:text-gray-400 mb-2'>
-                <Calendar size={12} />
-                {formattedDate}
+        {/* Back Side */}
+        <div className='absolute inset-0 h-full w-full rounded-2xl bg-linear-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-5 md:p-6 text-center transform-[rotateY(180deg)] backface-hidden border border-gray-200/50 dark:border-gray-700/50'>
+          <div className='flex h-full flex-col'>
+            {/* Header */}
+            <div className='mb-3'>
+              <div className='w-10 h-10 mx-auto rounded-xl bg-linear-to-br from-amber-500 to-orange-500 flex items-center justify-center mb-3 shadow-lg shadow-amber-500/25'>
+                <Award className='w-5 h-5 text-white' />
               </div>
-            )}
+              <h4 className='text-sm md:text-base font-bold text-gray-900 dark:text-white line-clamp-2'>
+                {item.title}
+              </h4>
+              
+              {/* Issue Date */}
+              {formattedDate && (
+                <div className='flex items-center justify-center gap-1 text-[10px] md:text-xs text-gray-500 dark:text-gray-400 mt-1'>
+                  <Calendar size={10} />
+                  {formattedDate}
+                </div>
+              )}
+            </div>
             
-            <div className='grow overflow-y-auto px-1 scrollbar-none'>
-              <p className='text-[12px] md:text-sm leading-relaxed opacity-90'>
+            {/* Description */}
+            <div className='grow overflow-y-auto px-1 scrollbar-none mb-3'>
+              <p className='text-[11px] md:text-sm leading-relaxed text-gray-600 dark:text-gray-300'>
                 {item.description}
               </p>
             </div>
@@ -167,21 +204,27 @@ const CardItem = ({ item }: { item: Item }) => {
                 href={item.credentialUrl}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='inline-flex items-center gap-1 mt-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-[10px] md:text-xs font-medium hover:bg-blue-500/30 transition-colors'
+                className='inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-linear-to-r from-amber-500 to-orange-500 text-white text-[10px] md:text-xs font-semibold hover:from-amber-600 hover:to-orange-600 transition-all hover:scale-105 shadow-lg shadow-amber-500/25'
               >
                 <ExternalLink size={12} />
                 Verify Credential
               </a>
             )}
             
-            <ul className='mt-2 flex flex-wrap justify-center gap-1.5'>
-              {item.tags.map((tag, index) => (
+            {/* Tags */}
+            <ul className='mt-3 flex flex-wrap justify-center gap-1.5'>
+              {item.tags.slice(0, 4).map((tag, index) => (
                 <li
                   key={index}
-                  className='rounded-full bg-black/80 px-2 py-0.5 text-[10px] md:text-[0.65rem] uppercase tracking-wider text-white dark:bg-white/10'>
+                  className='rounded-full bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-2.5 py-0.5 text-[9px] md:text-[10px] font-medium text-gray-600 dark:text-gray-300'>
                   {tag}
                 </li>
               ))}
+              {item.tags.length > 4 && (
+                <li className='rounded-full bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-2.5 py-0.5 text-[9px] md:text-[10px] font-medium text-gray-500 dark:text-gray-400'>
+                  +{item.tags.length - 4}
+                </li>
+              )}
             </ul>
           </div>
         </div>
