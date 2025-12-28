@@ -51,7 +51,7 @@ export async function updateSectionVisibility(section: string, visible: boolean)
         await createAuditLog("UPDATE", "SectionVisibility", section, { visible });
 
         revalidatePath("/");
-        revalidateTag("public");
+        revalidateTag("sections"); // ✅ This matches the cache tag in queries.ts
         revalidatePath("/admin/settings");
 
         return { success: true };
