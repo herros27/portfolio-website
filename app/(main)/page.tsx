@@ -15,6 +15,9 @@ import {
   getSectionVisibility,
 } from "@/lib/queries";
 
+// Force dynamic rendering to prevent build-time database access
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   // Fetch all data from database including section visibility
   const [profile, projects, certificates, experiences, skills, visibility] = await Promise.all([
