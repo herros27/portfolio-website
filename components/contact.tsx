@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import SectionHeading from "./ui/section-heading";
-
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
 import { sendEmail } from "@/actions/sendEmail";
 import SubmitBtn from "./ui/submit-btn";
@@ -18,11 +17,63 @@ interface ContactProps {
 }
 
 export default function Contact({ profile }: ContactProps) {
-  const { ref } = useSectionInView("Contact", 0.40);
-  const [pending, setPending] = useState(false);
+  // Ref untuk Active Section (Navbar)
+  const { ref: sectionInViewRef } = useSectionInView("Contact", 0.5);
 
-  // Default email if no profile
+  // Ref untuk Animasi Scroll Framer Motion
+  const containerRef = useRef<HTMLElement>(null);
+
+  const [pending, setPending] = useState(false);
   const contactEmail = profile?.email || "khairunsyah2714@gmail.com";
+
+  // Setup Scroll Animation
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 80%", "center 30%"],
+  });
+
+  // "start 80%", "center 50%"
+
+  // const rotateX = useTransform(scrollYProgress, [0, 0.5, 0.7], [-75, 5, 0]);
+
+  // const rotateZ = useTransform(scrollYProgress, [0, 0.7], [-4, 0]);
+
+  // const z = useTransform(scrollYProgress, [0, 0.7], [-200, 0]);
+
+  // const y = useTransform(scrollYProgress, [0, 0.7], [160, 0]);
+
+  // const scale = useTransform(scrollYProgress, [0, 0.7], [0.85, 1]);
+
+  // // Fade in
+
+  const rotateXRaw = useTransform(scrollYProgress, [0, 0.5, 0.7], [-75, 8, 0]);
+
+  const rotateZRaw = useTransform(scrollYProgress, [0, 0.7], [-4, 0]);
+  const zRaw = useTransform(scrollYProgress, [0, 0.7], [-200, 0]);
+  const yRaw = useTransform(scrollYProgress, [0, 0.7], [160, 0]);
+  const scaleRaw = useTransform(scrollYProgress, [0, 0.7], [0.85, 1]);
+  const opacityRaw = useTransform(scrollYProgress, [0, 0.3, 0.7], [0, 0.7, 1]);
+
+  const opacity = useSpring(opacityRaw, {
+    stiffness: 80,
+    damping: 20,
+  });
+
+  // Gerakan utama
+
+  const spring = { stiffness: 120, damping: 25, mass: 0.6 };
+
+  const rotateX = useSpring(rotateXRaw, spring);
+  const rotateZ = useSpring(rotateZRaw, spring);
+  const z = useSpring(zRaw, spring);
+  const y = useSpring(yRaw, spring);
+  const scale = useSpring(scaleRaw, spring);
+  // Shadow dinamis
+  const boxShadow = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["0px 60px 120px rgba(0,0,0,0.4)", "0px 20px 40px rgba(0,0,0,0.25)"]
+  );
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,42 +95,102 @@ export default function Contact({ profile }: ContactProps) {
   return (
     <section
       id='contact'
-      ref={ref as React.LegacyRef<HTMLElement>}
-      className='mb-20 sm:mb-28 w-[min(100%,38rem)] text-center'>
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}>
-        <SectionHeading>Contact me</SectionHeading>
-        <p className='text-gray-700 -mt-6 dark:text-white/80'>
-          Please contact me directly at{" "}
-          <a className='underline' href={`mailto:${contactEmail}`}>
-            {contactEmail}
-          </a>{" "}
-          or through this form.
-        </p>
+      ref={(el) => {
+        // 1. Assign ke containerRef
+        if (containerRef) {
+          (containerRef as React.MutableRefObject<HTMLElement | null>).current =
+            el;
+        }
+        // 2. Assign ke sectionInViewRef
+        if (sectionInViewRef) {
+          if (typeof sectionInViewRef === "function") {
+            sectionInViewRef(el);
+          } else {
+            (sectionInViewRef as React.MutableRefObject<any>).current = el;
+          }
+        }
+      }}
+      className='mb-20 sm:mb-28 w-full max-w-[50rem] scroll-mt-24 mx-auto text-center px-4 perspective-[1600px]
+'>
+      <SectionHeading>Contact me</SectionHeading>
 
-        <form
-          onSubmit={handleSubmit}
-          className='mt-10 flex flex-col dark:text-black'>
-          <input
-            className='cursor-none h-14 px-4 rounded-lg borderBlack dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-hidden'
-            name='senderEmail'
-            type='email'
-            required
-            maxLength={500}
-            placeholder='Your email'
+      <p className='text-gray-700 -mt-5 mb-10 dark:text-white/80 max-w-2xl mx-auto leading-relaxed'>
+        Please contact me directly at{" "}
+        <a
+          className='font-semibold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent hover:underline decoration-purple-500 decoration-2 underline-offset-4 transition-all'
+          href={`mailto:${contactEmail}`}>
+          {contactEmail}
+        </a>{" "}
+        or through this form.
+      </p>
+
+      <motion.div
+        style={{
+          rotateX,
+          rotateZ,
+          translateZ: z,
+          y,
+          scale,
+          opacity,
+          boxShadow,
+          transformStyle: "preserve-3d",
+        }}
+        className='origin-bottom'>
+        <div className='relative group rounded-3xl p-0.5 sm:p-1 overflow-hidden shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)] dark:shadow-[0_20px_50px_rgba(100,_50,_200,_0.3)]'>
+          <div className='absolute inset-0 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 opacity-30 group-hover:opacity-100 blur-xl transition-opacity duration-700' />
+
+          <div className='absolute inset-0 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 opacity-50 rounded-3xl' />
+          <motion.div
+            style={{ translateZ: -40 }}
+            className='absolute inset-0 rounded-3xl bg-black/10'
           />
-          <textarea
-            className='cursor-none h-52 my-3 rounded-lg borderBlack p-4 dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-hidden'
-            name='message'
-            placeholder='Your message'
-            required
-            maxLength={5000}
-          />
-          <SubmitBtn pending={pending} />
-        </form>
+          <form
+            onSubmit={handleSubmit}
+            className='relative flex flex-col gap-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-[1.4rem] p-6 sm:p-8 shadow-2xl dark:shadow-purple-900/20'>
+            <div className='flex flex-col gap-2 text-left'>
+              <label
+                htmlFor='senderEmail'
+                className='text-sm font-medium text-gray-600 dark:text-gray-300 ml-1'>
+                Email Address
+              </label>
+              <input
+                className='h-14 px-5 rounded-xl border border-black/5 dark:border-white/10 bg-gray-50 dark:bg-white/5 
+                text-black dark:text-white placeholder:text-gray-400 
+                focus:bg-white dark:focus:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 
+                transition-all duration-300'
+                name='senderEmail'
+                id='senderEmail'
+                type='email'
+                required
+                maxLength={500}
+                placeholder='example@gmail.com'
+              />
+            </div>
+
+            <div className='flex flex-col gap-2 text-left'>
+              <label
+                htmlFor='message'
+                className='text-sm font-medium text-gray-600 dark:text-gray-300 ml-1'>
+                Your Message
+              </label>
+              <textarea
+                className='h-52 px-5 py-4 rounded-xl border border-black/5 dark:border-white/10 bg-gray-50 dark:bg-white/5 
+                text-black dark:text-white placeholder:text-gray-400 resize-none
+                focus:bg-white dark:focus:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 
+                transition-all duration-300'
+                name='message'
+                id='message'
+                placeholder='Tell me about your project...'
+                required
+                maxLength={5000}
+              />
+            </div>
+
+            <div className='mt-4 flex justify-end'>
+              <SubmitBtn pending={pending} />
+            </div>
+          </form>
+        </div>
       </motion.div>
     </section>
   );

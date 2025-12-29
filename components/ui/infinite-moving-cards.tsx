@@ -10,6 +10,7 @@ import React, {
 } from "react";
 import Image, { StaticImageData } from "next/image";
 import { ExternalLink, Calendar, Award, ChevronRight } from "lucide-react";
+import { BorderBeam } from "@/components/ui/border-beam";
 
 // --- Tipe Data ---
 interface Item {
@@ -133,20 +134,33 @@ const CardItem = ({ item }: { item: Item }) => {
             className='rounded-2xl object-cover transition-transform duration-700 group-hover/card:scale-110'
             sizes='(max-width: 768px) 80vw, 450px'
           />
-          
+
           {/* Gradient overlay */}
           <div className='absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent rounded-2xl' />
-          
+
           {/* Content overlay */}
           <div className='absolute inset-0 flex flex-col justify-between p-5 md:p-6'>
             {/* Top badge */}
-            <div className='flex justify-end'>
+            <div className='flex justify-start'>
               <div className='flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30'>
-                <Award className='w-3.5 h-3.5 text-white' />
-                <span className='text-xs font-medium text-white'>Certificate</span>
+                {/* <BorderBeam
+                  size={30}
+                  borderWidth={2}
+                  initialOffset={20}
+                  className='from-transparent via-red-500 to-transparent'
+                  transition={{
+                    type: "spring",
+                    stiffness: 60,
+                    damping: 20,
+                  }}
+                /> */}
+                <Award className='w-3.5 h-3.5 text-black' />
+                <span className='text-xs font-medium text-black'>
+                  Certificate
+                </span>
               </div>
             </div>
-            
+
             {/* Bottom content */}
             <div className='space-y-2'>
               <h3 className='text-lg md:text-2xl font-bold text-white drop-shadow-lg line-clamp-2'>
@@ -165,7 +179,7 @@ const CardItem = ({ item }: { item: Item }) => {
               </div>
             </div>
           </div>
-          
+
           {/* Decorative corner accent */}
           <div className='absolute top-0 left-0 w-24 h-24 bg-linear-to-br from-amber-500/30 to-transparent rounded-tl-2xl' />
         </div>
@@ -181,7 +195,7 @@ const CardItem = ({ item }: { item: Item }) => {
               <h4 className='text-sm md:text-base font-bold text-gray-900 dark:text-white line-clamp-2'>
                 {item.title}
               </h4>
-              
+
               {/* Issue Date */}
               {formattedDate && (
                 <div className='flex items-center justify-center gap-1 text-[10px] md:text-xs text-gray-500 dark:text-gray-400 mt-1'>
@@ -190,27 +204,26 @@ const CardItem = ({ item }: { item: Item }) => {
                 </div>
               )}
             </div>
-            
+
             {/* Description */}
             <div className='grow overflow-y-auto px-1 scrollbar-none mb-3'>
               <p className='text-[11px] md:text-sm leading-relaxed text-gray-600 dark:text-gray-300'>
                 {item.description}
               </p>
             </div>
-            
+
             {/* Credential Link */}
             {item.credentialUrl && (
               <a
                 href={item.credentialUrl}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-linear-to-r from-amber-500 to-orange-500 text-white text-[10px] md:text-xs font-semibold hover:from-amber-600 hover:to-orange-600 transition-all hover:scale-105 shadow-lg shadow-amber-500/25'
-              >
+                className='inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-linear-to-r from-amber-500 to-orange-500 text-white text-[10px] md:text-xs font-semibold hover:from-amber-600 hover:to-orange-600 transition-all hover:scale-105 shadow-lg shadow-amber-500/25'>
                 <ExternalLink size={12} />
                 Verify Credential
               </a>
             )}
-            
+
             {/* Tags */}
             <ul className='mt-3 flex flex-wrap justify-center gap-1.5'>
               {item.tags.slice(0, 4).map((tag, index) => (
