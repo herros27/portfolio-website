@@ -4,17 +4,17 @@ import { useState } from "react";
 import { SectionVisibility } from "@prisma/client";
 import { updateSectionVisibility } from "@/actions/settings";
 import toast from "react-hot-toast";
-import { 
-  Home, 
-  User, 
-  Award, 
-  FolderGit2, 
-  Wrench, 
-  Briefcase, 
+import {
+  Home,
+  User,
+  Award,
+  FolderGit2,
+  Wrench,
+  Briefcase,
   Mail,
   Eye,
   EyeOff,
-  Loader2
+  Loader2,
 } from "lucide-react";
 
 interface SettingsFormProps {
@@ -48,13 +48,17 @@ export default function SettingsForm({ sections }: SettingsFormProps) {
   const handleToggle = async (section: string, currentVisible: boolean) => {
     setLoading(section);
     const result = await updateSectionVisibility(section, !currentVisible);
-    
+
     if (result.error) {
       toast.error(result.error);
     } else {
-      toast.success(`${sectionLabels[section] || section} ${!currentVisible ? "shown" : "hidden"}`);
-      setSettings(prev => 
-        prev.map(s => s.section === section ? { ...s, visible: !currentVisible } : s)
+      toast.success(
+        `${sectionLabels[section] || section} ${!currentVisible ? "shown" : "hidden"}`
+      );
+      setSettings((prev) =>
+        prev.map((s) =>
+          s.section === section ? { ...s, visible: !currentVisible } : s
+        )
       );
     }
     setLoading(null);
@@ -62,68 +66,97 @@ export default function SettingsForm({ sections }: SettingsFormProps) {
 
   // Get visibility for a section (default to true if not found)
   const isVisible = (section: string) => {
-    const setting = settings.find(s => s.section === section);
+    const setting = settings.find((s) => s.section === section);
     return setting?.visible ?? true;
   };
 
-  const allSections = ["intro", "about", "certificates", "projects", "skills", "experience", "contact"];
+  const allSections = [
+    "intro",
+    "about",
+    "certificates",
+    "projects",
+    "skills",
+    "experience",
+    "contact",
+  ];
 
   return (
-    <div className="space-y-6">
+    <div className='space-y-6 text-gray-900 dark:text-white'>
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className='flex items-center justify-between'>
         <div>
-          <h1 className="text-3xl font-bold text-white">Settings</h1>
-          <p className="text-gray-400 mt-1">Manage your portfolio visibility settings</p>
+          <h1 className='text-3xl font-bold text-gray-900 dark:text-white'>
+            Settings
+          </h1>
+          <p className='mt-1 text-gray-600 dark:text-gray-400'>
+            Manage your portfolio visibility settings
+          </p>
         </div>
       </div>
 
       {/* Section Visibility */}
-      <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-        <h2 className="text-xl font-semibold text-white mb-4">Section Visibility</h2>
-        <p className="text-gray-400 text-sm mb-6">
-          Toggle which sections are visible on your public portfolio. Hidden sections will not be shown to visitors.
+      <div
+        className='rounded-xl border p-6
+  bg-white border-gray-200
+  dark:bg-gray-900 dark:border-gray-800'>
+        <h2 className='text-xl font-semibold text-gray-900 dark:text-white mb-4'>
+          Section Visibility
+        </h2>
+
+        <p className='text-sm mb-6 text-gray-600 dark:text-gray-400'>
+          Toggle which sections are visible on your public portfolio.
         </p>
 
-        <div className="grid gap-4">
+        <div className='grid gap-4'>
           {allSections.map((section) => {
             const visible = isVisible(section);
             const isLoading = loading === section;
-            
+
             return (
               <div
                 key={section}
-                className={`flex items-center justify-between p-4 rounded-lg border transition-colors ${
-                  visible 
-                    ? "bg-gray-800/50 border-gray-700" 
-                    : "bg-gray-800/20 border-gray-800"
-                }`}
-              >
-                <div className="flex items-center gap-4">
-                  <div className={`p-2 rounded-lg ${visible ? "bg-blue-500/20 text-blue-400" : "bg-gray-700/50 text-gray-500"}`}>
+                className={`flex items-center justify-between p-4 rounded-lg border transition-colors
+    ${
+      visible
+        ? "bg-gray-100 border-gray-300 dark:bg-gray-800/50 dark:border-gray-700"
+        : "bg-gray-50 border-gray-200 dark:bg-gray-800/20 dark:border-gray-800"
+    }`}>
+                <div className='flex items-center gap-4'>
+                  <div
+                    className={`p-2 rounded-lg
+    ${
+      visible
+        ? "bg-blue-500/20 text-blue-600 dark:text-blue-400"
+        : "bg-gray-200 text-gray-500 dark:bg-gray-700/50 dark:text-gray-500"
+    }`}>
                     {sectionIcons[section]}
                   </div>
                   <div>
-                    <h3 className={`font-medium ${visible ? "text-white" : "text-gray-400"}`}>
+                    <h3
+                      className={`font-medium ${
+                        visible
+                          ? "text-gray-900 dark:text-white"
+                          : "text-gray-500"
+                      }`}>
                       {sectionLabels[section] || section}
                     </h3>
-                    <p className="text-sm text-gray-500">
+
+                    <p className='text-sm text-gray-500 dark:text-gray-400'>
                       {visible ? "Visible to visitors" : "Hidden from visitors"}
                     </p>
                   </div>
                 </div>
-                
+
                 <button
                   onClick={() => handleToggle(section, visible)}
                   disabled={isLoading}
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors ${
                     visible
-                      ? "bg-green-500/20 text-green-400 hover:bg-green-500/30"
-                      : "bg-gray-700 text-gray-400 hover:bg-gray-600"
-                  }`}
-                >
+                      ? "bg-green-500/20 text-green-600 hover:bg-green-500/30 dark:text-green-400"
+                      : "bg-gray-200 text-gray-600 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
+                  }`}>
                   {isLoading ? (
-                    <Loader2 size={18} className="animate-spin" />
+                    <Loader2 size={18} className='animate-spin' />
                   ) : visible ? (
                     <Eye size={18} />
                   ) : (
@@ -138,9 +171,12 @@ export default function SettingsForm({ sections }: SettingsFormProps) {
       </div>
 
       {/* Info Card */}
-      <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
-        <p className="text-blue-400 text-sm">
-          <strong>Note:</strong> Changes take effect immediately. Refresh your portfolio to see the updates.
+      <div
+        className='rounded-xl p-4 border
+  bg-blue-50 border-blue-200
+  dark:bg-blue-500/10 dark:border-blue-500/20'>
+        <p className='text-sm text-blue-700 dark:text-blue-400'>
+          <strong>Note:</strong> Changes take effect immediately.
         </p>
       </div>
     </div>
