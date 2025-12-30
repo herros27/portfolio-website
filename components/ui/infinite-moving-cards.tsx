@@ -41,6 +41,7 @@ export const InfiniteMovingCards = ({
   const scrollerRef = useRef<HTMLUListElement>(null);
   const [start, setStart] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [flippedCount, setFlippedCount] = useState(0);
 
   const repeatedItems = useMemo(() => {
     let newItems = [...items];
@@ -50,35 +51,36 @@ export const InfiniteMovingCards = ({
     return newItems;
   }, [items]);
 
+  // Use React to duplicate items for seamless loop, ensuring interactivity works on all cards
+  const scrollerItems = useMemo(() => {
+    return [...repeatedItems, ...repeatedItems];
+  }, [repeatedItems]);
+
   const addAnimation = useCallback(() => {
     if (!containerRef.current || !scrollerRef.current) return;
 
-    if (scrollerRef.current.children.length < repeatedItems.length * 2) {
-      const scrollerContent = Array.from(scrollerRef.current.children);
-      scrollerContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
-        if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem);
-        }
-      });
-    }
-
+    // Set animation direction
     containerRef.current.style.setProperty(
       "--animation-direction",
       direction === "left" ? "forwards" : "reverse"
     );
 
+    // Set animation speed
     let duration = "40s";
     if (speed === "fast") duration = "20s";
     else if (speed === "slow") duration = "80s";
 
     containerRef.current.style.setProperty("--animation-duration", duration);
     setStart(true);
-  }, [direction, speed, repeatedItems.length]);
+  }, [direction, speed]);
 
   useEffect(() => {
     addAnimation();
   }, [addAnimation]);
+
+  const handleCardFlip = useCallback((isFlipped: boolean) => {
+    setFlippedCount((prev) => (isFlipped ? prev + 1 : Math.max(0, prev - 1)));
+  }, []);
 
   return (
     <div
@@ -94,22 +96,35 @@ export const InfiniteMovingCards = ({
       <ul
         ref={scrollerRef}
         style={{
-          animationPlayState: isPaused ? "paused" : "running",
+          animationPlayState: isPaused || flippedCount > 0 ? "paused" : "running",
+          width: "max-content", // Ensure container fits all items
         }}
         className={cn(
-          "flex min-w-full shrink-0 gap-6 py-6 w-max flex-nowrap",
+          "flex min-w-full shrink-0 gap-6 py-6 flex-nowrap",
           start && "animate-scroll",
-          "pointer-events-none"
+          "pointer-events-none" // Enable pointer events for children, disable for container drag if needed
         )}>
-        {repeatedItems.map((item, idx) => (
-          <CardItem key={idx} item={item} />
+        {scrollerItems.map((item, idx) => (
+          <CardItem 
+            key={`${idx}-${item.title}`} 
+            item={item} 
+            onFlip={handleCardFlip}
+          />
         ))}
       </ul>
     </div>
   );
 };
 
-const CardItem = ({ item }: { item: Item }) => {
+const CardItem = ({ 
+  item, 
+  onFlip 
+}: { 
+  item: Item; 
+  onFlip: (isFlipped: boolean) => void;
+}) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+
   // Format date if exists
   const formattedDate = item.issueDate
     ? new Date(item.issueDate).toLocaleDateString("en-US", {
@@ -117,14 +132,28 @@ const CardItem = ({ item }: { item: Item }) => {
         year: "numeric",
       })
     : null;
+    
+  // Notify parent of flip state changes
+  useEffect(() => {
+    onFlip(isFlipped);
+    // Cleanup if component unmounts while flipped:
+    return () => {
+      if (isFlipped) onFlip(false);
+    };
+  }, [isFlipped, onFlip]);
 
   return (
     <li
       className={cn(
         "group/card relative h-80 w-80 md:h-96 md:w-[450px] shrink-0 rounded-2xl perspective-[1000px]",
-        "pointer-events-auto"
-      )}>
-      <div className='relative h-full w-full rounded-2xl shadow-2xl shadow-black/10 dark:shadow-black/30 transition-all duration-700 transform-3d group-hover/card:transform-[rotateY(180deg)]'>
+        "pointer-events-auto cursor-pointer"
+      )}
+      onClick={() => setIsFlipped((prev) => !prev)}>
+      <div
+        className={cn(
+          "relative h-full w-full rounded-2xl shadow-2xl shadow-black/10 dark:shadow-black/30 transition-all duration-700 transform-3d group-hover/card:transform-[rotateY(180deg)]",
+          isFlipped && "transform-[rotateY(180deg)]"
+        )}>
         {/* Front Side */}
         <div className='absolute inset-0 h-full w-full rounded-2xl backface-hidden overflow-hidden'>
           <Image
@@ -174,7 +203,7 @@ const CardItem = ({ item }: { item: Item }) => {
               )}
               {/* Hint to flip */}
               <div className='flex items-center gap-1 text-white/60 text-xs pt-1'>
-                <span>Hover to see details</span>
+                <span>Tap or hover for details</span>
                 <ChevronRight size={12} className='animate-pulse' />
               </div>
             </div>
@@ -218,6 +247,7 @@ const CardItem = ({ item }: { item: Item }) => {
                 href={item.credentialUrl}
                 target='_blank'
                 rel='noopener noreferrer'
+                onClick={(e) => e.stopPropagation()}
                 className='inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-linear-to-r from-amber-500 to-orange-500 text-white text-[10px] md:text-xs font-semibold hover:from-amber-600 hover:to-orange-600 transition-all hover:scale-105 shadow-lg shadow-amber-500/25'>
                 <ExternalLink size={12} />
                 Verify Credential
