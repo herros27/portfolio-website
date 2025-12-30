@@ -69,5 +69,13 @@
     "tsx": "^4.21.0",
     "tw-animate-css": "^1.3.6",
     "typescript": "^5.9.3"
-  }
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions",
+    "not dead",
+    "not ie 11"
+  ]
 }

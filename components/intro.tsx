@@ -86,8 +86,9 @@ export default function Intro({ profile }: IntroProps) {
                   alt={`${name} portrait`}
                   width='192'
                   height='192'
-                  quality='95'
+                  quality='75'
                   priority={true}
+                  sizes='(max-width: 640px) 96px, 128px'
                   className='h-24 w-24 rounded-full border-[0.35rem] border-white object-cover sm:h-32 sm:w-32'
                 />
               </div>

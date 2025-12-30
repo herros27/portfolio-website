@@ -51,7 +51,7 @@ export default function ThreeDMarquee({
                         ease: "easeInOut",
                       }}
                       key={imageIndex + image}
-                      src={image}
+                      src={`${image}&w=420&h=315&fit=crop&q=60&fm=webp`}
                       alt={`Image ${imageIndex + 1}`}
                       loading='lazy'
                       decoding='async'
