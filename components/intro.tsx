@@ -125,7 +125,15 @@ export default function Intro({ profile }: IntroProps) {
           transition={{
             delay: 0.1,
           }}>
-          <InteractiveHoverButton className=' group flex w-full items-center justify-center gap-2 rounded-full dark:bg-gray-900 bg-white px-7 py-3 text-white outline-hidden transition hover:scale-105 hover:bg-gray-950 focus:scale-105 active:scale-100 sm:w-auto'>
+          <InteractiveHoverButton
+            onClick={() => {
+              setActiveSection("Contact");
+              setTimeOfLastClick(Date.now());
+              document.getElementById("contact")?.scrollIntoView({
+                behavior: "smooth",
+              });
+            }}
+            className='group flex w-full items-center justify-center gap-2 rounded-full dark:bg-gray-900 bg-white px-7 py-3 text-white outline-hidden transition hover:scale-105 hover:bg-gray-950 focus:scale-105 active:scale-100 sm:w-auto'>
             <BorderBeam
               size={100}
               initialOffset={20}
@@ -136,15 +144,7 @@ export default function Intro({ profile }: IntroProps) {
                 damping: 20,
               }}
             />
-            <Link
-              href='#contact'
-              onClick={() => {
-                setActiveSection("Contact");
-                setTimeOfLastClick(Date.now());
-              }}
-              className='cursor-none'>
-              Contact me here
-            </Link>
+            Contact me here
           </InteractiveHoverButton>
 
           <ShinyButton

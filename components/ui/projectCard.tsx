@@ -98,6 +98,7 @@ export default function Project({
                       href={demoUrl}
                       target='_blank'
                       rel='noopener noreferrer'
+                      aria-label={`Live demo for ${title}`}
                       className='inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-linear-to-r from-blue-500 to-cyan-500 text-white text-xs font-semibold hover:from-blue-600 hover:to-cyan-600 transition-all hover:scale-105 shadow-lg shadow-blue-500/25'>
                       <ExternalLink size={14} />
                       Live Demo
@@ -109,6 +110,7 @@ export default function Project({
                       href={githubUrl}
                       target='_blank'
                       rel='noopener noreferrer'
+                      aria-label={`View code for ${title}`}
                       className='inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-semibold hover:bg-gray-800 dark:hover:bg-gray-100 transition-all hover:scale-105'>
                       <Github size={14} />
                       View Code

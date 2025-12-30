@@ -115,7 +115,7 @@ When I'm not coding, I enjoy exploring the depths of Blockchain technology and e
               <Sparkles className='w-8 h-8 text-white' />
             </motion.div>
             <SectionHeading>About me</SectionHeading>
-            <p className='text-gray-500 dark:text-gray-400 text-sm mt-2'>
+            <p className='text-gray-600 dark:text-gray-400 text-sm mt-2'>
               Get to know the person behind the code
             </p>
           </div>

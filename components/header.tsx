@@ -118,6 +118,7 @@ export default function Header({ visibility }: HeaderProps) {
         animate={{ opacity: 1, scale: 1 }}>
         <button
           onClick={() => setIsOpen(!isOpen)}
+          aria-label='Toggle menu'
           className='bg-white w-[3.25rem] h-[3.25rem] bg-opacity-80 backdrop-blur-[0.5rem] border border-white border-opacity-40 shadow-2xl rounded-full flex items-center justify-center hover:scale-[1.15] active:scale-90 transition-all dark:bg-gray-950 dark:border-black/40'>
           {/* Icon Hamburger / Close */}
           {isOpen ? (

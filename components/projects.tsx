@@ -91,7 +91,7 @@ export default function Projects({ projects }: ProjectsProps) {
 
         <SectionHeading>My Projects</SectionHeading>
 
-        <p className='text-gray-500 dark:text-gray-400 text-sm mt-2 max-w-md mx-auto'>
+        <p className='text-gray-600 dark:text-gray-400 text-sm mt-2 max-w-md mx-auto'>
           A collection of work that showcases my expertise in building digital
           solutions
         </p>
