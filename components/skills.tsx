@@ -107,7 +107,8 @@ export default function Skills({ skills }: SkillsProps) {
   const cloudOpacity = useTransform(cloudProgress, [0, 1], [0.6, 1]);
 
   // Generate slugs from skills or use defaults
-  const slugs = skills.length > 0 ? skills.map((s) => getSlug(s.name)) : defaultSlugs;
+  const slugs =
+    skills.length > 0 ? skills.map((s) => getSlug(s.name)) : defaultSlugs;
 
   // Generate URL images
   const images = slugs.map(
@@ -115,7 +116,9 @@ export default function Skills({ skills }: SkillsProps) {
   );
 
   // Get unique categories
-  const categories = Array.from(new Set(skills.map((s) => s.category).filter(Boolean)));
+  const categories = Array.from(
+    new Set(skills.map((s) => s.category).filter(Boolean))
+  );
 
   return (
     <section
@@ -139,7 +142,7 @@ export default function Skills({ skills }: SkillsProps) {
           className='absolute top-0 right-1/4 w-96 h-96 bg-teal-500/5 dark:bg-teal-500/10 rounded-full blur-3xl'
         />
         <motion.div
-           animate={{
+          animate={{
             scale: [1, 1.3, 1],
             x: [0, -50, 0],
             y: [0, -30, 0],
@@ -153,7 +156,7 @@ export default function Skills({ skills }: SkillsProps) {
           className='absolute bottom-0 left-1/4 w-96 h-96 bg-cyan-500/5 dark:bg-cyan-500/10 rounded-full blur-3xl'
         />
         <motion.div
-           animate={{
+          animate={{
             scale: [1, 1.1, 1],
             opacity: [0.3, 0.5, 0.3],
           }}
@@ -216,11 +219,14 @@ export default function Skills({ skills }: SkillsProps) {
           style={{ scale: cloudScale, opacity: cloudOpacity }}
           className='relative'>
           {/* Decorative ring */}
-          <div className='absolute -inset-4 rounded-full border border-dashed border-gray-300/50 dark:border-gray-600/50' style={{ animation: 'spin 30s linear infinite' }} />
-          
+          <div
+            className='absolute -inset-4 rounded-full border border-dashed border-gray-300/50 dark:border-gray-600/50'
+            style={{ animation: "spin 30s linear infinite" }}
+          />
+
           {/* Glow effect */}
           <div className='absolute -inset-8 bg-linear-to-r from-cyan-500/10 via-transparent to-teal-500/10 rounded-full blur-2xl' />
-          
+
           {/* Cloud container - fixed size, centered */}
           <div className='relative bg-white/30 dark:bg-gray-900/30 backdrop-blur-sm rounded-full border border-gray-200/50 dark:border-gray-700/50 shadow-xl shadow-gray-200/20 dark:shadow-black/30 w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] flex items-center justify-center overflow-hidden'>
             <IconCloud images={images} />
