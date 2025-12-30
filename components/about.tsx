@@ -52,10 +52,49 @@ When I'm not coding, I enjoy exploring the depths of Blockchain technology and e
       beamDuration={4}
       gridColor='rgba(99, 102, 241, 0.15)'>
       {/* Background decorations - full width */}
-      <div className='absolute inset-y-0 left-1/2 -translate-x-1/2 w-screen pointer-events-none z-10'>
-        <div className='absolute top-20 left-0 w-96 h-96 bg-fuchsia-500/10 dark:bg-fuchsia-500/10 rounded-full blur-3xl' />
-        <div className='absolute bottom-20 right-0 w-96 h-96 bg-cyan-500/10 dark:bg-cyan-500/10 rounded-full blur-3xl' />
-        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/5 dark:bg-indigo-500/5 rounded-full blur-3xl' />
+      <div className='absolute inset-y-0 left-1/2 -translate-x-1/2 w-screen pointer-events-none z-10 overflow-hidden'>
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            x: [0, 100, 0],
+            y: [0, 50, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+          className='absolute top-20 left-0 w-96 h-96 bg-fuchsia-500/10 dark:bg-fuchsia-500/10 rounded-full blur-3xl'
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            x: [0, -100, 0],
+            y: [0, -50, 0],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+          className='absolute bottom-20 right-0 w-96 h-96 bg-cyan-500/10 dark:bg-cyan-500/10 rounded-full blur-3xl'
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            x: [0, 50, 0],
+            y: [0, -50, 0],
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+          className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/5 dark:bg-indigo-500/5 rounded-full blur-3xl'
+        />
       </div>
       <section
         ref={ref as React.LegacyRef<HTMLElement>}
@@ -71,7 +110,8 @@ When I'm not coding, I enjoy exploring the depths of Blockchain technology and e
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className='inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-linear-to-br from-indigo-500 via-purple-500 to-pink-500 mb-4 shadow-lg shadow-purple-500/25'>
+              className='inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-linear-to-br from-green-600 via-lime-500 to-emerald-400
+ mb-4 shadow-lg shadow-purple-500/25'>
               <Sparkles className='w-8 h-8 text-white' />
             </motion.div>
             <SectionHeading>About me</SectionHeading>

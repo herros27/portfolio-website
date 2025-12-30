@@ -134,7 +134,8 @@ function LoginForm() {
         <button
           type='submit'
           disabled={isLoading}
-          className='w-full py-3.5 px-4 bg-linear-to-r from-blue-500 via-indigo-500 to-violet-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:via-indigo-600 hover:to-violet-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-900 transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-blue-500/25'>
+          className='w-full py-3.5 px-4 bg-linear-to-br from-neutral-700 via-gray-700 to-zinc-600
+ text-white font-semibold rounded-lg hover:from-neutral-800 hover:via-gray-800 hover:to-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-900 transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-blue-500/25'>
           {isLoading ? (
             <span className='flex items-center justify-center gap-2'>
               <Loader2 size={20} className='animate-spin' />
@@ -195,7 +196,8 @@ export default function LoginPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className='text-center mb-8'>
-          <div className='relative inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-linear-to-br from-blue-500 via-indigo-500 to-violet-500 mb-4 shadow-lg shadow-indigo-500/30 overflow-hidden'>
+          <div className='relative inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-linear-to-br from-neutral-900 via-gray-800 to-zinc-700
+ mb-4 shadow-lg shadow-indigo-500/30 overflow-hidden'>
             <Lock className='w-9 h-9 text-white' />
             <BorderBeam
               size={100}
@@ -206,10 +208,10 @@ export default function LoginPage() {
             />
           </div>
           <h1 className='text-3xl font-bold bg-linear-to-r from-slate-900 via-indigo-800 to-slate-900 dark:from-white dark:via-blue-100 dark:to-white bg-clip-text text-transparent'>
-            Admin Access
+            Irun Access
           </h1>
           <p className='text-slate-500 dark:text-blue-200/70 mt-2'>
-            Sign in to manage your portfolio
+            This area is restricted to authorized personnel only.
           </p>
         </motion.div>
 

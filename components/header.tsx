@@ -40,14 +40,12 @@ export default function Header({ visibility }: HeaderProps) {
   });
 
   return (
-    <header className='z-50 relative'>
-      <motion.div
-        className='hidden sm:block fixed top-0 left-1/2 h-18 w-full rounded-none border border-white border-opacity-40 bg-white bg-opacity-80 shadow-lg shadow-black/3 backdrop-blur-0.5rem sm:top-6 sm:h-13 sm:w-172 sm:rounded-full dark:bg-gray-950 dark:border-black/40 dark:bg-opacity-75'
+    <header className='z-50 relative items-center justify-center'>
+      <motion.nav
+        className='hidden md:flex fixed top-6 left-5/6 h-12 -translate-x-1/2 py-2 sm:h-[initial] sm:py-0 w-auto'
         initial={{ y: -100, x: "-50%", opacity: 0 }}
-        animate={{ y: 0, x: "-50%", opacity: 1 }}></motion.div>
-
-      <nav className='hidden sm:flex  fixed top-[0.15rem] left-1/2 h-12 -translate-x-1/2 py-2 sm:top-[1.7rem] sm:h-[initial] sm:py-0'>
-        <ul className='flex w-88 flex-wrap items-center justify-center gap-y-1 text-[0.9rem] font-medium text-gray-500 sm:w-[initial] sm:flex-nowrap sm:gap-5'>
+        animate={{ y: 0, x: "-50%", opacity: 1 }}>
+        <ul className='flex w-full flex-wrap items-center justify-center gap-y-1 text-[0.9rem] font-medium text-gray-500 sm:w-[initial] sm:flex-nowrap gap-5 px-5 rounded-full border border-white border-opacity-40 bg-white bg-opacity-80 shadow-lg shadow-black/3 backdrop-blur-0.5rem dark:bg-gray-950 dark:border-black/40 dark:bg-opacity-75'>
           {visibleLinks.map((link) => (
             <motion.li
               className='h-3/4 flex items-center justify-center relative'
@@ -56,7 +54,7 @@ export default function Header({ visibility }: HeaderProps) {
               animate={{ y: 0, opacity: 1 }}>
               <Link
                 className={clsx(
-                  "cursor-none flex w-full items-center justify-center px-3 py-3 hover:text-gray-700 transition dark:text-gray-100 dark:hover:text-gray-700",
+                  "cursor-none flex w-full items-center justify-center  py-3 hover:text-gray-700 transition dark:text-gray-100 dark:hover:text-gray-700 whitespace-nowrap",
                   {
                     "text-gray-100 dark:text-gray-200":
                       activeSection === link.name,
@@ -83,11 +81,11 @@ export default function Header({ visibility }: HeaderProps) {
             </motion.li>
           ))}
         </ul>
-      </nav>
+      </motion.nav>
 
       {/* Admin Button - Desktop Floating */}
       <motion.div
-        className='hidden sm:block fixed top-6 right-6 z-50'
+        className='hidden md:block fixed top-6 right-6 z-50'
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2 }}>
@@ -111,16 +109,16 @@ export default function Header({ visibility }: HeaderProps) {
         </Link>
       </motion.div>
 
-      {/* ==================== MOBILE VIEW (Visible only on Mobile) ==================== */}
+      {/* ==================== MOBILE/TABLET VIEW (Hamburger) ==================== */}
 
       {/* Tombol Hamburger Floating */}
       <motion.div
-        className='fixed top-4 right-4 z-999 sm:hidden'
+        className='fixed top-4 right-4 z-[999] md:hidden'
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className='bg-white w-3rem h-3rem scale-190 bg-opacity-80 backdrop-blur-0.5rem border border-white border-opacity-40 shadow-2xl rounded-full flex items-center justify-center hover:scale-[1.15] active:scale-190 transition-all dark:bg-gray-950 dark:border-black/40'>
+          className='bg-white w-[3.25rem] h-[3.25rem] bg-opacity-80 backdrop-blur-[0.5rem] border border-white border-opacity-40 shadow-2xl rounded-full flex items-center justify-center hover:scale-[1.15] active:scale-90 transition-all dark:bg-gray-950 dark:border-black/40'>
           {/* Icon Hamburger / Close */}
           {isOpen ? (
             <svg
@@ -158,18 +156,18 @@ export default function Header({ visibility }: HeaderProps) {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className='fixed top-20 right-4 w-64 bg-white bg-opacity-90 backdrop-blur-lg border border-white border-opacity-40 shadow-2xl rounded-2xl p-4 flex flex-col items-center justify-center gap-2 dark:bg-gray-950 dark:border-black/40 dark:bg-opacity-90 sm:hidden z-998'
+            className='fixed top-20 right-4 w-72 bg-white/95 backdrop-blur-2xl border border-white/20 shadow-2xl rounded-2xl p-4 flex flex-col items-center justify-center gap-2 dark:bg-gray-950/95 dark:border-white/10 sm:w-80 md:hidden z-[998]'
             initial={{ opacity: 0, scale: 0.9, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: -20 }}>
-            <ul className='flex flex-col items-center gap-4 text-[0.9rem] font-medium text-gray-500 w-full'>
+            <ul className='flex flex-col items-center gap-2 text-[0.95rem] font-medium text-gray-500 w-full'>
               {visibleLinks.map((link) => (
                 <li key={link.hash} className='w-full'>
                   <Link
                     className={clsx(
-                      "flex w-full items-center justify-center p-3 rounded-lg hover:bg-gray-100 hover:text-gray-950 transition dark:hover:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-200",
+                      "flex w-full items-center justify-center p-3.5 rounded-xl hover:bg-gray-100 hover:text-gray-950 transition dark:hover:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-200",
                       {
-                        "text-gray-950 bg-gray-200 dark:bg-gray-800 dark:text-gray-100":
+                        "text-gray-950 bg-gray-100 dark:bg-gray-800 dark:text-gray-100 font-semibold":
                           activeSection === link.name,
                       }
                     )}
@@ -177,18 +175,18 @@ export default function Header({ visibility }: HeaderProps) {
                     onClick={() => {
                       setActiveSection(link.name);
                       setTimeOfLastClick(Date.now());
-                      setIsOpen(false); // Tutup menu setelah klik
+                      setIsOpen(false); 
                     }}>
                     {link.name}
                   </Link>
                 </li>
               ))}
 
-              {/* Admin Button */}
-              <li className='cursor-none w-full pt-2 border-t border-gray-300 dark:border-gray-700'>
+              {/* Admin Button Mobile */}
+              <li className='w-full   border-t border-gray-100 dark:border-gray-800'>
                 <Link
                   href='/admin'
-                  className='cursor-none flex items-center justify-center gap-2 p-3 rounded-lg bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/30 transition-colors font-medium'
+                  className='flex items-center justify-center gap-2 p-3.5 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 transition-all font-medium active:scale-95'
                   onClick={() => setIsOpen(false)}>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -196,7 +194,7 @@ export default function Header({ visibility }: HeaderProps) {
                     viewBox='0 0 24 24'
                     strokeWidth={1.5}
                     stroke='currentColor'
-                    className='cursor-none w-5 h-5'>
+                    className='w-5 h-5'>
                     <path
                       strokeLinecap='round'
                       strokeLinejoin='round'
