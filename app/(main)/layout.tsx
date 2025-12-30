@@ -8,7 +8,7 @@ import { SmoothCursor } from "@/components/ui/smooth-cursor";
 import { ProgressiveBlur } from "@/components/magicui/progressive-blur";
 import SplashProvider from "@/components/providers/splash-provider";
 import { getSectionVisibility } from "@/lib/queries";
-
+import { SpeedInsights } from "@vercel/speed-insights/next";
 export default async function MainLayout({
   children,
 }: {
@@ -18,7 +18,8 @@ export default async function MainLayout({
   const visibility = await getSectionVisibility();
 
   return (
-    <div className="main-portfolio bg-gray-50 text-gray-950 relative pt-0 md:pt-26 dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90">
+    <div className='main-portfolio bg-gray-50 text-gray-950 relative pt-0 md:pt-26 dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90'>
+      <SpeedInsights />
       <SplashProvider>
         <div className='bg-[#fbe2e3] absolute -top-24 -z-10 right-44 h-125 w-125 rounded-full blur-[10rem] sm:w-275 dark:bg-[#946263]'></div>
         <div className='bg-[#dbd7fb] absolute -top-4 -z-10 -left-140 h-125 w-200 rounded-full blur-[10rem] sm:w-275 md:-left-132 lg:-left-112 xl:-left-60 2xl:-left-20 dark:bg-[#676394]'></div>
