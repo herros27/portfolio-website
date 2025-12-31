@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Link from "next/link";
 import { BsLinkedin } from "react-icons/bs";
 import { HiDownload } from "react-icons/hi";
@@ -73,7 +73,7 @@ export default function Intro({ profile }: IntroProps) {
       <div className='relative z-20 mx-auto w-full max-w-200 px-4 sm:px-6'>
         <div className='flex items-center justify-center'>
           <div className='relative'>
-            <motion.div
+            <m.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{
@@ -84,48 +84,46 @@ export default function Intro({ profile }: IntroProps) {
                 <Image
                   src={photoUrl}
                   alt={`${name} portrait`}
-                  width='192'
-                  height='192'
-                  quality='75'
+                  width={192}
+                  height={192}
+                  quality={75}
                   priority={true}
                   sizes='(max-width: 640px) 96px, 128px'
                   className='h-24 w-24 rounded-full border-[0.35rem] border-white object-cover sm:h-32 sm:w-32'
                 />
               </div>
-            </motion.div>
+            </m.div>
 
-            <motion.span
+            <span
               className='absolute bottom-0 right-0 text-3xl sm:text-4xl'
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                type: "spring",
-                stiffness: 125,
-                delay: 0.1,
-                duration: 0.7,
-              }}>
+              // initial={{ opacity: 0, scale: 0 }}
+              // animate={{ opacity: 1, scale: 1 }}
+              // transition={{
+              //   type: "spring",
+              //   stiffness: 125,
+              //   delay: 0.1,
+              //   duration: 0.7,
+              // }}
+              >
               👋
-            </motion.span>
+            </span>
           </div>
         </div>
 
-        <motion.h1
-          className='mb-8 mt-6 px-2 text-xl font-medium leading-normal! sm:mb-10 sm:text-3xl lg:text-4xl'
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}>
-          <span className='font-bold'>Hawoo 🖐️, I'm {name.split(" ")[0]}.</span>{" "}
-          {/* <div key={index}></div> */}
-          {parse(bio)}
-          {/* {bio} */}
-        </motion.h1>
+        
+        <h1 className="mb-8 mt-6 px-2 text-xl font-medium leading-normal sm:mb-10 sm:text-3xl lg:text-4xl">
+          <span className="font-bold">
+            Hawoo 🖐️, I'm {name.split(" ")[0]}.
+          </span>{" "}
+          <span dangerouslySetInnerHTML={{ __html: bio }} />
+        </h1>
 
-        <motion.div
+
+        <m.div
           className='flex flex-col items-center justify-center gap-4 px-4 text-lg font-medium sm:flex-row sm:gap-5'
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.1,
-          }}>
+           transition={{ duration: 0.6, ease: "easeOut" }}>
           <InteractiveHoverButton
             onClick={() => {
               setActiveSection("Contact");
@@ -179,7 +177,7 @@ export default function Intro({ profile }: IntroProps) {
               <FaGithubSquare />
             </a>
           </div>
-        </motion.div>
+        </m.div>
       </div>
 
       <div className='absolute inset-0 z-10 h-full w-full bg-white/60 backdrop-blur-[2px] dark:bg-black/60' />

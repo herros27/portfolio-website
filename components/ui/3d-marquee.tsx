@@ -2,11 +2,12 @@
 
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { MarqueeImage } from "@/components/providers/splash-provider";
 export default function ThreeDMarquee({
   images,
   className,
 }: {
-  images: string[];
+  images: MarqueeImage[];
   className?: string;
 }) {
   // Split the images array into 4 equal parts
@@ -39,20 +40,16 @@ export default function ThreeDMarquee({
                 key={colIndex + "marquee"}
                 className='flex flex-col items-start gap-4'>
                 <GridLineVertical className='-left-4' offset='80px' />
-                {subarray.map((image, imageIndex) => (
-                  <div className='relative' key={imageIndex + image}>
+                {subarray.map((image) => (
+                  <div className='relative' key={image.id}>
                     <GridLineHorizontal className='-top-4' offset='20px' />
                     <motion.img
-                      whileHover={{
-                        y: -10,
-                      }}
-                      transition={{
-                        duration: 0.3,
-                        ease: "easeInOut",
-                      }}
-                      key={imageIndex + image}
-                      src={`${image}&w=420&h=315&fit=crop&q=60&fm=webp`}
-                      alt={`Image ${imageIndex + 1}`}
+                      whileHover={{ y: -10 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      src={image.src}
+                      alt={image.alt}
+                      width={image.width}
+                      height={image.height}
                       loading='lazy'
                       decoding='async'
                       className='aspect-90/67 w-105 rounded-lg object-cover'

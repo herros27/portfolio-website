@@ -29,13 +29,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' className='scroll-smooth!'>
+    <html lang='en' className={inter.className}>
       <head>
         <link rel='preconnect' href='https://res.cloudinary.com' />
         <link rel='preconnect' href='https://images.unsplash.com' />
         <link rel='preconnect' href='https://cdn.simpleicons.org' />
       </head>
-      <body className={inter.className}>
+      <body >
         {children}
       </body>
     </html>

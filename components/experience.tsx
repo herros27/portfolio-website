@@ -9,7 +9,7 @@ import {
 import "react-vertical-timeline-component/style.min.css";
 import { useSectionInView } from "@/lib/hooks";
 import { useTheme } from "@/context/theme-context";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useScroll, useTransform } from "framer-motion";
 import { CgWorkAlt } from "react-icons/cg";
 import { FaAndroid } from "react-icons/fa";
 import { LuGraduationCap } from "react-icons/lu";
@@ -102,17 +102,17 @@ export default function Experience({ experiences }: ExperienceProps) {
 
       {/* Header section */}
       <div ref={headingRef} className='mb-10 relative z-10'>
-        <motion.div
+        <m.div
           style={{ scale: headingScale, opacity: headingOpacity }}
           className='text-center'>
-          <motion.div
+          <m.div
             initial={{ scale: 0 }}
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
             className='inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-linear-to-br from-rose-500 via-pink-500 to-fuchsia-500 mb-4 shadow-lg shadow-pink-500/25 mx-auto'>
             <Briefcase className='w-8 h-8 text-white' />
-          </motion.div>
+          </m.div>
 
           <SectionHeading>My Experience</SectionHeading>
 
@@ -121,7 +121,7 @@ export default function Experience({ experiences }: ExperienceProps) {
           </p>
 
           {/* Stats badges */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -139,8 +139,8 @@ export default function Experience({ experiences }: ExperienceProps) {
                 Growing Daily
               </span>
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </div>
 
       {/* Timeline */}
@@ -153,14 +153,14 @@ export default function Experience({ experiences }: ExperienceProps) {
       </div>
 
       {/* Bottom instruction */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.6 }}
+      <p
+        // initial={{ opacity: 0 }}
+        // whileInView={{ opacity: 1 }}
+        // viewport={{ once: true }}
+        // transition={{ delay: 0.6 }}
         className='text-center text-xs text-gray-400 dark:text-gray-500 mt-12 relative z-10'>
         Scroll to explore my journey
-      </motion.p>
+      </p>
     </section>
   );
 }
@@ -221,21 +221,21 @@ function TimelineElement({
         }}
         date={
           (
-            <motion.span
-              style={{ opacity: opacityProgess, display: "inline-block" }}
+            <span
+              // style={{ opacity: opacityProgess, display: "inline-block" }}
               className='text-sm font-medium text-gray-500 dark:text-gray-400'>
               {dateStr}
-            </motion.span>
+            </span>
           ) as unknown as string
         }
         icon={
-          <motion.div
+          <m.div
             className='absolute inset-0 flex items-center justify-center'
             style={{ scale: scaleProgess, opacity: opacityProgess }}>
             <div className='pt-2 flex items-center justify-center'>
               {getIcon(item.icon)}
             </div>
-          </motion.div>
+          </m.div>
         }
         iconStyle={{
           background:
@@ -250,7 +250,7 @@ function TimelineElement({
           alignItems: "center",
           justifyContent: "center",
         }}>
-        <motion.div
+        <m.div
           style={{
             scale: scaleProgess,
             opacity: opacityProgess,
@@ -282,7 +282,7 @@ function TimelineElement({
           <p className='mt-3 text-sm leading-relaxed text-gray-700 dark:text-gray-300'>
             {item.description}
           </p>
-        </motion.div>
+        </m.div>
       </VerticalTimelineElement>
     </div>
   );

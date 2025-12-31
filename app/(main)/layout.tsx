@@ -8,7 +8,7 @@ import dynamic from "next/dynamic";
 import SplashProvider from "@/components/providers/splash-provider";
 import { getSectionVisibility } from "@/lib/queries";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-
+import { LazyMotion, domAnimation } from "framer-motion";
 // Lazy load non-critical UI components to reduce initial JS bundle
 const SmoothCursor = dynamic(() =>
   import("@/components/ui/smooth-cursor").then((m) => m.SmoothCursor)
@@ -27,6 +27,7 @@ export default async function MainLayout({
   const visibility = await getSectionVisibility();
 
   return (
+    <LazyMotion features={domAnimation}>  
     <div className='main-portfolio bg-gray-50 text-gray-950 relative pt-0 md:pt-26 dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90'>
       <SpeedInsights />
       <SplashProvider>
@@ -58,5 +59,6 @@ export default async function MainLayout({
         <SmoothCursor />
       </SplashProvider>
     </div>
+    </LazyMotion>
   );
 }

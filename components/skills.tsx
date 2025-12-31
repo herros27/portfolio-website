@@ -3,7 +3,7 @@
 import React, { useRef } from "react";
 import SectionHeading from "./ui/section-heading";
 import { useSectionInView } from "@/lib/hooks";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useScroll, useTransform } from "framer-motion";
 import { IconCloud } from "@/components/ui/icon-cloud";
 import { Cpu, Sparkles, Zap } from "lucide-react";
 
@@ -139,18 +139,18 @@ export default function Skills({ skills }: SkillsProps) {
       </div>
 
       {/* Header section */}
-      <motion.div
+      <m.div
         ref={headingRef as React.LegacyRef<HTMLDivElement>}
         style={{ scale: headingScale, opacity: headingOpacity }}
         className='mb-8 relative z-10 max-w-2xl mx-auto'>
-        <motion.div
+        <m.div
           initial={{ scale: 0 }}
           whileInView={{ scale: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
           className='inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-linear-to-br from-teal-500 via-cyan-500 to-emerald-500 mb-4 shadow-lg shadow-cyan-500/25'>
           <Cpu className='w-8 h-8 text-white' />
-        </motion.div>
+        </m.div>
 
         <SectionHeading>My Skills</SectionHeading>
 
@@ -159,7 +159,7 @@ export default function Skills({ skills }: SkillsProps) {
         </p>
 
         {/* Stats badges */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -177,12 +177,12 @@ export default function Skills({ skills }: SkillsProps) {
               Always Learning
             </span>
           </div>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
 
       {/* Icon Cloud Container */}
       <div className='flex items-center justify-center scale-120 md:scale-125 relative z-10 py-12'>
-        <motion.div
+        <m.div
           ref={cloudRef as React.LegacyRef<HTMLDivElement>}
           style={{ scale: cloudScale, opacity: cloudOpacity }}
           className='relative'>
@@ -199,12 +199,12 @@ export default function Skills({ skills }: SkillsProps) {
           <div className='relative bg-white/30 dark:bg-gray-900/30 backdrop-blur-sm rounded-full border border-gray-200/50 dark:border-gray-700/50 shadow-xl shadow-gray-200/20 dark:shadow-black/30 w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] flex items-center justify-center overflow-hidden'>
             <IconCloud images={images} />
           </div>
-        </motion.div>
+        </m.div>
       </div>
 
       {/* Skill categories */}
       {categories.length > 0 && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -217,18 +217,18 @@ export default function Skills({ skills }: SkillsProps) {
               {category}
             </span>
           ))}
-        </motion.div>
+        </m.div>
       )}
 
       {/* Bottom instruction */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.8 }}
+      <p
+        // initial={{ opacity: 0 }}
+        // whileInView={{ opacity: 1 }}
+        // viewport={{ once: true }}
+        // transition={{ delay: 0.8 }}
         className='text-center text-xs text-gray-400 dark:text-gray-500 mt-8 relative z-10'>
         Drag to rotate • Click icons to focus
-      </motion.p>
+      </p>
     </section>
   );
 }

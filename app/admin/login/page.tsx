@@ -236,13 +236,11 @@ export default function LoginPage() {
         </Suspense>
 
         {/* Footer */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+        <p
+          
           className='mt-8 text-center text-sm text-slate-400 dark:text-blue-200/50'>
           Secure admin access only
-        </motion.p>
+        </p>
       </div>
     </AuroraBackground>
   );

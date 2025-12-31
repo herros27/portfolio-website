@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import SectionHeading from "./ui/section-heading";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { m } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
 import { sendEmail } from "@/actions/sendEmail";
 import SubmitBtn from "./ui/submit-btn";
@@ -64,14 +64,14 @@ export default function Contact({ profile }: ContactProps) {
       className='mb-20 sm:mb-28 w-full max-w-200 scroll-mt-24 mx-auto text-center px-4 perspective-[1600px]'>
       {/* Header section with Icon */}
       <div className='mb-10 sm:mb-14'>
-        <motion.div
+        <m.div
           initial={{ scale: 0 }}
           whileInView={{ scale: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
           className='inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-linear-to-br from-indigo-500 via-blue-500 to-sky-500 mb-4 shadow-lg shadow-blue-500/25'>
           <Mail className='w-8 h-8 text-white' />
-        </motion.div>
+        </m.div>
 
         <SectionHeading>Contact Me</SectionHeading>
 

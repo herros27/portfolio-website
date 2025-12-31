@@ -39,13 +39,13 @@ export default function SplashScreen({
           transition={{ duration: 10, ease: "easeInOut" }}
           onAnimationComplete={finishLoading} // Panggil fungsi selesai saat loading bar penuh
         />
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.7 }}
-          transition={{ delay: 2, duration: 10 }}
+        <p
+          // initial={{ opacity: 0 }}
+          // animate={{ opacity: 0.7 }}
+          // transition={{ delay: 2, duration: 10 }}
           className='mt-4 text-sm text-muted-foreground font-mono'>
           Loading experience...
-        </motion.p>
+        </p>
       </div>
     </motion.div>
   );

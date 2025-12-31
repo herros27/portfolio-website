@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { links } from "@/lib/data";
 import Link from "next/link";
 import clsx from "clsx";
@@ -41,17 +41,18 @@ export default function Header({ visibility }: HeaderProps) {
 
   return (
     <header className='z-50 relative items-center justify-center'>
-      <motion.nav
+      <m.nav
         className='hidden md:flex fixed top-6 left-5/6 h-12 -translate-x-1/2 py-2 sm:h-[initial] sm:py-0 w-auto'
         initial={{ y: -100, x: "-50%", opacity: 0 }}
         animate={{ y: 0, x: "-50%", opacity: 1 }}>
         <ul className='flex w-full flex-wrap items-center justify-center gap-y-1 text-[0.9rem] font-medium text-gray-500 sm:w-[initial] sm:flex-nowrap gap-5 px-5 rounded-full border border-white border-opacity-40 bg-white bg-opacity-80 shadow-lg shadow-black/3 backdrop-blur-0.5rem dark:bg-gray-950 dark:border-black/40 dark:bg-opacity-75'>
           {visibleLinks.map((link) => (
-            <motion.li
+            <li
               className='h-3/4 flex items-center justify-center relative'
               key={link.hash}
-              initial={{ y: -100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}>
+              // initial={{ y: -100, opacity: 0 }}
+              // animate={{ y: 0, opacity: 1 }}
+              >
               <Link
                 className={clsx(
                   "cursor-none flex w-full items-center justify-center  py-3 hover:text-gray-700 transition dark:text-gray-100 dark:hover:text-gray-700 whitespace-nowrap",
@@ -68,23 +69,24 @@ export default function Header({ visibility }: HeaderProps) {
                 {link.name}
 
                 {link.name === activeSection && (
-                  <motion.span
+                  <span
                     className='bg-gray-700 rounded-full absolute inset-0 -z-10 dark:bg-gray-700'
-                    layoutId='activeSection'
-                    transition={{
-                      type: "spring",
-                      stiffness: 380,
-                      damping: 30,
-                    }}></motion.span>
+                    // layoutId='activeSection'
+                    // transition={{
+                    //   type: "spring",
+                    //   stiffness: 380,
+                    //   damping: 30,
+                    // }}
+                    ></span>
                 )}
               </Link>
-            </motion.li>
+            </li>
           ))}
         </ul>
-      </motion.nav>
+      </m.nav>
 
       {/* Admin Button - Desktop Floating */}
-      <motion.div
+      <m.div
         className='hidden md:block fixed top-6 right-6 z-50'
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -107,12 +109,12 @@ export default function Header({ visibility }: HeaderProps) {
           </svg>
           <span className='hidden lg:inline'>Irun Access Only</span>
         </Link>
-      </motion.div>
+      </m.div>
 
       {/* ==================== MOBILE/TABLET VIEW (Hamburger) ==================== */}
 
       {/* Tombol Hamburger Floating */}
-      <motion.div
+      <m.div
         className='fixed top-4 right-4 z-999 md:hidden'
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}>
@@ -151,12 +153,12 @@ export default function Header({ visibility }: HeaderProps) {
             </svg>
           )}
         </button>
-      </motion.div>
+      </m.div>
 
       {/* Mobile Menu Dropdown */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <m.div
             className='fixed top-20 right-4 w-72 bg-white/95 backdrop-blur-2xl border border-white/20 shadow-2xl rounded-2xl p-4 flex flex-col items-center justify-center gap-2 dark:bg-gray-950/95 dark:border-white/10 sm:w-80 md:hidden z-998'
             initial={{ opacity: 0, scale: 0.9, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -206,7 +208,7 @@ export default function Header({ visibility }: HeaderProps) {
                 </Link>
               </li>
             </ul>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </header>

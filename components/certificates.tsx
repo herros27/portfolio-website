@@ -143,14 +143,14 @@ export default function Certificates({ certificates }: CertificatesProps) {
       </div>
 
       {/* Bottom instruction */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 2 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.6 }}
+      <p
+        // initial={{ opacity: 0 }}
+        // whileInView={{ opacity: 2 }}
+        // viewport={{ once: true }}
+        // transition={{ delay: 0.6 }}
         className='text-center text-xs  text-gray-400 dark:text-gray-500 mt-8'>
         Hover on cards to pause and explore • Click to verify credentials
-      </motion.p>
+      </p>
     </section>
   );
 }
