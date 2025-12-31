@@ -147,7 +147,8 @@ export default function Project({
                     fill
                     quality={75}
                     className='object-cover transition-transform duration-700 group-hover:scale-110'
-                    sizes="(max-width: 768px) 100vw, 320px"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 80vw, 1280px"
+
                   />
                   {/* Overlay on hover */}
                   <div className='absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4'>
