@@ -61,7 +61,7 @@ export default function SplashProvider({
 
     try {
       const res = await fetch(
-        "https://api.unsplash.com/photos/random?count=30&client_id=YOUR_KEY",
+        "https://api.unsplash.com/photos/random?count=30&client_id=Vke3mS727zZ9UUD-1q35lIOjX4y29RM4hShA1BFVZGE",
         {
           headers: {
             "Accept-Version": "v1",
