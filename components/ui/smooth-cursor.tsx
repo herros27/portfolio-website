@@ -2,7 +2,7 @@
 
 import { motion, useSpring } from "motion/react";
 import { FC, JSX, useEffect, useRef, useState } from "react";
-// import { useIsDesktop } from "@/lib/hooks";
+import { useIsDesktop } from "@/lib/hooks";
 interface Position {
   x: number;
   y: number;
@@ -87,7 +87,7 @@ export function SmoothCursor({
     restDelta: 0.001,
   },
 }: SmoothCursorProps) {
-  // const [isMoving, setIsMoving] = useState(false);
+  const isDesktop = useIsDesktop();
   const lastMousePos = useRef<Position>({ x: 0, y: 0 });
   const velocity = useRef<Position>({ x: 0, y: 0 });
   const lastUpdateTime = useRef(Date.now());
@@ -180,6 +180,9 @@ export function SmoothCursor({
     };
   }, [cursorX, cursorY, rotation, scale]);
 
+  // Skip rendering custom cursor on mobile/touch devices
+  if (!isDesktop) return null;
+
   return (
     <motion.div
       style={{
@@ -206,3 +209,4 @@ export function SmoothCursor({
     </motion.div>
   );
 }
+

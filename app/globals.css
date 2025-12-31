@@ -279,3 +279,66 @@ html.dark {
     }
   }
 }
+
+/* Performance-optimized floating animations for background blobs */
+/* Replaces framer-motion infinite animations to reduce main-thread work */
+@keyframes float-blob-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(100px, 50px) scale(1.2); }
+}
+
+@keyframes float-blob-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-100px, -50px) scale(1.2); }
+}
+
+@keyframes float-blob-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+  50% { transform: translate(50px, -50px) scale(1.1); opacity: 0.5; }
+}
+
+@keyframes float-blob-4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(80px, 60px) scale(1.25); }
+}
+
+@keyframes float-blob-5 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-80px, -60px) scale(1.25); }
+}
+
+@keyframes float-blob-6 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(50, 30px) scale(1.3); }
+}
+
+.animate-float-1 {
+  animation: float-blob-1 20s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.animate-float-2 {
+  animation: float-blob-2 25s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.animate-float-3 {
+  animation: float-blob-3 30s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.animate-float-4 {
+  animation: float-blob-4 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.animate-float-5 {
+  animation: float-blob-5 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.animate-float-6 {
+  animation: float-blob-6 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+

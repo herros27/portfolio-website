@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react"
 import { renderToString } from "react-dom/server"
+import { useInView } from "react-intersection-observer"
 
 interface Icon {
   x: number
@@ -22,6 +23,7 @@ function easeOutCubic(t: number): number {
 }
 
 export function IconCloud({ icons, images }: IconCloudProps) {
+  const { ref: inViewRef, inView } = useInView({ threshold: 0.1 })
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [iconPositions, setIconPositions] = useState<Icon[]>([])
   const [rotation, setRotation] = useState({ x: 0, y: 0 })
@@ -212,6 +214,9 @@ export function IconCloud({ icons, images }: IconCloudProps) {
 
   // Animation and rendering
   useEffect(() => {
+    // Pause animation when not in viewport to reduce CPU usage
+    if (!inView) return
+    
     const canvas = canvasRef.current
     const ctx = canvas?.getContext("2d")
     if (!canvas || !ctx) return
@@ -302,20 +307,23 @@ export function IconCloud({ icons, images }: IconCloudProps) {
         cancelAnimationFrame(animationFrameRef.current)
       }
     }
-  }, [icons, images, iconPositions, isDragging, mousePos, targetRotation])
+  }, [icons, images, iconPositions, isDragging, mousePos, targetRotation, inView])
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={400}
-      height={400}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-      className="rounded-full cursor-grab active:cursor-grabbing transition-shadow hover:shadow-lg hover:shadow-cyan-500/10"
-      aria-label="Interactive 3D Icon Cloud - Drag to rotate, click icons to focus"
-      role="img"
-    />
+    <div ref={inViewRef}>
+      <canvas
+        ref={canvasRef}
+        width={400}
+        height={400}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        className="rounded-full cursor-grab active:cursor-grabbing transition-shadow hover:shadow-lg hover:shadow-cyan-500/10"
+        aria-label="Interactive 3D Icon Cloud - Drag to rotate, click icons to focus"
+        role="img"
+      />
+    </div>
   )
 }
+

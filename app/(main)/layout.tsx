@@ -4,11 +4,20 @@ import Footer from "@/components/footer";
 import ThemeSwitch from "@/components/theme-switch";
 import ThemeContextProvider from "@/context/theme-context";
 import { Toaster } from "react-hot-toast";
-import { SmoothCursor } from "@/components/ui/smooth-cursor";
-import { ProgressiveBlur } from "@/components/magicui/progressive-blur";
+import dynamic from "next/dynamic";
 import SplashProvider from "@/components/providers/splash-provider";
 import { getSectionVisibility } from "@/lib/queries";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+
+// Lazy load non-critical UI components to reduce initial JS bundle
+const SmoothCursor = dynamic(() =>
+  import("@/components/ui/smooth-cursor").then((m) => m.SmoothCursor)
+);
+const ProgressiveBlur = dynamic(() =>
+  import("@/components/magicui/progressive-blur").then(
+    (m) => m.ProgressiveBlur
+  )
+);
 export default async function MainLayout({
   children,
 }: {

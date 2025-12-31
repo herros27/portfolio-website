@@ -113,13 +113,13 @@ export default function Header({ visibility }: HeaderProps) {
 
       {/* Tombol Hamburger Floating */}
       <motion.div
-        className='fixed top-4 right-4 z-[999] md:hidden'
+        className='fixed top-4 right-4 z-999 md:hidden'
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}>
         <button
           onClick={() => setIsOpen(!isOpen)}
           aria-label='Toggle menu'
-          className='bg-white w-[3.25rem] h-[3.25rem] bg-opacity-80 backdrop-blur-[0.5rem] border border-white border-opacity-40 shadow-2xl rounded-full flex items-center justify-center hover:scale-[1.15] active:scale-90 transition-all dark:bg-gray-950 dark:border-black/40'>
+          className='bg-white w-13 h-13 bg-opacity-80 backdrop-blur-[0.5rem] border border-white border-opacity-40 shadow-2xl rounded-full flex items-center justify-center hover:scale-[1.15] active:scale-90 transition-all dark:bg-gray-950 dark:border-black/40'>
           {/* Icon Hamburger / Close */}
           {isOpen ? (
             <svg
@@ -157,7 +157,7 @@ export default function Header({ visibility }: HeaderProps) {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className='fixed top-20 right-4 w-72 bg-white/95 backdrop-blur-2xl border border-white/20 shadow-2xl rounded-2xl p-4 flex flex-col items-center justify-center gap-2 dark:bg-gray-950/95 dark:border-white/10 sm:w-80 md:hidden z-[998]'
+            className='fixed top-20 right-4 w-72 bg-white/95 backdrop-blur-2xl border border-white/20 shadow-2xl rounded-2xl p-4 flex flex-col items-center justify-center gap-2 dark:bg-gray-950/95 dark:border-white/10 sm:w-80 md:hidden z-998'
             initial={{ opacity: 0, scale: 0.9, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: -20 }}>

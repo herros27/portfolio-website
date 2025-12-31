@@ -1,6 +1,4 @@
 import dynamicImport from "next/dynamic";
-import Intro from "@/components/intro";
-import About from "@/components/about";
 import SectionDivider from "@/components/ui/section-divider";
 import {
   getPublicProfile,
@@ -10,6 +8,14 @@ import {
   getPublicSkills,
   getSectionVisibility,
 } from "@/lib/queries";
+
+// Dynamic imports for heavy client-side components
+const Intro = dynamicImport(() => import("@/components/intro"), {
+  loading: () => <SectionSkeleton />,
+});
+const About = dynamicImport(() => import("@/components/about"), {
+  loading: () => <SectionSkeleton />,
+});
 
 // Dynamic imports for below-the-fold sections to reduce initial bundle
 const Certificates = dynamicImport(() => import("@/components/certificates"), {

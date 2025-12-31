@@ -20,20 +20,21 @@ export function useSectionInView<T extends HTMLElement>(sectionName: SectionName
   };
 }
 
+// Detect if user is on desktop (has fine pointer like mouse)
+export function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
 
-// export function useIsDesktop() {
-//   const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(pointer: fine)");
 
-//   useEffect(() => {
-//     const mediaQuery = window.matchMedia("(pointer: fine)");
+    const handleChange = () => setIsDesktop(mediaQuery.matches);
 
-//     const handleChange = () => setIsDesktop(mediaQuery.matches);
+    handleChange(); // initial check
+    mediaQuery.addEventListener("change", handleChange);
 
-//     handleChange(); // initial check
-//     mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
 
-//     return () => mediaQuery.removeEventListener("change", handleChange);
-//   }, []);
+  return isDesktop;
+}
 
-//   return isDesktop;
-// }
