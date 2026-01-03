@@ -13,7 +13,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
             async authorize(credentials) {
                 if (!credentials?.email || !credentials?.password) {
-                    throw new Error("Email and password are required");
+                    // throw new Error("Email and password are required");
+                    return null;
                 }
 
                 const email = credentials.email as string;
@@ -24,17 +25,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 });
 
                 if (!user) {
-                    throw new Error("Invalid email or password");
+                    // throw new Error("Invalid email or password");
+                    return null;
                 }
 
                 if (!user.isActive) {
-                    throw new Error("Account is disabled. Please contact support.");
+                    throw new Error("ACCOUNT_DISABLED");
                 }
 
                 const isPasswordValid = await bcrypt.compare(password, user.password);
 
                 if (!isPasswordValid) {
-                    throw new Error("Invalid email or password");
+                    // throw new Error("Invalid email or password");
+                    return null;
                 }
 
                 return {

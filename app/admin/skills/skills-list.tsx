@@ -16,6 +16,38 @@ interface SkillsListProps {
   skills: Skill[];
 }
 
+// Convert skill name to Simple Icons slug format
+const toSlug = (name: string): string => {
+  return name
+    .toLowerCase()
+    .replace(/[.\s]+/g, "")
+    .replace(/[^a-z0-9]/g, "");
+};
+
+// Skill icon component with fallback
+const SkillIcon = ({ name }: { name: string }) => {
+  const [imgFailed, setImgFailed] = useState(false);
+  const slug = toSlug(name);
+
+  if (imgFailed) {
+    // Fallback: show abbreviated name
+    return (
+      <span className='md:hidden text-gray-900 dark:text-white font-medium text-xs'>
+        {name.length > 6 ? name.substring(0, 2) : name}
+      </span>
+    );
+  }
+
+  return (
+    <img
+      src={`https://cdn.simpleicons.org/${slug}/${slug}`}
+      alt={name}
+      className='w-5 h-5 dark:invert'
+      onError={() => setImgFailed(true)}
+    />
+  );
+};
+
 export default function SkillsList({ skills }: SkillsListProps) {
   const [items, setItems] = useState(skills);
   const [newSkill, setNewSkill] = useState("");
@@ -73,8 +105,14 @@ export default function SkillsList({ skills }: SkillsListProps) {
   return (
     <div className='space-y-6'>
       {/* Add New Skill */}
-      <AdminCard showBeam={true} beamSize={300} beamDuration={10} className='p-6'>
-        <h3 className='text-lg font-medium text-gray-900 dark:text-white mb-4'>Add New Skill</h3>
+      <AdminCard
+        showBeam={true}
+        beamSize={300}
+        beamDuration={10}
+        className='p-6'>
+        <h3 className='text-lg font-medium text-gray-900 dark:text-white mb-4'>
+          Add New Skill
+        </h3>
         <div className='flex flex-col gap-3 sm:flex-row'>
           <input
             type='text'
@@ -86,7 +124,7 @@ export default function SkillsList({ skills }: SkillsListProps) {
                 handleAdd();
               }
             }}
-            placeholder='Enter skill name...'
+            placeholder='Enter skill name from Simple Icons...'
             className='
               w-full
               px-4 py-3
@@ -124,11 +162,19 @@ export default function SkillsList({ skills }: SkillsListProps) {
       </AdminCard>
 
       {/* Skills Grid */}
-      <AdminCard showBeam={true} beamSize={250} beamDuration={8} beamDelay={0.5} className='p-6'>
+      <AdminCard
+        showBeam={true}
+        beamSize={250}
+        beamDuration={8}
+        beamDelay={0.5}
+        className='p-6'>
         <div className='flex items-center justify-between mb-4'>
-          <h3 className='text-lg font-medium text-gray-900 dark:text-white'>Your Skills</h3>
+          <h3 className='text-lg font-medium text-gray-900 dark:text-white'>
+            Your Skills
+          </h3>
           <span className='text-sm text-gray-600 dark:text-gray-400 px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700'>
-            {items.filter((s) => s.visible).length} visible / {items.length} total
+            {items.filter((s) => s.visible).length} visible / {items.length}{" "}
+            total
           </span>
         </div>
 
@@ -146,10 +192,15 @@ export default function SkillsList({ skills }: SkillsListProps) {
                     ? "bg-gray-100 dark:bg-gray-800/50 border-gray-300 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10"
                     : "bg-gray-50 dark:bg-gray-800/30 border-gray-200 dark:border-gray-800 opacity-60"
                 }`}>
-                <span className='text-gray-900 dark:text-white font-medium truncate'>
-                  {skill.name}
-                </span>
-                <div className='flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity'>
+                <div className='flex items-center gap-2 min-w-0 flex-1'>
+                  {/* Icon for mobile (with fallback handled internally) */}
+                  <SkillIcon name={skill.name} />
+                  {/* Text for desktop (hidden on mobile) */}
+                  <span className='hidden md:inline text-gray-900 dark:text-white font-medium truncate'>
+                    {skill.name}
+                  </span>
+                </div>
+                <div className='flex items-center gap-1 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity'>
                   <button
                     onClick={() => handleToggleVisibility(skill.id)}
                     className='p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all hover:scale-110'

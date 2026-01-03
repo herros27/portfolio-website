@@ -42,7 +42,18 @@ const LoginForm = () => {
       });
 
       if (result?.error) {
-        toast.error(result.error);
+        let message = "Login failed. Please try again.";
+        switch (result.error) {
+          case "CredentialsSignin":
+            message = "Invalid email or password.";
+            break;
+          case "ACCOUNT_DISABLED":
+            message = "Your account has been disabled. Please contact support.";
+            break;
+        }
+    
+        toast.error(message);
+        return;
       } else {
         toast.success("Login successful!");
         router.push(callbackUrl);
