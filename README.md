@@ -1,163 +1,201 @@
 # Dynamic Portfolio Website & CMS
 
+Website portofolio **full-stack modern** yang dilengkapi dengan **Admin Dashboard (CMS)**.
+Dibangun untuk mengelola konten seperti **Projects, Experience, Certificates, dan Skills** secara dinamis **tanpa mengubah kode**, menggunakan **Next.js 15**, **Prisma**, dan **PostgreSQL**.
 
+---
 
-Website portofolio full-stack yang dilengkapi dengan **Admin Dashboard (CMS)** untuk mengelola konten secara dinamis tanpa perlu mengubah kode. Dibangun dengan teknologi modern seperti **Next.js 15**, **Prisma**, **PostgreSQL**, dan **NextAuth**.## 🚀 Fitur Utama### 🌟 Public Frontend* **Desain Modern & Responsif**: Tampilan profesional dengan animasi halus (Framer Motion & Magic UI).* **Bagian Dinamis**: Data Projects, Experience, Certificates, dan Skills diambil langsung dari database.* **Fitur Kontak**: Formulir kontak fungsional yang terintegrasi dengan email (Resend).* **SEO Optimized**: Metadata dinamis untuk setiap halaman.### 🛡️ Admin Dashboard (CMS)* **Manajemen Konten Lengkap (CRUD)**:    * **Profile**: Update bio, foto, CV, dan sosial media.    * **Projects**: Tambah/Edit portofolio proyek dengan upload gambar (Cloudinary).    * **Experience**: Kelola riwayat pekerjaan dan pendidikan.    * **Certificates**: Showcase sertifikat dan pencapaian.    * **Skills**: Atur daftar keahlian teknis.* **Autentikasi Aman**: Login admin menggunakan NextAuth v5.* **Audit Logs**: Melacak setiap perubahan data yang terjadi di sistem.* **Pengaturan Visibilitas**: Sembunyikan/tampilkan bagian tertentu (misal: Skills atau Projects) dengan satu klik.* **Statistik Real-time**: Ringkasan jumlah data di dashboard utama.## 🛠️ Teknologi yang Digunakan* **Framework**: [Next.js 15 (App Router)](https://nextjs.org/)* **Database**: [PostgreSQL](https://www.postgresql.org/)* **ORM**: [Prisma](https://www.prisma.io/)* **Authentication**: [NextAuth.js v5 (Auth.js)](https://authjs.dev/)* **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)* **Image Storage**: [Cloudinary](https://cloudinary.com/)* **Validation**: [Zod](https://zod.dev/) & React Hook Form* **Email Service**: [Resend](https://resend.com/)* **Deployment**: Vercel (Frontend) & Supabase/Neon/Railway (Database)## 📋 Prasyarat* [Node.js](https://nodejs.org/) (Versi 20+ direkomendasikan)* [Docker Desktop](https://www.docker.com/) (Untuk menjalankan database lokal)* Akun [Cloudinary](https://cloudinary.com/) (Untuk upload gambar)* Akun [Resend](https://resend.com/) (Untuk fitur email)## 📦 Panduan Instalasi & Setup
+## 🚀 Fitur Utama
 
+### 🌟 Public Frontend
 
+* **Desain Interaktif**
+  Dibangun dengan **Tailwind CSS v4**, animasi halus menggunakan **Framer Motion** dan **Magic UI**.
+* **Konten Dinamis**
+  Data Projects, Experience, Certificates, dan Skills diambil langsung dari database.
+* **Form Kontak**
+  Integrasi email menggunakan **Resend**.
+* **SEO Optimized**
+  Metadata dinamis untuk setiap halaman (SEO-friendly).
 
-Ikuti langkah-langkah ini untuk menjalankan proyek di komputer lokal:### 1. Clone Repository```bash
+---
 
-git clone [https://github.com/username-anda/portfolio-website-dinamis.git](https://github.com/username-anda/portfolio-website-dinamis.git)
+### 🛡️ Admin Dashboard (CMS)
 
+* **Manajemen Konten (CRUD)**
+
+  * **Profile**: Edit bio, foto profil, dan link sosial media
+  * **Projects**: Tambah/Edit portofolio + upload gambar (Cloudinary)
+  * **Experience**: Kelola riwayat pekerjaan/pendidikan (Timeline)
+  * **Certificates**: Upload & kelola sertifikat
+  * **Skills**: Tambah, edit, dan atur urutan skill
+* **Autentikasi & Keamanan**
+  Menggunakan **Auth.js (NextAuth v5)**.
+* **Audit Logs**
+  Mencatat semua aktivitas perubahan data.
+* **Pengaturan Website**
+  Kontrol visibilitas setiap section secara real-time.
+
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+* **Framework**: Next.js 15 (App Router)
+* **Language**: TypeScript
+* **Database**: PostgreSQL
+* **ORM**: Prisma
+* **Styling & Animation**: Tailwind CSS v4, Framer Motion, Magic UI
+* **Authentication**: Auth.js (NextAuth v5)
+* **Storage**: Cloudinary
+* **Email Service**: Resend
+
+---
+
+## 📋 Prasyarat
+
+Pastikan Anda telah menginstal:
+
+* Node.js **v18.17+** atau **v20+**
+* Docker Desktop (untuk database lokal)
+* Akun **Cloudinary** dan **Resend** (API Key)
+
+---
+
+## 📦 Panduan Instalasi
+
+### 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/username-anda/portfolio-website-dinamis.git
 cd portfolio-website-dinamis
+```
 
-2. Instal Dependencies
+---
 
-Bash
+### 2️⃣ Instal Dependencies
 
-
-
+```bash
 npm install
+```
 
-3. Konfigurasi Environment Variables
+---
 
-Salin file .env.example menjadi .env:
+### 3️⃣ Setup Environment Variables
 
-Bash
+Salin file `.env.example` menjadi `.env`:
 
-
-
+```bash
 cp .env.example .env
+```
 
-Isi variabel berikut di file .env:
+Isi konfigurasi berikut di file `.env`:
 
-Cuplikan kode
-
-
-
-# Database (Gunakan string koneksi lokal atau cloud)
-
+```env
+# Database
 DATABASE_URL="postgresql://admin_portfolio:password_rahasia_123@localhost:5434/portfolio_cms?schema=public"
 
-
-
-# Auth (Generate string acak untuk secret: openssl rand -base64 32)
-
-AUTH_SECRET="rahasia_super_aman"
-
+# Auth (Generate dengan: openssl rand -base64 32)
+AUTH_SECRET="isi_secret_key_acak"
 AUTH_URL="http://localhost:3000"
 
+# Cloudinary
+CLOUDINARY_CLOUD_NAME="nama_cloud_anda"
+CLOUDINARY_API_KEY="api_key_anda"
+CLOUDINARY_API_SECRET="api_secret_anda"
 
+# Resend
+RESEND_API_KEY="re_123..."
+```
 
-# Cloudinary (Dari dashboard Cloudinary Anda)
+---
 
-CLOUDINARY_CLOUD_NAME="xxx"
+### 4️⃣ Jalankan Database (Docker)
 
-CLOUDINARY_API_KEY="xxx"
-
-CLOUDINARY_API_SECRET="xxx"
-
-
-
-# Resend (Untuk kirim email)
-
-RESEND_API_KEY="re_xxx"
-
-4. Jalankan Database Lokal (via Docker)
-
-Proyek ini menyediakan file docker-compose.yml untuk setup PostgreSQL instan.
-
-(Catatan: Port diset ke 5434 untuk menghindari konflik dengan postgres default).
-
-Bash
-
-
-
+```bash
 docker-compose up -d
+```
 
-5. Setup Database Schema
+> **Catatan:**
+> Database akan berjalan di port **5434** sesuai konfigurasi `docker-compose.yml`.
 
-Push schema Prisma ke database dan jalankan seeding data awal (untuk membuat akun admin default).
+---
 
-Bash
+### 5️⃣ Setup Database & Admin
 
+```bash
+# Push schema Prisma ke database
+npm run db:push
 
+# Generate Prisma Client
+npm run db:generate
 
-# Push schema ke DB
-
-npm run db:push# Generate Prisma Client
-
-npm run db:generate# Isi data awal (Seed)
-
+# Seed data awal & buat akun Admin
 npm run db:seed
+```
 
-6. Jalankan Server Development
+---
 
-Bash
+### 6️⃣ Jalankan Server Development
 
-
-
+```bash
 npm run dev
+```
 
-Buka http://localhost:3000 di browser.
+Buka di browser:
+👉 **[http://localhost:3000](http://localhost:3000)**
 
-🔐 Akses Admin Panel
+---
 
-Buka http://localhost:3000/admin/login.
+## 🔐 Akses Admin Dashboard
 
-Gunakan kredensial default (jika menggunakan seed default):
+* URL: **[http://localhost:3000/admin/login](http://localhost:3000/admin/login)**
+* Kredensial default (lihat `prisma/seed.ts`):
 
-Email: admin@example.com (cek prisma/seed.ts untuk memastikannya)
+  * **Email**: `admin@example.com`
+  * **Password**: `password123`
 
-Password: (sesuai konfigurasi di seed)
+> ⚠️ **Disarankan mengganti password admin setelah login pertama.**
 
-📂 Struktur Folder
+---
 
-Plaintext
+## 📂 Struktur Project
 
-
-
+```plaintext
 .
-
-├── actions/             # Server Actions (Mutasi data backend)
-
+├── actions/            # Server Actions (Backend Logic)
 ├── app/
-
-│   ├── (main)/          # Halaman publik (Home, dll)
-
-│   ├── admin/           # Halaman Admin Dashboard (Protected)
-
-│   ├── api/             # API Routes (Auth, Upload)
-
-│   └── ...
-
+│   ├── (main)/         # Public Pages (Frontend)
+│   ├── admin/          # Admin Dashboard
+│   └── api/            # API Routes
 ├── components/
-
-│   ├── admin/           # Komponen UI khusus Admin
-
-│   ├── ui/              # Komponen UI Shared (Button, Card, dll)
-
+│   ├── admin/          # Admin UI Components
+│   ├── ui/             # Shared UI Components
 │   └── ...
+├── lib/                # Configurations (Auth, DB, Utils)
+├── prisma/             # Prisma Schema & Seed
+└── public/             # Static Assets
+```
 
-├── lib/                 # Utilitas (Auth config, DB connection)
+---
 
-├── prisma/              # Schema database & Seed script
+## 📜 Perintah Berguna
 
-└── public/              # Aset statis
+| Perintah            | Deskripsi                              |
+| ------------------- | -------------------------------------- |
+| `npm run dev`       | Menjalankan server development         |
+| `npm run build`     | Build untuk production                 |
+| `npm run lint`      | Cek kualitas kode                      |
+| `npm run db:push`   | Sinkronisasi schema Prisma ke database |
+| `npm run db:studio` | Membuka Prisma Studio (GUI Database)   |
 
-📜 Skrip Tersedia
+---
 
-npm run dev: Menjalankan server development dengan Turbopack.
+## 📄 Lisensi
 
-npm run db:push: Sinkronisasi schema Prisma ke database (bagus untuk dev).
+Proyek ini dilisensikan di bawah **MIT License**.
 
-npm run db:studio: Membuka GUI Prisma Studio untuk melihat isi database.
+---
 
-npm run build: Build proyek untuk production.
+## ❤️ Kredit
 
-📄 Lisensi
-
-Proyek ini dilisensikan di bawah MIT License.
-
-Dibuat dengan ❤️ oleh Kemas Khairunsyah
+Dibuat dengan ❤️ oleh **Kemas Khairunsyah**
